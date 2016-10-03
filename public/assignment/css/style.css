@@ -3,5 +3,13 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 65px;
+}
+
+.ul-wo-bullets {
+    list-style-type: none;
+}
+
+.default-blue {
+    color: #337ab7;
 }
