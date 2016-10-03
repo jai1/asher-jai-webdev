@@ -14,6 +14,12 @@ body {
     color: #337ab7;
 }
 
+/* Overriding Bootstrap default setting - not good but have no choice since good practices are not working here */
+
+.navbar-default .navbar-brand {
+    color: #337ab7;
+}
+
 ul#widget-choose-height {
     line-height: 30px;
 }
