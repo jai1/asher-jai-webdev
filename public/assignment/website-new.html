@@ -10,112 +10,119 @@
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
-        <div class="container-fluid containerRightPadding col-sm-3 hidden-xs">
+    <div class="container row">
+        <div class="col-xs-1 hidden-xs">
             <div class="navbar-header">
-                <p class="navbar-text pull-left">
-                    <a href="website-list.html" class="navbar-link">
-                  <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties">
-                  </span>
-                    </a>
+                <p class="navbar-text">
+                    <a href="profile.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
                 </p>
-                <a class="navbar-brand" href="#">Websites</a>
+            </div>
+        </div>
+
+        <div class="col-xs-2 hidden-xs">
+            <div class="navbar-header">
+                <a class="navbar-brand default-blue" href="website-list.html">
+                    Websites
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xs-1 hidden-xs">
+            <div class="navbar-header">
                 <p class="navbar-text pull-right">
                     <a href="website-new.html" class="navbar-link">
-                  <span class="glyphicon glyphicon-plus glyphiconPlusProperties">
-                  </span>
+                        <span class="glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
                     </a>
                 </p>
             </div>
         </div>
-
-        <div class="container-fluid containerRightPadding col-sm-9">
-            <div class="navbar-header">
-                <p class="navbar-text pull-left">
-                    <a href="website-list.html" class="navbar-link">
+        <div class="col-sm-1 row vdivide hidden-xs"></div>
+        <div class="col-xs-7">
+            <p class="navbar-text">
+                <a href="website-list.html" class="navbar-link">
                   <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties visible-xs">
                   </span>
-                    </a>
-                </p>
-                <a class="navbar-brand" href="#">New Website</a>
-                <p class="navbar-text pull-right">
-                    <a href="website-list.html" class="navbar-link">
-                  <span class="glyphicon glyphicon-ok glyphiconOkProperties">
+                </a>
+            </p>
+            <a class="navbar-brand pull-left default-blue" href="#">New Website</a>
+            <p class="navbar-text pull-right">
+                <a href="website-list.html" class="navbar-link">
+                  <span class="glyphicon glyphicon-ok glyphiconOkProperties default-blue">
                   </span>
-                    </a>
-                </p>
-            </div>
+                </a>
+            </p>
         </div>
     </div>
 </nav>
 
 
-<div class="row container-fluid">
-    <div class="col-sm-3 hidden-xs ">
-        <p>
-            <a href="page-list.html" class="blueColorText nounderline">Address Book App</a>
-            <a href="website-edit.html">
+<div class="row container">
+    <div class="col-xs-4 hidden-xs ">
+        <ul class="ul-wo-bullets">
+            <li>
+                <a href="page-list.html" class="blueColorText nounderline">Address Book App</a>
+                <a href="website-edit.html">
         <span class="glyphicon glyphicon-cog pull-right">
                       </span>
-            </a>
-        </p>
+                </a>
+            </li>
+            <li>
+                <a href="page-list.html" class="blueColorText nounderline">Blogger</a>
+                <a href="website-edit.html">
+        <span class="glyphicon glyphicon-cog pull-right">
+                      </span>
+                </a>
+            </li>
 
-        <p>
-            <a href="page-list.html" class="blueColorText nounderline">Blogger</a>
-            <a href="website-edit.html">
+            <li>
+                <a href="page-list.html" class="blueColorText nounderline">Blogging App</a>
+                <a href="website-edit.html">
         <span class="glyphicon glyphicon-cog pull-right">
                       </span>
-            </a>
-        </p>
+                </a>
+            </li>
 
-        <p>
-            <a href="page-list.html" class="blueColorText nounderline">Blogging App</a>
-            <a href="website-edit.html">
+            <li>
+                <a href="page-list.html" class="blueColorText nounderline">Script Testing App</a>
+                <a href="website-edit.html">
         <span class="glyphicon glyphicon-cog pull-right">
                       </span>
-            </a>
-        </p>
-
-        <p>
-            <a href="page-list.html" class="blueColorText nounderline">Script Testing App</a>
-            <a href="website-edit.html">
-        <span class="glyphicon glyphicon-cog pull-right">
-                      </span>
-            </a>
-        </p>
+                </a>
+            </li>
+        </ul>
     </div>
 
-
-    <div class="col-sm-1 v-divider hidden-xs"></div>
-    <div class="col-sm-8">
+    <div class="col-xs-1 row vdivide hidden-xs"></div>
+    <div class="col-xs-7">
         <form>
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <label for="websitename">Website Name</label>
+                <input type="text" class="form-control" id="websitename" value="Address Book App">
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+                <label for="websitedescription">Website Description</label>
+                <textarea class="form-control" rows="5" id="websitedescription">Free Text
+            </textarea>
             </div>
         </form>
-
     </div>
 
-</div>
 
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
 
-        <p class="navbar-text pull-right">
-            <a href="profile.html" class="navbar-link">
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+
+            <p class="navbar-text pull-right">
+                <a href="profile.html" class="navbar-link">
                     <span class="glyphicon glyphicon-user glyphiconUserProperties">
           </span>
-            </a>
-        </p>
-    </div>
+                </a>
+            </p>
+        </div>
 
-</nav>
-
+    </nav>
+</div>
 </body>
 </html>
