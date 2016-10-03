@@ -10,11 +10,11 @@
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container row">
-        <div class="col-xs-1 hidden-xs">
+    <div class="container-fluid">
+        <div class="col-xs-1">
             <div class="navbar-header">
                 <p class="navbar-text">
-                    <a href="profile.html" class="navbar-link">
+                    <a href="website-list.html" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
                 </p>
             </div>
@@ -37,14 +37,9 @@
                 </p>
             </div>
         </div>
-        <div class="col-sm-1 row vdivide hidden-xs"></div>
-            <div class="col-xs-7">
-                <p class="navbar-text">
-                    <a href="website-list.html" class="navbar-link">
-                  <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties visible-xs">
-                  </span>
-                    </a>
-                </p>
+        <!-- Commented this line since vdivide is dropped in BootStrap3, if you uncomment it change the col-xs-8 to col-xs-7 -->
+        <!-- <div class="row vdivide col-xs-1 hidden-xs"></div> -->
+            <div class="col-xs-8">
                 <a class="navbar-brand pull-left default-blue" href="#">Edit Website</a>
                 <p class="navbar-text pull-right">
                     <a href="website-list.html" class="navbar-link">
@@ -57,7 +52,7 @@
 </nav>
 
 
-<div class="row container">
+<div class="container-fluid">
     <div class="col-xs-4 hidden-xs ">
         <ul class="ul-wo-bullets">
         <li>
@@ -93,8 +88,9 @@
         </ul>
     </div>
 
-    <div class="col-xs-1 row vdivide hidden-xs"></div>
-    <div class="col-xs-7">
+    <!-- Commented this line since vdivide is dropped in BootStrap3, if you uncomment it change the col-xs-8 to col-xs-7 -->
+    <!-- <div class="row vdivide col-xs-1 hidden-xs"></div> -->
+    <div class="col-xs-8">
         <form>
             <div class="form-group">
                 <label for="websitename">Website Name</label>
