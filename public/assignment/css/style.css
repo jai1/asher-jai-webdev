@@ -11,13 +11,7 @@ body {
 }
 
 .default-blue {
-    color: #337ab7;
-}
-
-/* Overriding Bootstrap default setting - not good but have no choice since good practices are not working here */
-
-.navbar-default .navbar-brand {
-    color: #337ab7;
+    color: #337ab7 !important;
 }
 
 ul#widget-choose-height {
