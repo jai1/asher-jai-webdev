@@ -1,93 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="col-xs-1 hidden-xs">
-            <div class="navbar-header">
-                <p class="navbar-text">
-                    <a href="profile.html" class="navbar-link">
-                        <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
+<nav class = "navbar navbar-default navbar-fixed-top">
+    <div class = "container-fluid">
+        <div class = "col-xs-1 hidden-xs">
+            <div class = "navbar-header">
+                <p class = "navbar-text">
+                    <a href = "../user/profile.view.client.html" class = "navbar-link">
+                        <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
                 </p>
             </div>
         </div>
-
-        <div class="col-xs-10">
-            <div class="navbar-header">
-                <a class="navbar-brand default-blue" href="#">
+        <div class = "col-xs-10">
+            <div class = "navbar-header">
+                <a class = "navbar-brand default-blue" href = "#">
                     Websites
                 </a>
             </div>
         </div>
-
-        <div class="col-xs-1 hidden-xs">
-            <div class="navbar-header">
-                <p class="navbar-text">
-                    <a href="website-new.html" class="navbar-link">
-                        <span class="glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
+        <div class = "col-xs-1 hidden-xs">
+            <div class = "navbar-header">
+                <p class = "navbar-text">
+                    <a href = "website-new.view.client.html" class = "navbar-link">
+                        <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
                     </a>
                 </p>
             </div>
         </div>
     </div>
 </nav>
-
-<div class="container">
-    <ul class="ul-wo-bullets">
-        <li>
-            <a href="page-list.html" class="blueColorText nounderline">Address Book App</a>
-            <a href="website-edit.html">
-        <span class="glyphicon glyphicon-cog pull-right hidden-xs">
-                      </span>
+<div class = "container-fluid">
+    <ul class = "list-group">
+        <li ng-repeat = "website in model.websites" class = "list-group-item">
+            <a href = "#/user/{{model.userId}}/website/{{website._id}}/page">
+                {{website.name}}
             </a>
-        </li>
-        <li>
-            <a href="page-list.html" class="blueColorText nounderline" >Blogger</a>
-            <a href="website-edit.html">
-        <span class="glyphicon glyphicon-cog pull-right hidden-xs">
-                      </span>
-            </a>
-        </li>
-        <li>
-
-            <a href="page-list.html" class="blueColorText nounderline">Blogging App</a>
-            <a href="website-edit.html">
-        <span class="glyphicon glyphicon-cog pull-right hidden-xs">
-                      </span>
-            </a>
-
-        </li>
-        <li>
-
-            <a href="page-list.html" class="blueColorText nounderline">Script Testing App</a>
-            <a href="website-edit.html">
-        <span class="glyphicon glyphicon-cog pull-right hidden-xs">
-                      </span>
+            <a href = "#/user/{{model.userId}}/website/{{website._id}}">
+                <span class = "glyphicon glyphicon-cog pull-right icon-links"></span>
             </a>
         </li>
     </ul>
 </div>
-
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container-fluid">
-
-        <p class="navbar-text pull-right">
-            <a href="profile.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user glyphiconUserProperties default-blue">
-          </span>
+<nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+        <p class = "navbar-text pull-right">
+            <a href = "../user/profile.view.client.html" class = "navbar-link">
+                <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
+                </span>
             </a>
         </p>
     </div>
 </nav>
-
-</body>
-</html>

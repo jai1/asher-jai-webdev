@@ -1,11 +1,11 @@
-/* File to confiure the routes */
+/* File to configure the routes */
 
 (function () {
     angular
         .module("WebAppMaker")
-        .config(Router); // Here we provide the function responsible for routing
+        .config(router); // Here we provide the function responsible for routing
 
-    function Router($routeProvider) {
+    function router($routeProvider) {
         $routeProvider
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
