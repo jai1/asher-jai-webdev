@@ -1,27 +1,33 @@
 <nav class = "navbar navbar-default navbar-fixed-top">
-    <div class = "container-fluid">
-        <div class = "col-xs-1 hidden-xs">
-            <div class = "navbar-header">
-                <p class = "navbar-text">
-                    <a href = "page-list.view.client.html" class = "navbar-link">
-                        <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
-                </p>
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
+					</span>
+                </a>
             </div>
-        </div>
-        <div class = "col-xs-10">
-            <div class = "navbar-header">
-                <a class = "navbar-brand default-blue" href = "#">
-                    New Page
+            <div class="navbar-header">
+                <a class="navbar-brand default-blue" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                    Pages
                 </a>
             </div>
         </div>
-        <div class = "col-xs-1 hidden-xs">
-            <div class = "navbar-header">
-                <p class = "navbar-text">
-                    <a href = "page-list.view.client.html" class = "navbar-link">
-                        <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
-                    </a>
-                </p>
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left">
+                <a class="navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                    <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right">
+                <a ng-click="model.createPage()" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok default-blue"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand pull-left" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}">
+                    New Page
+                </a>
             </div>
         </div>
     </div>
@@ -58,11 +64,9 @@
 </div>
 <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
-        <p class = "navbar-text pull-right">
-            <a href = "../user/profile.view.client.html" class = "navbar-link">
-                <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
-                </span>
-            </a>
-        </p>
+        <a class = "navbar-link pull-right" href = "#/user/{{model.userId}}">
+            <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
+            </span>
+        </a>
     </div>
 </nav>
