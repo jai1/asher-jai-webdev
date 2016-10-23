@@ -1,14 +1,16 @@
 <div class = "container">
     <h1>Register</h1>
     <div ng-show = "model.error" class = "alert alert-danger" role = "alert">
-        {{model.error}}
+        ERROR: {{model.error}}
     </div>
-    <input ng-model = "model.user.username" type = "text" class = "form-control" placeholder = "Username"/>
-    <input ng-model = "model.user.password" type = "password" class = "form-control" placeholder = "Password"/>
+    <input ng-model = "model.user.username" type = "text" class = "form-control" placeholder = "Enter your Username"/>
+    <input ng-model = "model.user.password" type = "password" class = "form-control" placeholder = "Enter a Password"/>
     <input ng-model = "model.user.confirmPassword" type = "password" class = "form-control"
-           placeholder = "Confirm Password"/>
-    <a class = "btn user-pages-theme btn-block"
+           placeholder = "Re-enter the same Password"/>
+    <a class = "btn btn-block"
        ng-click = "model.register(model.user);">Register</a>
     <a class = "btn btn-danger  btn-block"
-       href = "#/login">Cancel</a>
+       href = "#/login">
+	   Cancel
+	</a>
 </div>

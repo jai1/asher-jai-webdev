@@ -1,31 +1,31 @@
 <nav class = "navbar navbar-default navbar-fixed-top">
-    <div class = "container-fluid">
-        <div class = "col-xs-1 hidden-xs">
-            <div class = "navbar-header">
-                <p class = "navbar-text">
-                    <a href = "../user/profile.view.client.html" class = "navbar-link">
-                        <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
-                </p>
+    <div class = "row container-fluid">
+        <div class = "col-xs-1">
+            <div class = "navbar-text">
+                <a class = "navbar-link pull-left" href = "#/user/{{model.userId}}">
+                    <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
+					</span>
+			    </a>
             </div>
         </div>
-        <div class = "col-xs-10">
+        <div class = "col-xs-10  hidden-xs">
             <div class = "navbar-header">
-                <a class = "navbar-brand default-blue" href = "#">
+                <a class = "navbar-brand pull-left default-blue" href="#/user/{{model.userId}}/website">
                     Websites
                 </a>
             </div>
         </div>
-        <div class = "col-xs-1 hidden-xs">
-            <div class = "navbar-header">
-                <p class = "navbar-text">
-                    <a href = "website-new.view.client.html" class = "navbar-link">
-                        <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
-                    </a>
-                </p>
+        <div class = "col-xs-1">
+            <div class = "navbar-text">
+                <a  class = "pull-right navbar-link" href="#/user/{{model.userId}}/website">
+                    <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue">
+					</span>
+                </a>
             </div>
         </div>
     </div>
 </nav>
+
 <div class = "container-fluid">
     <ul class = "list-group">
         <li ng-repeat = "website in model.websites" class = "list-group-item">
@@ -40,11 +40,9 @@
 </div>
 <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
-        <p class = "navbar-text pull-right">
-            <a href = "../user/profile.view.client.html" class = "navbar-link">
-                <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
-                </span>
-            </a>
-        </p>
+        <a class = "navbar-link pull-right" href = "#/user/{{model.userId}}">
+            <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
+            </span>
+        </a>
     </div>
 </nav>

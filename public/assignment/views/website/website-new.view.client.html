@@ -1,44 +1,40 @@
 <nav class = "navbar navbar-default navbar-fixed-top">
-    <div class = "container-fluid">
-        <div>
-            <div class = "col-xs-1">
-                <div class = "navbar-header">
-                    <p class = "navbar-text">
-                        <a href = "website-list.view.client.html" class = "navbar-link">
-                            <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
-                    </p>
-                </div>
+    <div class="row container-fluid">
+        <div class="col-sm-4 hidden-xs">
+            <div class="navbar-text pull-left">
+                <a class="navbar-link" href="#/user/{{model.userId}}/website">
+                    <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
+					</span>
+                </a>
             </div>
-            <div class = "col-xs-2 hidden-xs">
-                <div class = "navbar-header">
-                    <a class = "navbar-brand default-blue" href = "website-list.view.client.html">
-                        Websites
-                    </a>
-                </div>
-            </div>
-            <div class = "col-xs-1 hidden-xs">
-                <div class = "navbar-header">
-                    <p class = "navbar-text pull-right">
-                        <a href = "website-new.view.client.html" class = "navbar-link">
-                            <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
-                        </a>
-                    </p>
-                </div>
+            <div class="navbar-header">
+                <a class="navbar-brand default-blue" href="#/user/{{model.userId}}/website">
+                    Websites
+                </a>
             </div>
         </div>
-        <!-- Commented this line since vdivide is dropped in BootStrap3, if you uncomment it change the col-xs-8 to col-xs-7 -->
-        <!-- <div class="row vdivide col-xs-1 hidden-xs"></div> -->
-        <div class = "col-xs-8">
-            <a class = "navbar-brand pull-left default-blue" href = "#">New Website</a>
-            <p class = "navbar-text pull-right">
-                <a href = "website-list.view.client.html" class = "navbar-link">
-                    <span class = "glyphicon glyphicon-ok glyphiconOkProperties default-blue">
-                    </span>
+		<!-- Commented this line since vdivide is dropped in BootStrap3, if you uncomment it change the col-xs-8 to col-xs-7 -->
+        <!-- <div class="col-sm-8 vdivide hidden-xs"></div> -->
+        <div class="col-sm-8">
+            <div class="navbar-text pull-left">
+                <a class="navbar-link" href="#/user/{{model.userId}}/website">
+                    <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span>
                 </a>
-            </p>
+            </div>
+            <div class="navbar-text pull-right">
+                <a ng-click="model.createWebsite()" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok default-blue"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand pull-left" href="#/user/{{model.userId}}/website/{{model.websiteId}}">
+                    New Website
+                </a>
+            </div>
         </div>
     </div>
 </nav>
+
 <div class = "container-fluid">
     <div class = "row">
         <div class = "col-sm-4 hidden-xs">
@@ -55,7 +51,7 @@
         </div>
         <div class = "col-sm-8">
             <div ng-show = "model.error" class = "alert alert-danger" role = "alert">
-                {{model.error}}
+                ERROR: {{model.error}}
             </div>
             <form>
                 <div class = "form-group">
@@ -73,12 +69,10 @@
     </div>
 </div>
 <nav class = "navbar navbar-default navbar-fixed-bottom">
-    <div class = "container">
-        <p class = "navbar-text pull-right">
-            <a href = "../user/profile.view.client.html" class = "navbar-link">
-                <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
-                </span>
-            </a>
-        </p>
+    <div class = "container-fluid">
+        <a class = "navbar-link pull-right" href = "#/user/{{model.userId}}">
+            <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
+            </span>
+        </a>
     </div>
 </nav>

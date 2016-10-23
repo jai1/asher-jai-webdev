@@ -1,28 +1,21 @@
+
+
+
 <nav class = "navbar navbar-default navbar-fixed-top">
     <div class = "container-fluid">
-        <div class = "col-xs-1 hidden-xs">
-        </div>
-        <div class = "col-xs-10">
-            <div class = "navbar-header">
-                <a class = "navbar-brand default-blue" href = "#">
-                    Profile
-                </a>
-            </div>
-        </div>
-        <div class = "col-xs-1 hidden-xs">
-            <div class = "navbar-header">
-                <p class = "navbar-text">
-                    <a href = "#" class = "navbar-link">
-                        <span class = "glyphicon glyphicon-ok glyphiconOkProperties default-blue"></span>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
+        <a class = "navbar-brand default-blue"  href="#/user/{{model.user._id}}">
+	        Profile
+        </a>
+
+        <a class = "navbar-link pull-right">
+            <span class = "glyphicon glyphicon-ok glyphiconOkProperties default-blue">
+			</span>
+        </a>
+	</div>
 </nav>
 <div class = "container">
     <div ng-show = "model.error" class = "alert alert-danger" role = "alert">
-        {{model.error}}
+        ERROR: {{model.error}}
     </div>
     <div ng-show = "model.success" class = "alert alert-success" role = "alert">
         {{model.success}}
@@ -31,22 +24,22 @@
         <div class = "form-group">
             <label for = "username">Username</label>
             <input ng-model = "model.user.username" type = "text" class = "form-control" id = "username"
-                   placeholder = "Username">
+                   placeholder = "Enter a Username">
         </div>
         <div class = "form-group">
             <label for = "email">Email address</label>
             <input ng-model = "model.user.email" type = "email" class = "form-control" id = "email"
-                   placeholder = "Enter E-mail">
+                   placeholder = "Enter your E-mail">
         </div>
         <div class = "form-group">
             <label for = "first-name">First Name</label>
             <input ng-model = "model.user.firstName" type = "text" class = "form-control" id = "first-name"
-                   placeholder = "Your First Name">
+                   placeholder = "Enter your First Name">
         </div>
         <div class = "form-group">
             <label for = "last-name">Last Name</label>
             <input ng-model = "model.user.lastName" type = "text" class = "form-control" id = "last-name"
-                   placeholder = "Your Last name">
+                   placeholder = "Enter your Last name">
         </div>
     </form>
     <a class="btn btn-primary btn-block"
@@ -55,12 +48,6 @@
        href = "#/login">Logout</a>
 </div>
 <nav class = "navbar navbar-default navbar-fixed-bottom">
-    <div class = "container-fluid">
-        <p class = "navbar-text pull-right">
-            <a href = "profile.view.client.html" class = "navbar-link">
-                <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
-                </span>
-            </a>
-        </p>
+    <div class="container-fluid">
     </div>
 </nav>
