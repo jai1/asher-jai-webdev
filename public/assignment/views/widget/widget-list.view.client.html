@@ -16,8 +16,8 @@
                 </a>
             </div>
         </div>
-        <div class = "col-xs-1">
-            <div class = "navbar-text pull-right">
+        <div class = "col-xs-1 pull-right">
+            <div class = "navbar-text">
                 <a class = "navbar-link"
                    href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                     <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue">
@@ -27,7 +27,7 @@
         </div>
     </div>
 </nav>
-<div class = "container-fluid list-group">
+<div class = "container-fluid list-group v-scroll-full-page">
     <div ng-repeat = "widget in model.widgets"
          ng-switch = "widget.widgetType" class = "list-group-item clearfix">
         <div ng-switch-when = "HEADER"

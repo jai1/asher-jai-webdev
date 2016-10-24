@@ -36,7 +36,7 @@
 </nav>
 <div class = "container-fluid">
     <div class = "row">
-        <div class = "col-sm-4 hidden-xs">
+        <div class="col-sm-4 hidden-xs v-scroll-left-half-page">
             <ul class = "list-group">
                 <li ng-repeat = "website in model.websites" class = "list-group-item clearfix">
                     <a href = "#/user/{{model.userId}}/website/{{website._id}}/page">
@@ -48,7 +48,7 @@
                 </li>
             </ul>
         </div>
-        <div class = "col-sm-8">
+        <div class = "col-sm-8 pull-right">
             <div ng-show = "model.error" class = "alert alert-danger" role = "alert">
                 ERROR: {{model.error}}
             </div>

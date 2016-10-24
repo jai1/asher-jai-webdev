@@ -44,3 +44,22 @@ ul#widget-choose-height {
     right: 5px;
     z-index: 5;
 }
+
+.v-scroll-full-page {
+    margin-left:15px;
+    padding-top: 10px;
+    margin-bottom: 50px;
+    top: 0px;
+    bottom: 0px;
+    overflow: auto;
+}
+
+.v-scroll-left-half-page {
+    margin-top: 50px;
+    padding-top: 15px;
+    margin-bottom: 50px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    overflow: auto;
+}

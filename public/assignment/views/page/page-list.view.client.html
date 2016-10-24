@@ -16,8 +16,8 @@
                 </a>
             </div>
         </div>
-        <div class = "col-xs-1">
-            <div class = "navbar-text pull-right">
+        <div class = "col-xs-1 pull-right">
+            <div class = "navbar-text">
                 <a class = "navbar-link" href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
                     <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue">
                     </span>
@@ -26,7 +26,7 @@
         </div>
     </div>
 </nav>
-<div class = "container-fluid">
+<div class = "container-fluid v-scroll-full-page">
     <ul class = "list-group">
         <li ng-repeat = "page in model.pages" class = "list-group-item clearfix">
             <a href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
