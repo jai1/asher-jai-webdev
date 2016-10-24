@@ -46,7 +46,7 @@
 	
         init();
 
-        vm.createWebsite = updateWebsite;
+        vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
 
         function updateWebsite() {
@@ -54,7 +54,9 @@
             if(!WebsiteService.updateWebsite(vm.websiteId, vm.website)) {
                 vm.error = "Unable to update the website";
             }
-            if (!vm.error) $location.url("/user/" + vm.userId + "/website");
+            if (!vm.error) {
+                $location.url("/user/" + vm.userId + "/website");
+            }
         }
 
         function deleteWebsite() {
@@ -62,7 +64,9 @@
             if(!WebsiteService.deleteWebsite(vm.websiteId)) {
                 vm.error = "Unable to delete the website";
             }
-            if (!vm.error) $location.url("/user/" + vm.userId + "/website");
+            if (!vm.error) {
+                $location.url("/user/" + vm.userId + "/website");
+            }
         }
     }
 })();

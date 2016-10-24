@@ -28,8 +28,7 @@
 
 <div class="container-fluid list-group">
     <div ng-repeat="widget in model.widgets"
-         ng-switch="widget.widgetType" class="object-underlay list-group-item zero-border">
-
+         ng-switch="widget.widgetType" class="list-group-item clearfix zero-border">
         <div ng-switch-when="HEADER"
              ng-switch="widget.size" class="container-fluid">
             <h1 ng-switch-when="1">{{widget.text}}</h1>
@@ -52,7 +51,7 @@
              ng-bind-html="model.safeCheckHTML(widget.text);" class="container-fluid">
         </div>
 
-        <div class="object-overlay">
+        <div class="pull-right overlay-using-z-index">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" class="icon-links">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>

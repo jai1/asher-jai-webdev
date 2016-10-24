@@ -48,9 +48,9 @@
 
         /* Return a page with the given id is present */
         function findPageById(i_pageId) {
-            for (var pages in pages) {
-                if (pages[pages]._id == i_pageId) {
-                    return pages[pages];
+            for (var page in pages) {
+                if (pages[page]._id == i_pageId) {
+                    return pages[page];
                 }
             }
             return undefined;

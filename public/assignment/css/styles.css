@@ -33,3 +33,14 @@ ul#widget-choose-height {
 .no-display {
     display: none;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.overlay-using-z-index {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 5;
+}

@@ -66,6 +66,7 @@
             if(!vm.error) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newWidgetId);
             }
+            // WidgetService.printDataOnConsole();
         }
     }
 
@@ -89,12 +90,17 @@
 
         function updateWidget() {
             vm.error = null;
-            if(!WidgetService.updateWidget(vm.widgetId,vm.widget)) {
+            console.log(vm.widget);
+            if (vm.widget.widgetType == "HEADER" && !(vm.widget.size && vm.widget.size >= 1 && vm.widget.size <=6)) {
+                vm.error="Size needs to be in [1 6]";
+            }
+            if(!vm.error && !WidgetService.updateWidget(vm.widgetId,vm.widget)) {
                 vm.error="Unable to update new Widget";
             }
             if(!vm.error) {
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
+            // WidgetService.printDataOnConsole();
         }
 
         function deleteWidget() {
@@ -105,6 +111,7 @@
             if(!vm.error) {
                 $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
             }
+            // WidgetService.printDataOnConsole();
         }
     }
 })();

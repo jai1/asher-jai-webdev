@@ -30,7 +30,7 @@
                 vm.error = "A page with the same name already exists";
             }
             if (!vm.error) {
-	        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+	            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
             }
 	}
     }
@@ -48,7 +48,7 @@
 	
         init();
 	
-	vm.updatePage = updatePage;
+	    vm.updatePage = updatePage;
         vm.deletePage = deletePage;
 
         function updatePage() {
@@ -57,7 +57,7 @@
                 vm.error = "Unable to update the page";
             }
             if (!vm.error) {
-	        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+	            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
             }
 	}
 
@@ -67,7 +67,7 @@
                 vm.error = "Unable to delete the page";
             }
             if (!vm.error) {
-	        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+	            $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
             }
 	}
     }

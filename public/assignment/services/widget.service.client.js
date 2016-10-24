@@ -9,7 +9,8 @@
             findWidgetById: findWidgetById,
             findWidgetsByPageId: findWidgetsByPageId,
             updateWidget: updateWidget,
-            deleteWidget: deleteWidget
+            deleteWidget: deleteWidget,
+            printDataOnConsole: printDataOnConsole
         };
 
         var widgets = [
@@ -27,7 +28,7 @@
         /* Creates a widget if it doesn't exist else returns undefined */
         function createWidget(i_pageId, i_widget) {
             i_widget._id = new Date().getTime();
-            i_widget.pageId == i_pageId;
+            i_widget.pageId = i_pageId;
             for(var widget in widgets) {
                 if(widgets[widget]._id == i_widget._id && widgets[widget].pageId == i_pageId) {
                     return undefined;
@@ -64,6 +65,7 @@
                 if(widgets[widget]._id == i_widgetId) {
                     i_widget._id = widgets[widget]._id;
                     i_widget.pageId = widgets[widget].pageId;
+                    widgets[widget] = i_widget;
                     return true;
                 }
             }
@@ -80,6 +82,14 @@
                 }
             }
             return false;
+        }
+
+        function printDataOnConsole() {
+            console.log("WidgetService Widgets { " );
+            for(var widget in widgets) {
+                console.log(widgets[widget]);
+            }
+            console.log("}" );
         }
     }
 })();
