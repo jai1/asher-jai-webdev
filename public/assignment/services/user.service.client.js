@@ -27,7 +27,7 @@
             // Delete the field confirm password to make the given object compatible with the one stored in DB
             delete i_user.confirmPassword;
             for (var user in users) {
-                if (i_user.username === users[user].username) {
+                if (i_user.username == users[user].username) {
                     // User already Exists
                     return false;
                 }
@@ -41,7 +41,7 @@
         /* Find a user with the given userId, else return undefined */
         function findUserById(i_userId) {
             for (var user in users) {
-                if (users[user]._id === i_userId) {
+                if (users[user]._id == i_userId) {
                     return users[user];
                 }
             }
@@ -51,7 +51,7 @@
         /* Find a user with the given userName, else return undefined */
         function findUserByUsername(i_username) {
             for (var user in users) {
-                if (users[user].username === i_username) {
+                if (users[user].username == i_username) {
                     return users[user];
                 }
             }
@@ -61,7 +61,7 @@
         /* Find a user with the given credentials, else return undefined */
         function findUserByCredentials(i_username, i_password) {
             for (var user in users) {
-                if (users[user].username === i_username && users[user].password === i_password) {
+                if (users[user].username == i_username && users[user].password == i_password) {
                     return users[user];
                 }
             }
@@ -72,7 +72,7 @@
         function updateUser(i_userId, i_user) {
             delete i_user.confirmPassword; // Delete the unwanted field
             for (var user in users) {
-                if (users[user]._id === i_userId) {
+                if (users[user]._id == i_userId) {
                     users[user] = i_user;
                     return true;
                 }
@@ -83,7 +83,7 @@
         /* Find a user with the given userId and delete it, else return false */
         function deleteUser(i_userId) {
             for (var user in users) {
-                if (users[user]._id === i_userId) {
+                if (users[user]._id == i_userId) {
                     users.splice(user, 1);
                     return true;
                 }

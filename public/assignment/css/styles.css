@@ -21,3 +21,11 @@ ul#widget-choose-height {
 .display-widget-list-inline {
     display: inline;
 }
+
+.zero-left-margin {
+    margin-left: 0px;
+}
+
+.zero-right-margin {
+    margin-right: 0px;
+}

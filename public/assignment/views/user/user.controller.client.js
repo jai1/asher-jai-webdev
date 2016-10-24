@@ -61,7 +61,6 @@
 	
         init();
 
-
         function updateProfile() {
             vm.success = null;
             vm.error = null;

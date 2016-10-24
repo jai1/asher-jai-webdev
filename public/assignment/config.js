@@ -3,9 +3,9 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .config(router); // Here we provide the function responsible for routing
+        .config(Router); // Here we provide the function responsible for routing
 
-    function router($routeProvider) {
+    function Router($routeProvider) {
         $routeProvider
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
@@ -58,7 +58,7 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
-                templateUrl: "views/widget/widget-new.view.client.html",
+                templateUrl: "views/widget/widget-chooser.view.client.html",
                 controller: "NewWidgetController",
                 controllerAs: "model"
             })

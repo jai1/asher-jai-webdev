@@ -1,14 +1,14 @@
 <nav class = "navbar navbar-default navbar-fixed-top">
     <div class = "row container-fluid">
         <div class = "col-xs-1">
-            <div class = "navbar-text">
-                <a class = "navbar-link pull-left" href = "#/user/{{model.userId}}">
+            <div class = "navbar-text pull-left zero-left-margin">
+                <a class = "navbar-link" href = "#/user/{{model.userId}}">
                     <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
 					</span>
 			    </a>
             </div>
         </div>
-        <div class = "col-xs-10  hidden-xs">
+        <div class = "col-xs-10 hidden-xs">
             <div class = "navbar-header">
                 <a class = "navbar-brand pull-left default-blue" href="#/user/{{model.userId}}/website">
                     Websites
@@ -16,8 +16,8 @@
             </div>
         </div>
         <div class = "col-xs-1">
-            <div class = "navbar-text">
-                <a  class = "pull-right navbar-link" href="#/user/{{model.userId}}/website">
+            <div class = "navbar-text pull-right">
+                <a  class = "navbar-link" href="#/user/{{model.userId}}/website/new">
                     <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue">
 					</span>
                 </a>
@@ -40,7 +40,7 @@
 </div>
 <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
-        <a class = "navbar-link pull-right" href = "#/user/{{model.userId}}">
+        <a class = "navbar-brand pull-right" href = "#/user/{{model.userId}}">
             <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
             </span>
         </a>

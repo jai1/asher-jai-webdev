@@ -1,136 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../css/styles.css" rel="stylesheet"/>
-</head>
-<body>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="col-xs-1 hidden-xs">
-            <div class="navbar-header">
-                <p class="navbar-text">
-                    <a href="../page/page-list.view.client.html" class="navbar-link">
-                        <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span></a>
-                </p>
-            </div>
-        </div>
-
-        <div class="col-xs-10">
-            <div class="navbar-header">
-                <a class="navbar-brand default-blue" href="#">
-                    Widgets
-                </a>
-            </div>
-        </div>
-
-        <div class="col-xs-1">
-            <div class="navbar-header hidden-xs">
-                <p class="navbar-text">
-                    <a href="widget-choose.view.client.html" class="navbar-link">
-                        <span class="glyphicon glyphicon-plus glyphiconPlusProperties default-blue"></span>
-                    </a>
-                </p>
-            </div>
-        </div>
+<nav class="navbar navbar-header navbar-fixed-top widget-pages-theme">
+    <div class="navbar-text pull-left stickyheader-align-left">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+            <span class="glyphicon glyphicon-chevron-left widget-pages-theme"></span>
+        </a>
+    </div>
+    <a class="navbar-brand widget-pages-theme stickyheader-title" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
+        Widgets
+    </a>
+    <div class="navbar-text pull-right stickyheader-align-right">
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
+            <span class="glyphicon glyphicon-plus widget-pages-theme"></span>
+        </a>
     </div>
 </nav>
 
-<ul class="container wrapper ul-wo-bullets">
-    <li>
-        <h1 class="display-widget-list-inline">
-            <b>
-                Gizmodo
-            </b>
-        </h1>
-        <span class="glyphicon glyphicon-align-justify pull-right">
-        </span>
-        <a href="widget-heading.view.client.html">
-            <span class="glyphicon glyphicon-cog pull-right">
-            </span>
-        </a>
+<div class="container-fluid list-group">
+    <div ng-repeat="widget in model.widgets"
+         ng-switch="widget.widgetType" class="object-underlay list-group-item zero-border">
 
-    </li>
-
-    <li>
-        <h2 class="display-widget-list-inline">
-            <b>World's Deepest Underwater Cave Discovered</b>
-        </h2>
-        <span class="glyphicon glyphicon-align-justify pull-right">
-        </span>
-        <a href="widget-heading.view.client.html">
-            <span class="glyphicon glyphicon-cog pull-right">
-            </span>
-        </a>
-
-
-
-    </li>
-
-    <li>
-        <span class="glyphicon glyphicon-align-justify pull-right">
-        </span>
-        <a href="widget-heading.view.client.html">
-            <span class="glyphicon glyphicon-cog pull-right">
-            </span>
-        </a>
-        <img src="http://www.livescience.com/images/i/000/086/490/original/deepest-underwater-cave-marcin-jamkowski.jpg?interpolation=lanczos-none&fit=inside|660:*"  class="img-responsive">
-    </li>
-
-
-    <li>
-        <h3 class="display-widget-list-inline">
-            The cave, called Hranická Propast, reaches a dizzying depth of 1,325 feet (404 meters). It is about 39 feet (12 m) deeper than what is now the world's second-deepest cave, Italy's Pozzo del Merro.
-            Polish diver Krzysztof Starnawski first explored Hranická Propast in 1999. The type of limestone formation he found led him to believe that the cave could extend a greater distance than his dives had taken him. So Starnawski led a Czech-Polish expedition to explore the cave, supported in part by a National Geographic grant, which included numerous dives over the past two years to collect more data. The limestone abyss was recently measured with the assistance of a remotely operated underwater vehicle (ROV), and determined to be the world's deepest.
-        </h3>
-        <span class="glyphicon glyphicon-align-justify pull-right">
-        </span>
-        <a href="widget-heading.view.client.html">
-            <span class="glyphicon glyphicon-cog pull-right">
-            </span>
-        </a>
-    </li>
-
-    <li>
-        <h2 class="display-widget-list-inline">
-            <b>Pirates of the Caribbean: Dead Men Tell No Tales Official Teaser Trailer #1 (2017) Movie HD
-            </b>
-        </h2>
-        <span class="glyphicon glyphicon-align-justify pull-right">
-        </span>
-        <a href="widget-heading.view.client.html">
-            <span class="glyphicon glyphicon-cog pull-right">
-            </span>
-        </a>
-
-    </li>
-    <li>
-        <span class="glyphicon glyphicon-align-justify pull-right">
-        </span>
-        <a href="widget-heading.view.client.html">
-            <span class="glyphicon glyphicon-cog pull-right">
-            </span>
-        </a>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="//www.youtube.com/embed/KpFMVcZ4o7U"></iframe>
+        <div ng-switch-when="HEADER"
+             ng-switch="widget.size" class="container-fluid">
+            <h1 ng-switch-when="1">{{widget.text}}</h1>
+            <h2 ng-switch-when="2">{{widget.text}}</h2>
+            <h3 ng-switch-when="3">{{widget.text}}</h3>
+            <h4 ng-switch-when="4">{{widget.text}}</h4>
+            <h5 ng-switch-when="5">{{widget.text}}</h5>
+            <h6 ng-switch-when="6">{{widget.text}}</h6>
         </div>
-    </li>
-</ul>
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
 
-        <p class="navbar-text pull-right">
-            <a href="../user/profile.view.client.html" class="navbar-link">
-                <span class="glyphicon glyphicon-user glyphiconUserProperties default-blue">
-                </span>
+        <div ng-switch-when="YOUTUBE" class="container-fluid">
+            <iframe class="video-responsive" width="{{widget.width}}" ng-src="{{model.safeCheckYoutubeURL(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div ng-switch-when="IMAGE" class="container-fluid">
+            <img class="img-responsive" width="{{widget.width}}" ng-src="{{model.safeCheckImageURL(widget.url)}}" />
+        </div>
+
+        <div ng-switch-when="HTML"
+             ng-bind-html="model.safeCheckHTML(widget.text);" class="container-fluid">
+        </div>
+
+        <div class="object-overlay">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" class="icon-links">
+                <span class="glyphicon glyphicon-cog"></span>
             </a>
-        </p>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-fixed-bottom widget-pages-theme">
+    <div class="navbar-text pull-right stickyheader-align-right">
+        <a href="#/user/{{model.userId}}" class="navbar-link">
+            <span class="glyphicon glyphicon-user widget-pages-theme"></span>
+        </a>
     </div>
 </nav>
-
-</body>
-</html>

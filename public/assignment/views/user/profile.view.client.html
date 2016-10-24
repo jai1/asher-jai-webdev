@@ -2,12 +2,12 @@
 
 
 <nav class = "navbar navbar-default navbar-fixed-top">
-    <div class = "container-fluid">
+    <div class = "container">
         <a class = "navbar-brand default-blue"  href="#/user/{{model.user._id}}">
 	        Profile
         </a>
 
-        <a class = "navbar-link pull-right">
+        <a ng-click="model.updateProfile()" class = "navbar-brand pull-right">
             <span class = "glyphicon glyphicon-ok glyphiconOkProperties default-blue">
 			</span>
         </a>
