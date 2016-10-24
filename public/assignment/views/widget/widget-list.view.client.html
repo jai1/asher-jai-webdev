@@ -10,14 +10,16 @@
         </div>
         <div class = "col-xs-10 hidden-xs">
             <div class = "navbar-header">
-                <a class = "navbar-brand pull-left default-blue" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
+                <a class = "navbar-brand pull-left default-blue"
+                   href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
                     Widgets
                 </a>
             </div>
         </div>
         <div class = "col-xs-1">
             <div class = "navbar-text pull-right">
-                <a  class = "navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <a class = "navbar-link"
+                   href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                     <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue">
                     </span>
                 </a>
@@ -25,41 +27,38 @@
         </div>
     </div>
 </nav>
-
-<div class="container-fluid list-group">
-    <div ng-repeat="widget in model.widgets"
-         ng-switch="widget.widgetType" class="list-group-item clearfix zero-border">
-        <div ng-switch-when="HEADER"
-             ng-switch="widget.size" class="container-fluid">
-            <h1 ng-switch-when="1">{{widget.text}}</h1>
-            <h2 ng-switch-when="2">{{widget.text}}</h2>
-            <h3 ng-switch-when="3">{{widget.text}}</h3>
-            <h4 ng-switch-when="4">{{widget.text}}</h4>
-            <h5 ng-switch-when="5">{{widget.text}}</h5>
-            <h6 ng-switch-when="6">{{widget.text}}</h6>
+<div class = "container-fluid list-group">
+    <div ng-repeat = "widget in model.widgets"
+         ng-switch = "widget.widgetType" class = "list-group-item clearfix zero-border">
+        <div ng-switch-when = "HEADER"
+             ng-switch = "widget.size" class = "container-fluid">
+            <h1 ng-switch-when = "1">{{widget.text}}</h1>
+            <h2 ng-switch-when = "2">{{widget.text}}</h2>
+            <h3 ng-switch-when = "3">{{widget.text}}</h3>
+            <h4 ng-switch-when = "4">{{widget.text}}</h4>
+            <h5 ng-switch-when = "5">{{widget.text}}</h5>
+            <h6 ng-switch-when = "6">{{widget.text}}</h6>
         </div>
-
-        <div ng-switch-when="YOUTUBE" class="container-fluid">
-            <iframe class="video-responsive" width="{{widget.width}}" ng-src="{{model.safeCheckYoutubeURL(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+        <div ng-switch-when = "YOUTUBE" class = "container-fluid">
+            <iframe class = "video-responsive" width = "{{widget.width}}"
+                    ng-src = "{{model.safeCheckYoutubeURL(widget.url)}}" frameborder = "0" allowfullscreen></iframe>
         </div>
-
-        <div ng-switch-when="IMAGE" class="container-fluid">
-            <img class="img-responsive" width="{{widget.width}}" ng-src="{{model.safeCheckImageURL(widget.url)}}" />
+        <div ng-switch-when = "IMAGE" class = "container-fluid">
+            <img class = "img-responsive" width = "{{widget.width}}"
+                 ng-src = "{{model.safeCheckImageURL(widget.url)}}"/>
         </div>
-
-        <div ng-switch-when="HTML"
-             ng-bind-html="model.safeCheckHTML(widget.text);" class="container-fluid">
+        <div ng-switch-when = "HTML"
+             ng-bind-html = "model.safeCheckHTML(widget.text);" class = "container-fluid">
         </div>
-
-        <div class="pull-right overlay-using-z-index">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" class="icon-links">
-                <span class="glyphicon glyphicon-cog"></span>
+        <div class = "pull-right overlay-using-z-index">
+            <a href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}"
+               class = "icon-links">
+                <span class = "glyphicon glyphicon-cog"></span>
             </a>
-            <span class="glyphicon glyphicon-menu-hamburger"></span>
+            <span class = "glyphicon glyphicon-menu-hamburger"></span>
         </div>
     </div>
 </div>
-
 <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
         <a class = "navbar-brand pull-right" href = "#/user/{{model.userId}}">

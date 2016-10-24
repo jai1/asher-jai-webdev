@@ -2,7 +2,8 @@
     <div class = "row container-fluid">
         <div class = "col-xs-1">
             <div class = "navbar-text pull-left zero-left-margin">
-                <a class = "navbar-link" href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <a class = "navbar-link"
+                   href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                     <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
                     </span>
                 </a>
@@ -10,14 +11,15 @@
         </div>
         <div class = "col-xs-10 hidden-xs">
             <div class = "navbar-header">
-                <a class = "navbar-brand pull-left default-blue" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
+                <a class = "navbar-brand pull-left default-blue"
+                   href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
                     Widget Edit
                 </a>
             </div>
         </div>
         <div class = "col-xs-1">
             <div class = "navbar-text pull-right">
-                <a  ng-click="model.updateWidget()" class = "navbar-link">
+                <a ng-click = "model.updateWidget()" class = "navbar-link">
                     <span class = "glyphicon glyphicon-ok default-blue">
                     </span>
                 </a>
@@ -25,14 +27,10 @@
         </div>
     </div>
 </nav>
-
-<div ng-show="model.error" class="alert alert-danger" role="alert">
+<div ng-show = "model.error" class = "alert alert-danger" role = "alert">
     {{model.error}}
 </div>
-
-<div ng-include="'views/widget/widget-'+model.widget.widgetType.toLowerCase()+'.editor.html'"></div>
-
-
+<div ng-include = "'views/widget/widget-'+model.widget.widgetType.toLowerCase()+'.editor.html'"></div>
 <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
         <a class = "navbar-brand pull-right" href = "#/user/{{model.userId}}">

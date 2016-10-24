@@ -7,21 +7,23 @@
 
     function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
+
         function init() {
             vm.userId = parseInt($routeParams.uid);
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
         }
-	
+
         init();
     }
 
     function NewWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
+
         function init() {
             vm.userId = parseInt($routeParams.uid);
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
         }
-	
+
         init();
 
         vm.createWebsite = createWebsite;
@@ -37,13 +39,14 @@
 
     function EditWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
+
         function init() {
             vm.userId = parseInt($routeParams.uid);
             vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
             vm.websiteId = parseInt($routeParams.wid);
             vm.website = WebsiteService.findWebsiteById(vm.websiteId);
         }
-	
+
         init();
 
         vm.updateWebsite = updateWebsite;
@@ -51,7 +54,7 @@
 
         function updateWebsite() {
             vm.error = null;
-            if(!WebsiteService.updateWebsite(vm.websiteId, vm.website)) {
+            if (!WebsiteService.updateWebsite(vm.websiteId, vm.website)) {
                 vm.error = "Unable to update the website";
             }
             if (!vm.error) {
@@ -61,7 +64,7 @@
 
         function deleteWebsite() {
             vm.error = null;
-            if(!WebsiteService.deleteWebsite(vm.websiteId)) {
+            if (!WebsiteService.deleteWebsite(vm.websiteId)) {
                 vm.error = "Unable to delete the website";
             }
             if (!vm.error) {

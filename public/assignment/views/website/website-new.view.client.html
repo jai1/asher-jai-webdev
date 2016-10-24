@@ -1,40 +1,39 @@
 <nav class = "navbar navbar-default navbar-fixed-top">
-    <div class="row container-fluid">
-        <div class="col-sm-4 hidden-xs">
-            <div class="navbar-text pull-left zero-left-margin">
-                <a class="navbar-link" href="#/user/{{model.userId}}/website">
-                    <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
-					</span>
+    <div class = "row container-fluid">
+        <div class = "col-sm-4 hidden-xs">
+            <div class = "navbar-text pull-left zero-left-margin">
+                <a class = "navbar-link" href = "#/user/{{model.userId}}/website">
+                    <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
+                    </span>
                 </a>
             </div>
-            <div class="navbar-header">
-                <a class="navbar-brand default-blue" href="#/user/{{model.userId}}/website">
+            <div class = "navbar-header">
+                <a class = "navbar-brand default-blue" href = "#/user/{{model.userId}}/website">
                     Websites
                 </a>
             </div>
         </div>
-		<!-- Commented this line since vdivide is dropped in BootStrap3, if you uncomment it change the col-xs-8 to col-xs-7 -->
+        <!-- Commented this line since vdivide is dropped in BootStrap3, if you uncomment it change the col-xs-8 to col-xs-7 -->
         <!-- <div class="col-sm-8 vdivide hidden-xs"></div> -->
-        <div class="col-sm-8">
-            <div class="visible-xs navbar-text pull-left zero-left-margin">
-                <a class="navbar-link" href="#/user/{{model.userId}}/website">
-                    <span class="glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span>
+        <div class = "col-sm-8">
+            <div class = "visible-xs navbar-text pull-left zero-left-margin">
+                <a class = "navbar-link" href = "#/user/{{model.userId}}/website">
+                    <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue"></span>
                 </a>
             </div>
-			<div class="navbar-text pull-right zero-right-margin">
-                    <a ng-click="model.createWebsite()">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand default-blue" href="#/user/{{model.userId}}/website/new">
-                        New Website
-                    </a>
+            <div class = "navbar-text pull-right zero-right-margin">
+                <a ng-click = "model.createWebsite()">
+                    <span class = "glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class = "navbar-header">
+                <a class = "navbar-brand default-blue" href = "#/user/{{model.userId}}/website/new">
+                    New Website
+                </a>
             </div>
         </div>
     </div>
 </nav>
-
 <div class = "container-fluid">
     <div class = "row">
         <div class = "col-sm-4 hidden-xs">

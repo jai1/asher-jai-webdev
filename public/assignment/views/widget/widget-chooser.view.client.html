@@ -2,7 +2,8 @@
     <div class = "row container-fluid">
         <div class = "col-xs-1">
             <div class = "navbar-text pull-left zero-left-margin">
-                <a class = "navbar-link" href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                <a class = "navbar-link"
+                   href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                     <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
                     </span>
                 </a>
@@ -10,35 +11,33 @@
         </div>
         <div class = "col-xs-10 hidden-xs">
             <div class = "navbar-header">
-                <a class = "navbar-brand pull-left default-blue" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <a class = "navbar-brand pull-left default-blue"
+                   href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                     Choose Widget
                 </a>
             </div>
         </div>
     </div>
 </nav>
-
-<div ng-show="model.error" class="alert alert-danger" role="alert">
+<div ng-show = "model.error" class = "alert alert-danger" role = "alert">
     ERROR: {{model.error}}
 </div>
-
-<div class="container-fluid">
+<div class = "container-fluid">
     <ul class = "list-group">
-        <li class="list-group-item clearfix cursor-pointer">
-            <a ng-click="model.createWidget('HEADER');">Header</a>
+        <li class = "list-group-item clearfix cursor-pointer">
+            <a ng-click = "model.createWidget('HEADER');">Header</a>
         </li>
-        <li class="list-group-item clearfix cursor-pointer">
-            <a ng-click="model.createWidget('HTML');">HTML</a>
+        <li class = "list-group-item clearfix cursor-pointer">
+            <a ng-click = "model.createWidget('HTML');">HTML</a>
         </li>
-        <li class="list-group-item clearfix cursor-pointer">
-            <a ng-click="model.createWidget('IMAGE');">Image</a>
+        <li class = "list-group-item clearfix cursor-pointer">
+            <a ng-click = "model.createWidget('IMAGE');">Image</a>
         </li>
-        <li class="list-group-item clearfix cursor-pointer">
-            <a ng-click="model.createWidget('YOUTUBE');">You Tube</a>
+        <li class = "list-group-item clearfix cursor-pointer">
+            <a ng-click = "model.createWidget('YOUTUBE');">You Tube</a>
         </li>
     </ul>
 </div>
-
 <nav class = "navbar navbar-default navbar-fixed-bottom">
     <div class = "container-fluid">
         <a class = "navbar-brand pull-right" href = "#/user/{{model.userId}}">

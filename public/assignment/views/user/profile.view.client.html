@@ -1,14 +1,13 @@
 <nav class = "navbar navbar-default navbar-fixed-top">
     <div class = "container">
-        <a class = "navbar-brand default-blue"  href="#/user/{{model.user._id}}">
-	        Profile
+        <a class = "navbar-brand default-blue" href = "#/user/{{model.user._id}}">
+            Profile
         </a>
-
-        <a ng-click="model.updateUserProfile()" class = "navbar-brand pull-right">
+        <a ng-click = "model.updateUserProfile()" class = "navbar-brand pull-right">
             <span class = "glyphicon glyphicon-ok glyphiconOkProperties default-blue">
-			</span>
+            </span>
         </a>
-	</div>
+    </div>
 </nav>
 <div class = "container">
     <div ng-show = "model.error" class = "alert alert-danger" role = "alert">
@@ -39,7 +38,7 @@
                    placeholder = "Enter your Last name">
         </div>
     </form>
-    <a class="btn btn-primary btn-block"
+    <a class = "btn btn-primary btn-block"
        href = "#/user/{{model.user._id}}/website">
         View Websites
     </a>
@@ -47,7 +46,7 @@
        href = "#/login">
         Logout
     </a>
-    <a ng-click="model.deleteUser()" class="btn btn-danger btn-block">
+    <a ng-click = "model.deleteUser()" class = "btn btn-danger btn-block">
         Delete Profile
     </a>
 </div>
