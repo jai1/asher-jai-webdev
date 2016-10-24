@@ -27,9 +27,9 @@
         /* Creates a widget if page exists else returns undefined */
         function createWidget(i_pageId, i_widget) {
             for(var widget in widgets) {
-                if(widgets[widget].pageId === i_pageId) {
+                if(widgets[widget].pageId == i_pageId) {
                     i_widget.pageId = widgets[widget].pageId;
-                    i_widget._id = parseInt(new Date().getTime());
+                    i_widget._id = new Date().getTime();
                     widgets.push(i_widget);
                     return i_widget._id;
                 }
@@ -41,7 +41,7 @@
         function findWidgetsByPageId(i_pageId) {
             var o_widgets = [];
             for(var widget in widgets) {
-                if(widgets[widget].pageId === i_pageId) {
+                if(widgets[widget].pageId == i_pageId) {
                     o_widgets.push(widgets[widget]);
                 }
             }
@@ -51,7 +51,7 @@
         /* Returns a widget if the given widgetId exists, else returns false. */
         function findWidgetById(i_widgetId) {
             for(var widget in widgets) {
-                if(widgets[widget]._id === i_widgetId) {
+                if(widgets[widget]._id == i_widgetId) {
                     return widgets[widget];
                 }
             }
@@ -61,7 +61,7 @@
         /* Updates the widget if the given widgetId exists, else returns false. */
         function updateWidget(i_widgetId, i_widget) {
             for(var widget in widgets) {
-                if(widgets[widget]._id === i_widgetId) {
+                if(widgets[widget]._id == i_widgetId) {
                     i_widget._id = widgets[widget]._id;
                     i_widget.pageId = widgets[widget].pageId;
                     return true;
@@ -73,7 +73,7 @@
         /* Deletes the widget if the given widgetId exists, else returns false. */
         function deleteWidget(i_widgetId) {
             for(var widget in widgets) {
-                if(widgets[widget]._id === i_widgetId) {
+                if(widgets[widget]._id == i_widgetId) {
                     // Remove widget from array
                     widgets.splice(widget,1);
                     return true;

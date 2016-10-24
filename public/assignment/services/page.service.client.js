@@ -23,7 +23,7 @@
         /* Returns true only if the new page has a unique id and name */
         function createPage(i_websiteId, i_page) {
             for (var page in pages) {
-                if (pages[page].websiteId === i_websiteId && pages[page].name === i_page.name) {
+                if (pages[page].websiteId == i_websiteId && pages[page].name == i_page.name) {
                     return false;
                 }
             }
@@ -39,7 +39,7 @@
         function findPageByWebsiteId(i_websiteId) {
             var o_pages = [];
             for (var page in pages) {
-                if (pages[page].websiteId === i_websiteId) {
+                if (pages[page].websiteId == i_websiteId) {
                     o_pages.push(pages[page]);
                 }
             }
@@ -49,7 +49,7 @@
         /* Return a page with the given id is present */
         function findPageById(i_pageId) {
             for (var pages in pages) {
-                if (pages[pages]._id === i_pageId) {
+                if (pages[pages]._id == i_pageId) {
                     return pages[pages];
                 }
             }
@@ -59,7 +59,7 @@
         /* Find the page using the pageId and replace the page. Return true is action is successful. */
         function updatePage(i_pageId, i_page) {
             for (var page in pages) {
-                if (pages[page]._id === i_pageId) {
+                if (pages[page]._id == i_pageId) {
                     i_page._id = pages[page]._id;
                     i_page.websiteId = pages[page].websiteId;
                     pages[page] = i_page;
@@ -72,7 +72,7 @@
         /* Find a page with the given page id and delete it. Returns true if operation is successful. */
         function deletePage(i_pageId) {
             for (var page in pages) {
-                if (pages[page]._id === i_pageId) {
+                if (pages[page]._id == i_pageId) {
                     pages.splice(page, 1); // Remove the page from the array
                     return true;
                 }

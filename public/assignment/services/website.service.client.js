@@ -27,7 +27,7 @@
         /* Create a new website if one with same name not already created by the same developer, return false otherwise */
         function createWebsite(i_userId, i_website) {
             for (var website in websites) {
-                if (websites[website].developerId === i_userId && websites[website].name === i_website.name) {
+                if (websites[website].developerId == i_userId && websites[website].name == i_website.name) {
                     return false;
                 }
             }
@@ -42,7 +42,7 @@
         function findWebsitesByUser(i_userId) {
             var o_websites = [];
             for (var website in websites) {
-                if (websites[website].developerId === i_userId) {
+                if (websites[website].developerId == i_userId) {
                     o_websites.push(websites[website]);
                 }
             }
@@ -52,7 +52,7 @@
         /* Return a the website with the given websiteId, else return undefined */
         function findWebsiteById(i_websiteId) {
             for (var website in websites) {
-                if (websites[website]._id === i_websiteId) {
+                if (websites[website]._id == i_websiteId) {
                     return websites[website];
                 }
             }
@@ -62,7 +62,7 @@
         /* If a website found with the given websiteId - replace it, else return false */
         function updateWebsite(i_websiteId, i_website) {
             for (var website in websites) {
-                if (websites[website]._id === i_websiteId) {
+                if (websites[website]._id == i_websiteId) {
                     i_website._id = websites[website]._id;
                     i_website.developerId = websites[website].developerId;
                     websites[website] = i_website;
@@ -75,7 +75,7 @@
         /* If a website found with the given websiteId - delete it, else return false */
         function deleteWebsite(i_websiteId) {
             for (var website in websites) {
-                if (websites[website]._id === i_websiteId) {
+                if (websites[website]._id == i_websiteId) {
                     websites.splice(website, 1);
                     return true;
                 }

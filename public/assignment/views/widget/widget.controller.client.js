@@ -9,9 +9,9 @@
         var vm = this;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
-            vm.websiteId = parseInt($routeParams.wid);
-            vm.pageId = parseInt($routeParams.pid);
+            vm.userId = $routeParams.uid;
+            vm.websiteId = $routeParams.wid;
+            vm.pageId = $routeParams.pid;
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
         }
 	
@@ -43,9 +43,9 @@
         var vm = this;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
-            vm.websiteId = parseInt($routeParams.wid);
-            vm.pageId = parseInt($routeParams.pid);
+            vm.userId = $routeParams.uid;
+            vm.websiteId = $routeParams.wid;
+            vm.pageId = $routeParams.pid;
         }
 
         init();
@@ -73,10 +73,10 @@
         var vm = this;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
-            vm.websiteId = parseInt($routeParams.wid);
-            vm.pageId = parseInt($routeParams.pid);
-            vm.widgetId = parseInt($routeParams.wgid);
+            vm.userId = $routeParams.uid;
+            vm.websiteId = $routeParams.wid;
+            vm.pageId = $routeParams.pid;
+            vm.widgetId = $routeParams.wgid;
             vm.widget = WidgetService.findWidgetById(vm.widgetId);
         }
 
