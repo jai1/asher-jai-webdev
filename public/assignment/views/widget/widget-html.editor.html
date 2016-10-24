@@ -2,10 +2,13 @@
     <form>
         <div class="form-group">
             <label for="text">Text</label>
-            <textarea class="form-control" ng-model="model.widget.text" id="text" placeholder="Enter text"></textarea>
+            <textarea class="form-control" ng-model="model.widget.text" id="text" placeholder="Enter data in HTML Format">
+            </textarea>
         </div>
     </form>
 
     <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWidget();">Delete</a>
+       ng-click="model.deleteWidget();">
+        Delete
+    </a>
 </div>

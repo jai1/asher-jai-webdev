@@ -1,16 +1,28 @@
-<nav class="navbar navbar-header navbar-fixed-top widget-pages-theme">
-    <div class="navbar-text pull-left stickyheader-align-left">
-        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
-            <span class="glyphicon glyphicon-chevron-left widget-pages-theme"></span>
-        </a>
-    </div>
-    <a class="navbar-brand widget-pages-theme stickyheader-title" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
-        Widgets
-    </a>
-    <div class="navbar-text pull-right stickyheader-align-right">
-        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
-            <span class="glyphicon glyphicon-plus widget-pages-theme"></span>
-        </a>
+<nav class = "navbar navbar-default navbar-fixed-top">
+    <div class = "row container-fluid">
+        <div class = "col-xs-1">
+            <div class = "navbar-text pull-left zero-left-margin">
+                <a class = "navbar-link" href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                    <span class = "glyphicon glyphicon-chevron-left glyphiconBackProperties default-blue">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class = "col-xs-10 hidden-xs">
+            <div class = "navbar-header">
+                <a class = "navbar-brand pull-left default-blue" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/">
+                    Widgets
+                </a>
+            </div>
+        </div>
+        <div class = "col-xs-1">
+            <div class = "navbar-text pull-right">
+                <a  class = "navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                    <span class = "glyphicon glyphicon-plus glyphiconPlusProperties default-blue">
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
 </nav>
 
@@ -49,10 +61,11 @@
     </div>
 </div>
 
-<nav class="navbar navbar-fixed-bottom widget-pages-theme">
-    <div class="navbar-text pull-right stickyheader-align-right">
-        <a href="#/user/{{model.userId}}" class="navbar-link">
-            <span class="glyphicon glyphicon-user widget-pages-theme"></span>
+<nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+        <a class = "navbar-brand pull-right" href = "#/user/{{model.userId}}">
+            <span class = "glyphicon glyphicon-user glyphiconUserProperties default-blue">
+            </span>
         </a>
     </div>
 </nav>

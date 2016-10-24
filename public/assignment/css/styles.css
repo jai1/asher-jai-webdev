@@ -29,3 +29,7 @@ ul#widget-choose-height {
 .zero-right-margin {
     margin-right: 0px;
 }
+
+.no-display {
+    display: none;
+}

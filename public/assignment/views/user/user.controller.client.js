@@ -48,9 +48,11 @@
         }
     }
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, $location, UserService) {
         var vm = this;
-        vm.updateProfile = updateProfile;
+
+        vm.deleteUser = deleteUser;
+        vm.updateUserProfile = updateUserProfile;
 
         function init() {
             var user = UserService.findUserById(parseInt($routeParams.uid));
@@ -61,14 +63,24 @@
 	
         init();
 
-        function updateProfile() {
+        function updateUserProfile() {
             vm.success = null;
             vm.error = null;
-            if (UserService.updateUser(parseInt($routeParams.uid), vm.user)) {
+            if (UserService.updateUser($routeParams.uid, vm.user)) {
                 vm.success = "Successfully Updated User Profile";
             } else { 
-	    	vm.error = "Unable to update User Profile";
-	    }
+	    	    vm.error = "Unable to update User Profile";
+	        }
+        }
+
+        function deleteUser() {
+            vm.error = null;
+            if (!UserService.deleteUser($routeParams.uid)) {
+                vm.error = "Unable to delete the User";
+            } else {
+                // This "/login" should be the same name as the when section
+                $location.url("/login");
+            }
         }
     }
 })();

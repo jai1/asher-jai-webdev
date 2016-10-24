@@ -24,17 +24,17 @@
 
         return apis;
 
-        /* Creates a widget if page exists else returns undefined */
+        /* Creates a widget if it doesn't exist else returns undefined */
         function createWidget(i_pageId, i_widget) {
+            i_widget._id = new Date().getTime();
+            i_widget.pageId == i_pageId;
             for(var widget in widgets) {
-                if(widgets[widget].pageId == i_pageId) {
-                    i_widget.pageId = widgets[widget].pageId;
-                    i_widget._id = new Date().getTime();
-                    widgets.push(i_widget);
-                    return i_widget._id;
+                if(widgets[widget]._id == i_widget._id && widgets[widget].pageId == i_pageId) {
+                    return undefined;
                 }
             }
-            return undefined;
+            widgets.push(i_widget);
+            return i_widget._id;
         }
 
         /* Returns a list widgets on the given page. */
