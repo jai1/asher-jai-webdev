@@ -27,9 +27,9 @@
         </div>
     </div>
 </nav>
-<div class = "container-fluid list-group v-scroll-full-page">
+<div class = "container-fluid list-group" jga-sortable>
     <div ng-repeat = "widget in model.widgets"
-         ng-switch = "widget.widgetType" class = "list-group-item clearfix">
+         ng-switch = "widget.widgetType" class = "list-group-item zeroBorder">
         <div ng-switch-when = "HEADER"
              ng-switch = "widget.size" class = "container-fluid">
             <h1 ng-switch-when = "1">{{widget.text}}</h1>

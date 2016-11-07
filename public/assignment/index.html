@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang = "en" ng-app = "WebAppMaker">
 <head>
-    <!-- Empty Tags don't work on some browsers -->
+    <!-- Empty Tags doesn't work on some browsers -->
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1, user-scalable=no">
+    <!--CSS for jQuery UI-->
+    <link rel = "stylesheet"
+          href = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!--CDN for jQuery, jQuery UI and jQuery Mobile-->
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <!-- CDN for Angular and Bootstrap -->
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
@@ -22,6 +29,13 @@
     <script src = "views/page/page.controller.client.js"></script>
     <script src = "views/widget/widget.controller.client.js"></script>
     <script src = "views/website/website.controller.client.js"></script>
+    <!--Services-->
+    <script src = "services/user.service.client.js"></script>
+    <script src = "services/website.service.client.js"></script>
+    <script src = "services/page.service.client.js"></script>
+    <script src = "services/widget.service.client.js"></script>
+    <!--Directives-->
+    <script src = "directives/jga-directives.js"></script>
     <!-- CSS Stylesheet -->
     <link href = "css/styles.css" rel = "stylesheet"/>
     <title>Assignment</title>

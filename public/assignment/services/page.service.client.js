@@ -3,93 +3,41 @@
         .module("WebAppMaker")
         .factory("PageService", Service);
 
-    function Service() {
+    function Service($http) {
         var apis = {
             createPage: createPage,
             updatePage: updatePage,
-            findPageByWebsiteId: findPageByWebsiteId,
+            findPageByWebsiteId: findPagesByWebsiteId,
             findPageById: findPageById,
             deletePage: deletePage
         };
-
-        var pages = [
-            {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
-            {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
-            {"_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"},
-            {"_id": "1", "name": "Post 1", "websiteId": "567", "description": "Lorem"},
-            {"_id": "2", "name": "Post 2", "websiteId": "567", "description": "Lorem"},
-            {"_id": "3", "name": "Post 3", "websiteId": "567", "description": "Lorem"},
-            {"_id": "4", "name": "Post 4", "websiteId": "567", "description": "Lorem"},
-            {"_id": "5", "name": "Post 5", "websiteId": "567", "description": "Lorem"},
-            {"_id": "6", "name": "Post 6", "websiteId": "567", "description": "Lorem"},
-            {"_id": "7", "name": "Post 7", "websiteId": "567", "description": "Lorem"},
-            {"_id": "8", "name": "Post 8", "websiteId": "567", "description": "Lorem"},
-            {"_id": "9", "name": "Post 9", "websiteId": "567", "description": "Lorem"},
-            {"_id": "10", "name": "Post 10", "websiteId": "567", "description": "Lorem"},
-            {"_id": "12", "name": "Post 11", "websiteId": "567", "description": "Lorem"},
-            {"_id": "13", "name": "Post 12", "websiteId": "567", "description": "Lorem"}
-        ];
 
         return apis;
 
         /* Returns true only if the new page has a unique id and name */
         function createPage(i_websiteId, i_page) {
-            for (var page in pages) {
-                if (pages[page].websiteId == i_websiteId && pages[page].name == i_page.name) {
-                    return false;
-                }
-            }
-
-            // Assuming that we get one request per second - need to change this logic, using counters in mongodb
-            i_page._id = parseInt(new Date().getTime());
-            i_page.websiteId = i_websiteId;
-            pages.push(i_page);
-            return true;
+            return $http.post("/api/website/" + i_websiteId + "/page", i_page);
         }
 
         /* Returns a list of pages with the given websiteId */
-        function findPageByWebsiteId(i_websiteId) {
-            var o_pages = [];
-            for (var page in pages) {
-                if (pages[page].websiteId == i_websiteId) {
-                    o_pages.push(pages[page]);
-                }
-            }
-            return o_pages;
+        function findPagesByWebsiteId(i_websiteId) {
+            return $http.get("/api/website/" + i_websiteId + "/page");
         }
 
         /* Return a page with the given id is present */
         function findPageById(i_pageId) {
-            for (var page in pages) {
-                if (pages[page]._id == i_pageId) {
-                    return pages[page];
-                }
-            }
-            return undefined;
+            return $http.get("/api/page/" + i_pageId);
         }
 
         /* Find the page using the pageId and replace the page. Return true is action is successful. */
         function updatePage(i_pageId, i_page) {
-            for (var page in pages) {
-                if (pages[page]._id == i_pageId) {
-                    i_page._id = pages[page]._id;
-                    i_page.websiteId = pages[page].websiteId;
-                    pages[page] = i_page;
-                    return true;
-                }
-            }
-            return false;
+            return $http.put("/api/page/" + i_pageId, i_page);
+
         }
 
         /* Find a page with the given page id and delete it. Returns true if operation is successful. */
         function deletePage(i_pageId) {
-            for (var page in pages) {
-                if (pages[page]._id == i_pageId) {
-                    pages.splice(page, 1); // Remove the page from the array
-                    return true;
-                }
-            }
-            return false;
+            return $http.delete("/api/page/" + i_pageId);
         }
     }
 })();

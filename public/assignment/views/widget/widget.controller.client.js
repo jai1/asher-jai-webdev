@@ -12,7 +12,14 @@
             vm.userId = $routeParams.uid;
             vm.websiteId = $routeParams.wid;
             vm.pageId = $routeParams.pid;
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            WidgetService
+                .findWidgetsByPageId(vm.pageId)
+                .success(function (widgets) {
+                    vm.widgets = widgets;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -58,15 +65,19 @@
             vm.error = null;
             var widget = {};
             widget.widgetType = type;
-            var newWidgetId = WidgetService.createWidget(vm.pageId, widget);
-            if (!newWidgetId) {
-                vm.error = "Unable to create new Widget";
-            }
+            WidgetService
+                .createWidget(vm.pageId, widget)
+                .success(function (widget) {
+                    if (!widget) {
 
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + newWidgetId);
-            }
-            // WidgetService.printDataOnConsole();
+                        vm.error = "Unable to create new Widget";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + widget._id);
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
     }
 
@@ -78,7 +89,14 @@
             vm.websiteId = $routeParams.wid;
             vm.pageId = $routeParams.pid;
             vm.widgetId = $routeParams.wgid;
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function (widget) {
+                    vm.widget = widget;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -90,28 +108,40 @@
 
         function updateWidget() {
             vm.error = null;
-            console.log(vm.widget);
+
             if (vm.widget.widgetType == "HEADER" && !(vm.widget.size && vm.widget.size >= 1 && vm.widget.size <= 6)) {
                 vm.error = "Size needs to be in [1 6]";
+                return;
             }
-            if (!vm.error && !WidgetService.updateWidget(vm.widgetId, vm.widget)) {
-                vm.error = "Unable to update new Widget";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            }
+            WidgetService
+                .updateWidget(vm.widgetId, vm.widget)
+                .success(function (widget) {
+                    if (!widget) {
+                        vm.error = "Unable to update new Widget";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }
+                })
+                .error(function (err) {
+
+                });
             // WidgetService.printDataOnConsole();
         }
 
         function deleteWidget() {
             vm.error = null;
-            if (!WidgetService.deleteWidget(vm.widgetId)) {
-                vm.error = "Unable to delete the Widget";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-            }
-            // WidgetService.printDataOnConsole();
+            WidgetService
+                .deleteWidget(vm.widgetId)
+                .success(function (status) {
+                    if (!status) {
+                        vm.error = "Unable to delete the Widget";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
     }
 })();

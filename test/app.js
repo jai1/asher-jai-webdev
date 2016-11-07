@@ -1,12 +1,11 @@
-module.exports = function(app)
-{
+module.exports = function (app) {
     app.get("/api/test", findAllMessages);
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
 
     var connectionString = 'mongodb://127.0.0.1:27017/test';
 
-    if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
             process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
             process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
@@ -27,10 +26,10 @@ module.exports = function(app)
         TestModel
             .find()
             .then(
-                function(tests) {
+                function (tests) {
                     res.json(tests);
                 },
-                function(err) {
+                function (err) {
                     res.status(400).send(err);
                 }
             );
@@ -40,10 +39,10 @@ module.exports = function(app)
         TestModel
             .create(req.body)
             .then(
-                function(test) {
+                function (test) {
                     res.json(test);
                 },
-                function(err) {
+                function (err) {
                     res.status(400).send(err);
                 }
             );
@@ -53,10 +52,10 @@ module.exports = function(app)
         TestModel
             .remove({_id: req.params.id})
             .then(
-                function(result) {
+                function (result) {
                     res.json(result);
                 },
-                function(err) {
+                function (err) {
                     res.status(400).send(err);
                 }
             );

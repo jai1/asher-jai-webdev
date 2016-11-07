@@ -9,7 +9,14 @@
         var vm = this;
         vm.userId = parseInt($routeParams.uid);
         vm.websiteId = parseInt($routeParams.wid);
-        vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+        PageService
+            .findPageByWebsiteId(vm.websiteId)
+            .success(function (pages) {
+                vm.pages = pages;
+            })
+            .error(function (err) {
+
+            });
     }
 
     function NewPageController($location, $routeParams, PageService) {
@@ -19,19 +26,33 @@
         function init() {
             vm.userId = parseInt($routeParams.uid);
             vm.websiteId = parseInt($routeParams.wid);
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
 
         function createPage() {
             vm.error = null;
-            if (!PageService.createPage(vm.websiteId, vm.page)) {
-                vm.error = "A page with the same name already exists";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            }
+            PageService
+                .createPage(vm.websiteId, vm.page)
+                .success(function (page) {
+                    if (page) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    } else {
+                        vm.error = "Page with this name already exists";
+                    }
+                })
+                .error(function (err) {
+
+                });
+
         }
     }
 
@@ -41,9 +62,23 @@
         function init() {
             vm.userId = parseInt($routeParams.uid);
             vm.websiteId = parseInt($routeParams.wid);
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                })
+                .error(function (err) {
+
+                });
             vm.pageId = parseInt($routeParams.pid);
-            vm.page = PageService.findPageById(vm.pageId);
+            PageService
+                .findPageById(vm.pageId)
+                .success(function (page) {
+                    vm.page = page;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -53,22 +88,35 @@
 
         function updatePage() {
             vm.error = null;
-            if (!PageService.updatePage(vm.pageId, vm.page)) {
-                vm.error = "Unable to update the page";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            }
+            PageService
+                .updatePage(vm.pageId, vm.page)
+                .success(function (page) {
+                    if (page) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    } else {
+                        vm.error = "Could not update page";
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
 
         function deletePage() {
             vm.error = null;
-            if (!PageService.deletePage(vm.pageId)) {
-                vm.error = "Unable to delete the page";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-            }
+            PageService
+                .deletePage(vm.pageId, vm.page)
+                .success(function (status) {
+                    if (status) {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    } else {
+                        vm.error = "Could not delete the  page";
+                    }
+                })
+                .error(function (err) {
+
+                });
+
         }
     }
 })();

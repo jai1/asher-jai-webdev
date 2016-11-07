@@ -16,12 +16,15 @@
                 vm.error = "Enter username and password to login!";
             }
             if (!vm.error) {
-                var user = UserService.findUserByCredentials(username, password);
-                if (!user) {
-                    vm.error = "Username or Password do not match";
-                } else {
-                    $location.url("/user/" + user._id);
-                }
+                UserService
+                    .findUserByCredentials(username, password)
+                    .success(function (user) {
+                        if (user) $location.url("/user/" + user._id);
+                        else vm.error = "Username or Password do not match";
+                    })
+                    .error(function (err) {
+
+                    });
             }
         }
     }
@@ -39,11 +42,18 @@
                 vm.error = "Enter a password";
             } else if (!user || (user.password !== user.confirmPassword)) {
                 vm.error = "Passwords don't match!";
-            } else if (UserService.createUser(user)) {
-                var uid = UserService.findUserByUsername(user.username)._id;
-                $location.url('/user/' + uid);
             } else {
-                vm.error = "Username already exists";
+                UserService
+                    .createUser(user)
+                    .success(function (user) {
+                        if (user) {
+                            $location.url("/user/" + user._id);
+                        }
+                        else vm.error = "Username already exists";
+                    })
+                    .error(function (err) {
+
+                    });
             }
         }
     }
@@ -55,10 +65,17 @@
         vm.updateUserProfile = updateUserProfile;
 
         function init() {
-            var user = UserService.findUserById(parseInt($routeParams.uid));
-            if (user) {
-                vm.user = user;
-            }
+            vm.userId = $routeParams.uid;
+            UserService
+                .findUserById(vm.userId)
+                .success(function (user) {
+                    if (user) {
+                        vm.user = user;
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -66,21 +83,35 @@
         function updateUserProfile() {
             vm.success = null;
             vm.error = null;
-            if (UserService.updateUser($routeParams.uid, vm.user)) {
-                vm.success = "Successfully Updated User Profile";
-            } else {
-                vm.error = "Unable to update User Profile";
-            }
+            UserService
+                .updateUser(vm.user)
+                .success(function (user) {
+                    if (user) {
+                        vm.success = "Successfully Updated User Profile";
+                    } else {
+                        vm.error = "Unable to update User Profile";
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
 
         function deleteUser() {
             vm.error = null;
-            if (!UserService.deleteUser($routeParams.uid)) {
-                vm.error = "Unable to delete the User";
-            } else {
-                // This "/login" should be the same name as the when section
-                $location.url("/login");
-            }
+            UserService
+                .deleteUser(vm.userId)
+                .success(function (status) {
+                    if (!status) {
+                        vm.error = "Unable to delete the User";
+                    } else {
+                        // This "/login" should be the same name as the when section
+                        $location.url("/login");
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
     }
 })();

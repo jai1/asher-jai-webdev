@@ -10,7 +10,14 @@
 
         function init() {
             vm.userId = parseInt($routeParams.uid);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            WebsiteService
+                .findWebsitesByUser(vm.userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -21,7 +28,14 @@
 
         function init() {
             vm.userId = parseInt($routeParams.uid);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+            WebsiteService
+                .findWebsitesByUser(vm.userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -30,10 +44,18 @@
 
         function createWebsite() {
             vm.error = null;
-            if (!WebsiteService.createWebsite(vm.userId, vm.website)) {
-                vm.error = "A website with the same name already exists";
-            }
-            if (!vm.error) $location.url("/user/" + vm.userId + "/website");
+            WebsiteService
+                .createWebsite(vm.userId, vm.website)
+                .success(function (website) {
+                    if (website) {
+                        $location.url("/user/" + vm.userId + "/website");
+                    } else {
+                        vm.error = "A website with the same name already exists";
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
     }
 
@@ -42,9 +64,23 @@
 
         function init() {
             vm.userId = parseInt($routeParams.uid);
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-            vm.websiteId = parseInt($routeParams.wid);
-            vm.website = WebsiteService.findWebsiteById(vm.websiteId);
+            WebsiteService
+                .findWebsitesByUser(vm.userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                })
+                .error(function (err) {
+
+                });
+            vm.websiteId = $routeParams.wid;
+            WebsiteService
+                .findWebsiteById(vm.websiteId)
+                .success(function (website) {
+                    vm.website = website;
+                })
+                .error(function (err) {
+
+                });
         }
 
         init();
@@ -54,22 +90,34 @@
 
         function updateWebsite() {
             vm.error = null;
-            if (!WebsiteService.updateWebsite(vm.websiteId, vm.website)) {
-                vm.error = "Unable to update the website";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website");
-            }
+            WebsiteService
+                .updateWebsite(vm.websiteId, vm.website)
+                .success(function (website) {
+                    if (!website) {
+                        vm.error = "Unable to update the website";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
 
         function deleteWebsite() {
             vm.error = null;
-            if (!WebsiteService.deleteWebsite(vm.websiteId)) {
-                vm.error = "Unable to delete the website";
-            }
-            if (!vm.error) {
-                $location.url("/user/" + vm.userId + "/website");
-            }
+            WebsiteService
+                .deleteWebsite(vm.websiteId)
+                .success(function (status) {
+                    if (!status) {
+                        vm.error = "Unable to delete the website";
+                    } else {
+                        $location.url("/user/" + vm.userId + "/website");
+                    }
+                })
+                .error(function (err) {
+
+                });
         }
     }
 })();
