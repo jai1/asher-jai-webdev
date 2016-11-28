@@ -1,0 +1,73 @@
+1. Flow
+	a. All the js files need to be included in the header - before the view.
+	b. Ng-app gives a name to the module.
+	c. First we Land on assignment/index.html, it uses <div ng-view></div>, Ng-view redirects to config.js
+	d. Config.js does the routing 
+		a. Put more specific addresses before generic ones.
+		b. If nothing found (including "/") the default case is executed.  Hence our first redirect is to login.html.
+		c. [] after the controller name are the things that the controller is dependent on.
+		d. controllerAs gives the name to be used in the Views to access the Controller attributes.
+	e. Views folder contains the Views and the controller, every view has its own controller.
+		a. View uses the following 
+			i. Bootstrap classes
+				1) Navbar and navbar-fixed-top - to get fixed header
+				2) navbar-fixed-bottom to get fixed bottom
+				3) col-xs-1 - to divide page into 12 columns
+				4) hidden-xs - to hide when xs sized
+				5) pull-right - to pull to right most edge
+				6) Row to go to next line if using columns
+				
+			ii. Angular directives
+				1) ng-repeat - for-each
+				2) Ng-switch - switch case
+				
+			
+		
+	f. Controller:-
+		a. Controller is used to 
+			i. Extract values from URL
+			ii. Control the view via {{model.<var name>}}
+			iii. Handle function calls made by the view
+			iv. Use Services to do common tasks
+		b. Every controller takes the following inputs
+			i. $routeParams -- to get the params from URL
+			ii. Some services - like PageService, UserService as inputs to call various functions of the service.
+			iii. $location - to redirect to other pages using $location.url(/* URL FROM config.js */)
+		c. var vm = this -- assigns controller object to vm
+		d. init() function is used to initialize the controller params using routeParams and 
+	g. Service
+		a. Services are kept in the Service folder. They contain two parts - Angular (Client) and Node (Server)
+		b. Angular Service - layer for routing the controller call to the nodejs server
+			i. Module name should be same as the one given in index.html (ng-app)
+			ii. Service takes $http as input to call node.js backend
+			iii. $http has four calls
+				a. Post - update or create any new resource - data in body
+				b. Put - create explicitly named new resource - http://stackoverflow.com/questions/630453/put-vs-post-in-rest
+				c. Delete - delete
+				d. Get -  fetch, find calls - data in url
+			a. $http calls return a promise which are given callbacks (usually anonymous func) for handling success and failures. These promise handling and callbacks are in Controller part.
+		c. Nodejs - Server side handling for services
+			a. Assignment/services contains the details
+			b. App.js  is used to require all the js and passes app as input to the services
+			c. Each service uses app to and declares what url requests it will handle
+			d. Each function takes two input
+				a. req - body and url of the requests
+				b. res - to respond to the clients request
+					a) Send method is powerful enough to understand what type of data it is passing json, html etc
+					b) Use sendStatus, json to be more explicit
+			e. Multer
+				a. Used to upload the images
+				b. Multer takes directory - on which the image is to be stored as input.
+				c. HOW DOES UPLOAD WORK??
+		d. 
+		
+	
+	
+2. Bootstrap
+	a.  
+3. AngularJS
+	a. Ng-view 
+	b. Config.js
+	c. Views
+	d. Controller
+	e. Service
