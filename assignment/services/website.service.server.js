@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function (app, model) {
 
     var websites = [
         {"_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem"},
@@ -36,65 +36,82 @@ module.exports = function (app) {
     function createWebsite(req, res) {
         var i_userId = req.params.uid;
         var i_website = req.body;
-        for (var website in websites) {
-            if (websites[website].developerId == i_userId && websites[website].name == i_website.name) {
-                res.send(null);
-                return;
-            }
-        }
-        // Assuming that we create only one website per second - need to change it
-        i_website._id = parseInt(new Date().getTime());
-        i_website.developerId = i_userId;
-        websites.push(i_website);
-        res.send(i_website);
+        model
+            .websiteModel
+            .createWebsiteForUser(i_userId, i_website)
+            .then(
+                function(persistedWebsite) {
+                    res.send(persistedWebsite);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function findAllWebsitesForUser(req, res) {
         var i_userId = req.params.uid;
-        var o_websites = [];
-        for (var website in websites) {
-            if (websites[website].developerId == i_userId) {
-                o_websites.push(websites[website]);
-            }
-        }
-        res.send(o_websites);
+        model
+            .websiteModel
+            .findAllWebsitesForUser(i_userId)
+            .then(
+                function(persistedWebsites) {
+                    res.send(persistedWebsites);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function findWebsiteById(req, res) {
         var i_websiteId = req.params.wid;
-        for (var website in websites) {
-            if (websites[website]._id == i_websiteId) {
-                res.send(websites[website]);
-                return;
-            }
-        }
-        res.send(undefined);
+        model
+            .websiteModel
+            .findWebsiteById(i_websiteId)
+            .then(
+                function(persistedWebsite) {
+                    res.send(persistedWebsite);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function updateWebsite(req, res) {
         var i_websiteId = req.params.wid;
         var i_website = req.body;
-        for (var website in websites) {
-            if (websites[website]._id == i_websiteId) {
-                i_website._id = websites[website]._id;
-                i_website.developerId = websites[website].developerId;
-                websites[website] = i_website;
-                res.send(website);
-                return;
-            }
-        }
-        res.send(undefined);
+        model
+            .websiteModel
+            .updateWebsite(i_websiteId, i_website)
+            .then(
+                function(persistedWebsite) {
+                    res.send(persistedWebsite);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function deleteWebsite(req, res) {
         var i_websiteId = req.params.wid;
-        for (var website in websites) {
-            if (websites[website]._id == i_websiteId) {
-                websites.splice(website, 1);
-                res.send(true);
-                return;
-            }
-        }
-        res.send(false);
+        model
+            .websiteModel
+            .deleteWebsite(i_websiteId)
+            .then(
+                function(status) {
+                    res.send(true);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 };

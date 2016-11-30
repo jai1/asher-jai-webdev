@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function (app, model) {
     var pages = [
         {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
         {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
@@ -27,64 +27,81 @@ module.exports = function (app) {
     function createPage(req, res) {
         var i_websiteId = req.params.wid;
         var i_page = req.body;
-        for (var page in pages) {
-            if (pages[page].websiteId == i_websiteId && pages[page].name == i_page.name) {
-                res.send(null);
-                return;
-            }
-        }
-        i_page._id = new Date().getTime().toString();
-        i_page.websiteId = i_websiteId;
-        pages.push(i_page);
-        res.send(i_page);
+        model
+            .pageModel
+            .createPageForWebsite(i_websiteId, i_page)
+            .then(
+                function(persistedPage) {
+                    res.send(persistedPage);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function findPagesByWebsiteId(req, res) {
         var i_websiteId = req.params.wid;
-        var o_pages = [];
-        for (var page in pages) {
-            if (pages[page].websiteId == i_websiteId) {
-                o_pages.push(pages[page]);
-            }
-        }
-        res.send(o_pages);
+        model
+            .pageModel
+            .findAllPagesForWebsite(i_websiteId)
+            .then(
+                function(persistedWebsitePages) {
+                    res.send(persistedWebsitePages);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function findPageById(req, res) {
         var i_pageId = req.params.pid;
-        for (var page in pages) {
-            if (pages[page]._id == i_pageId) {
-                res.send(pages[page]);
-                return;
-            }
-        }
-        res.send(undefined);
+        model
+            .pageModel
+            .findPageById(i_pageId)
+            .then(
+                function(persistedPage) {
+                    res.send(persistedPage);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function updatePage(req, res) {
         var i_pageId = req.params.pid;
         var i_page = req.body;
-        for (var page in pages) {
-            if (pages[page]._id == i_pageId) {
-                i_page._id = pages[page]._id;
-                i_page.websiteId = pages[page].websiteId;
-                pages[page] = i_page;
-                res.send(i_page);
-                return;
-            }
-        }
-        res.send(null);
+        model
+            .pageModel
+            .updatePage(i_pageId, i_page)
+            .then(
+                function(persistedPage) {
+                    res.send(persistedPage);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function deletePage(req, res) {
         var i_pageId = req.params.pid;
-        for (var page in pages) {
-            if (pages[page]._id == i_pageId) {
-                pages.splice(page, 1); // Remove the page from the array
-                res.send(true);
-                return;
-            }
-        }
-        res.send(false);
+        model
+            .pageModel
+            .deletePage(i_pageId)
+            .then(
+                function(status) {
+                    res.send(true);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 };

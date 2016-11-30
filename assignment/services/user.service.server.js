@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function (app, model) {
 
     var users = [
         {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
@@ -17,18 +17,18 @@ module.exports = function (app) {
     function createUser(req, res) {
         var i_user = req.body;
         // Delete the field confirm password to make the given object compatible with the one stored in DB
-        delete i_user.confirmPassword;
-        for (var user in users) {
-            if (i_user.username == users[user].username) {
-                // User already Exists
-                res.send(null);
-                return;
-            }
-        }
-        // Assuming that we create only one user per second - need to change it
-        i_user._id = new Date().getTime();
-        users.push(i_user);
-        res.send(i_user);
+        model
+            .userModel
+            .createUser(i_user)
+            .then(
+                function(persistedUser) {
+                    res.send(persistedUser);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function findUser(req, res) {
@@ -45,61 +45,83 @@ module.exports = function (app) {
 
     function findUserByUsername(req, res) {
         var i_username = req.query.username;
-        for (var user in users) {
-            if (users[user].username == i_username) {
-                res.send(users[user]);
-                return;
-            }
-        }
-        res.send(undefined);
+        model
+            .userModel
+            .findUserByUsername(i_username)
+            .then(
+                function(persistedUser) {
+                    res.send(persistedUser);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function findUserByCredentials(req, res) {
         var i_username = req.query.username;
         var i_password = req.query.password;
-        for (var user in users) {
-            if (users[user].username == i_username && users[user].password == i_password) {
-                res.send(users[user]);
-                return;
-            }
-        }
-        res.send(undefined);
+        model
+            .userModel
+            .findUserByCredentials(i_username, i_password)
+            .then(
+                function(persistedUser) {
+                    res.send(persistedUser);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function findUserById(req, res) {
         var i_userId = req.params.uid;
-        for (var user in users) {
-            if (users[user]._id == i_userId) {
-                res.send(users[user]);
-                return;
-            }
-        }
-        res.send(undefined);
+        model
+            .userModel
+            .findUserById(i_userId)
+            .then(
+                function(persistedUser) {
+                    res.send(persistedUser);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function updateUser(req, res) {
         var i_user = req.body;
         var i_userId = req.params.uid;
-        delete i_user.confirmPassword; // Delete the unwanted field
-        for (var user in users) {
-            if (users[user]._id == i_userId) {
-                users[user] = i_user;
-                res.send(user);
-                return;
-            }
-        }
-        res.send(null);
+        model
+            .userModel
+            .updateUser(i_userId, i_user)
+            .then(
+                function(status) {
+                    res.sendStatus(200);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
     function deleteUser(req, res) {
         var i_userId = req.params.uid;
-        for (var user in users) {
-            if (users[user]._id == i_userId) {
-                users.splice(user, 1);
-                res.send(true);
-                return;
-            }
-        }
-        res.send(false);
+        model
+            .userModel
+            .deleteUser(i_userId)
+            .then(
+                function(status) {
+                    res.send(true);
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 };

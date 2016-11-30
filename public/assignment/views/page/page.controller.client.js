@@ -7,8 +7,8 @@
 
     function PageListController($routeParams, PageService) {
         var vm = this;
-        vm.userId = parseInt($routeParams.uid);
-        vm.websiteId = parseInt($routeParams.wid);
+        vm.userId = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
         PageService
             .findPageByWebsiteId(vm.websiteId)
             .success(function (pages) {
@@ -24,8 +24,8 @@
         vm.createPage = createPage;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
-            vm.websiteId = parseInt($routeParams.wid);
+            vm.userId = $routeParams.uid;
+            vm.websiteId = $routeParams.wid;
             PageService
                 .findPageByWebsiteId(vm.websiteId)
                 .success(function (pages) {
@@ -60,8 +60,8 @@
         var vm = this;
 
         function init() {
-            vm.userId = parseInt($routeParams.uid);
-            vm.websiteId = parseInt($routeParams.wid);
+            vm.userId = $routeParams.uid;
+            vm.websiteId = $routeParams.wid;
             PageService
                 .findPageByWebsiteId(vm.websiteId)
                 .success(function (pages) {
@@ -70,7 +70,7 @@
                 .error(function (err) {
 
                 });
-            vm.pageId = parseInt($routeParams.pid);
+            vm.pageId = $routeParams.pid;
             PageService
                 .findPageById(vm.pageId)
                 .success(function (page) {
