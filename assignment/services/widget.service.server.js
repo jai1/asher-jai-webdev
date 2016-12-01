@@ -1,6 +1,6 @@
 module.exports = function (app, model) {
     var multer = require('multer');
-        var upload = multer({dest: __dirname + '/../../public/assignment/uploads'});
+    var upload = multer({dest: __dirname + '/../../public/assignment/uploads'});
     app.post("/api/page/:pid/widget", createWidget);
     app.get("/api/page/:pid/widget", findAllWidgetsForPage);
     app.get("/api/widget/:wgid", findWidgetById);
@@ -94,7 +94,7 @@ module.exports = function (app, model) {
         var i_userId = req.body.userId;
         var i_websiteId = req.body.websiteId;
         var i_pageId = req.body.pageId;
-        if (! req.hasOwnProperty('file')) {
+        if (!req.hasOwnProperty('file')) {
             res.redirect("/assignment/index.html#/user/" + i_userId + "/website/" + i_websiteId + "/page/" + i_pageId + "/widget/" + i_widgetId);
             return;
         }
@@ -133,7 +133,7 @@ module.exports = function (app, model) {
                             res.send(error);
                         }
                     );
-            }, function(error) {
+            }, function (error) {
                 res.sendStatus(400).send(error);
             });
     }
