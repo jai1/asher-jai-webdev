@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     var model = {};
     var mongoose = require("mongoose");
     var Q = require("q");
@@ -6,16 +6,16 @@ module.exports = function() {
     var PageModel = mongoose.model("PageModel", PageSchema);
 
     var api = {
-        setModel                : setModel,
-        createPageForWebsite    : createPageForWebsite,
-        findAllPagesForWebsite  : findAllPagesForWebsite,
-        findPageById            : findPageById,
-        updatePage              : updatePage,
-        deletePage              : deletePage,
-        removeWidgetFromPage    : removeWidgetFromPage,
-        findWidgetsForPage      : findWidgetsForPage,
-        reorderWidgetsForPage   : reorderWidgetsForPage,
-        removePage              : removePage
+        setModel: setModel,
+        createPageForWebsite: createPageForWebsite,
+        findAllPagesForWebsite: findAllPagesForWebsite,
+        findPageById: findPageById,
+        updatePage: updatePage,
+        deletePage: deletePage,
+        removeWidgetFromPage: removeWidgetFromPage,
+        findWidgetsForPage: findWidgetsForPage,
+        reorderWidgetsForPage: reorderWidgetsForPage,
+        removePage: removePage
     };
     return api;
 
@@ -26,11 +26,11 @@ module.exports = function() {
     function createPageForWebsite(websiteId, page) {
         return PageModel
             .create(page)
-            .then(function(pageObj) {
+            .then(function (pageObj) {
                 return model
                     .websiteModel
                     .findWebsiteById(websiteId)
-                    .then(function(websiteObj) {
+                    .then(function (websiteObj) {
                         websiteObj.pages.push(pageObj._id);
                         websiteObj.save();
                         pageObj._website = websiteObj._id;
@@ -66,12 +66,12 @@ module.exports = function() {
     function deletePage(pageId) {
         return PageModel
             .findById(pageId)
-            .then(function(pageObj) {
+            .then(function (pageObj) {
                 var websiteId = pageObj._website;
                 return model
                     .websiteModel
                     .removePageFromWebsite(websiteId, pageId)
-                    .then(function(website) {
+                    .then(function (website) {
                         return removePage(pageId);
                     });
             });
@@ -80,15 +80,15 @@ module.exports = function() {
     function removePage(pageId) {
         return PageModel
             .findById(pageId)
-            .select({"_id":0, "widgets":1})
-            .then(function(pageWidgets) {
-                var promises = pageWidgets.widgets.map(function(widget) {
+            .select({"_id": 0, "widgets": 1})
+            .then(function (pageWidgets) {
+                var promises = pageWidgets.widgets.map(function (widget) {
                     return model.widgetModel.removeWidget(widget);
                 });
                 return Q
                     .all(promises)
-                    .then(function() {
-                        return PageModel.remove({_id:pageId});
+                    .then(function () {
+                        return PageModel.remove({_id: pageId});
                     });
             });
     }
@@ -96,10 +96,10 @@ module.exports = function() {
     function removeWidgetFromPage(pageId, widgetId) {
         return PageModel
             .findById(pageId)
-            .then(function(pageObj) {
+            .then(function (pageObj) {
                 var widgets = pageObj.widgets;
-                for(var w in widgets) {
-                    if(widgets[w].toString()===widgetId) widgets.splice(w,1);
+                for (var w in widgets) {
+                    if (widgets[w].toString() === widgetId) widgets.splice(w, 1);
                 }
                 pageObj.widgets = widgets;
                 return pageObj.save();
@@ -110,17 +110,17 @@ module.exports = function() {
         return PageModel
             .findById(pageId)
             .populate('widgets')
-            .select({'widgets':1, '_id':0});
+            .select({'widgets': 1, '_id': 0});
     }
 
     function reorderWidgetsForPage(pageId, initial, final) {
         return findPageById(pageId)
-            .then(function(page) {
+            .then(function (page) {
                 var widgets = page.widgets;
                 //remove from initial and put it at final
-                var movedWidget = widgets.splice(initial,1)[0];
-                widgets.splice(final,0,movedWidget);
-                page.widgets=widgets;
+                var movedWidget = widgets.splice(initial, 1)[0];
+                widgets.splice(final, 0, movedWidget);
+                page.widgets = widgets;
                 return page.save();
             });
     }

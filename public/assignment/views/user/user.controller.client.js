@@ -10,7 +10,7 @@
         vm.login = login;
 
         function login(username, password) {
-            // console.log('in login');
+            console.log('in login');
             vm.error = null;
             if (!username || !password) {
                 vm.error = "Enter username and password to login!";

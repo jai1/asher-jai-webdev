@@ -1,6 +1,5 @@
 module.exports = function (app, model) {
     app.post("/api/user", createUser);
-    // Handles both Credentials and Username
     app.get("/api/user", findUser);
     app.get("/api/user/:uid", findUserById);
     app.put("/api/user/:uid", updateUser);
@@ -13,10 +12,10 @@ module.exports = function (app, model) {
             .userModel
             .createUser(i_user)
             .then(
-                function(persistedUser) {
+                function (persistedUser) {
                     res.send(persistedUser);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -41,10 +40,10 @@ module.exports = function (app, model) {
             .userModel
             .findUserByUsername(i_username)
             .then(
-                function(persistedUser) {
+                function (persistedUser) {
                     res.send(persistedUser);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -58,10 +57,10 @@ module.exports = function (app, model) {
             .userModel
             .findUserByCredentials(i_username, i_password)
             .then(
-                function(persistedUser) {
+                function (persistedUser) {
                     res.send(persistedUser);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -74,10 +73,10 @@ module.exports = function (app, model) {
             .userModel
             .findUserById(i_userId)
             .then(
-                function(persistedUser) {
+                function (persistedUser) {
                     res.send(persistedUser);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -91,10 +90,10 @@ module.exports = function (app, model) {
             .userModel
             .updateUser(i_userId, i_user)
             .then(
-                function(status) {
+                function (status) {
                     res.sendStatus(200);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -107,10 +106,10 @@ module.exports = function (app, model) {
             .userModel
             .deleteUser(i_userId)
             .then(
-                function(status) {
+                function (status) {
                     res.send(true);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );

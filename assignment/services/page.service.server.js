@@ -12,10 +12,10 @@ module.exports = function (app, model) {
             .pageModel
             .createPageForWebsite(i_websiteId, i_page)
             .then(
-                function(persistedPage) {
+                function (persistedPage) {
                     res.send(persistedPage);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -27,10 +27,10 @@ module.exports = function (app, model) {
             .pageModel
             .findAllPagesForWebsite(i_websiteId)
             .then(
-                function(persistedWebsitePages) {
+                function (persistedWebsitePages) {
                     res.send(persistedWebsitePages);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -43,10 +43,10 @@ module.exports = function (app, model) {
             .pageModel
             .findPageById(i_pageId)
             .then(
-                function(persistedPage) {
+                function (persistedPage) {
                     res.send(persistedPage);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -60,10 +60,10 @@ module.exports = function (app, model) {
             .pageModel
             .updatePage(i_pageId, i_page)
             .then(
-                function(persistedPage) {
+                function (persistedPage) {
                     res.send(persistedPage);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
@@ -76,10 +76,10 @@ module.exports = function (app, model) {
             .pageModel
             .deletePage(i_pageId)
             .then(
-                function(status) {
+                function (status) {
                     res.send(true);
                 },
-                function(error) {
+                function (error) {
                     res.sendStatus(400).send(error);
                 }
             );

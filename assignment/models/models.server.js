@@ -1,9 +1,9 @@
-module.exports = function() {
+module.exports = function () {
 
     var mongoose = require("mongoose");
     var connectionString = 'mongodb://127.0.0.1:27017/wam-fall-2016';
     //for production: mongodb://<dbuser>:<dbpassword>@ds035796.mlab.com:35796/web-dev
-    if(process.env.MLAB_PASSWORD) {
+    if (process.env.MLAB_PASSWORD) {
         console.log("Connecting to production mongo...");
         connectionString = 'mongodb://' +
             process.env.MLAB_USERNAME + ':' +
@@ -40,6 +40,7 @@ module.exports = function() {
         userInit();
 
     }
+
     function userInit() {
         return userModel.count().then(function (cnt) {
             if (cnt != 0) {
@@ -55,7 +56,7 @@ module.exports = function() {
             for (user in users) {
                 var _id = users[user]._id;
                 delete users[user]._id;
-                (function(id) {
+                (function (id) {
                     userModel.createUser(users[user])
                         .then(
                             function (persistedUser) {
@@ -103,7 +104,7 @@ module.exports = function() {
                 var _id = websites[website]._id;
                 delete websites[website]._id;
                 delete websites[website].developerId;
-                (function(id) {
+                (function (id) {
                     websiteModel.createWebsiteForUser(userId, websites[website])
                         .then(
                             function (persistedWebsite) {
@@ -118,7 +119,7 @@ module.exports = function() {
         }
     }
 
-    function pageInit(id ,websiteId) {
+    function pageInit(id, websiteId) {
         var pages = [
             {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
             {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
@@ -138,13 +139,13 @@ module.exports = function() {
         ];
 
         for (page in pages) {
-            if (pages[page].websiteId = id) {
+            if (pages[page].websiteId == id) {
                 var _id = pages[page]._id;
                 delete pages[page]._id;
                 delete pages[page].websiteId;
                 // Problem with promises:-
                 //
-                (function(id) {
+                (function (id) {
                     pageModel.createPageForWebsite(websiteId, pages[page])
                         .then(function (persistedPage) {
                             console.log(persistedPage);
@@ -218,9 +219,9 @@ module.exports = function() {
                 delete widgets[widget]._id;
                 delete widgets[widget].pageId;
                 widgetModel.createWidget(pageId, widgets[widget])
-                    .then(function(persistedWidget) {
+                    .then(function (persistedWidget) {
                         console.log(persistedWidget);
-                    }, function(error) {
+                    }, function (error) {
                         console.error(error);
                     });
             }

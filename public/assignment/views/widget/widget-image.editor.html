@@ -30,24 +30,33 @@
     </div>
     -->
     </form>
-    <div class = "form-group">
+    <div class="row">
+        <div class="form-group col-xs-6">
         <label for = "url">Upload</label>
         <form action = "/api/upload" method = "post" enctype = "multipart/form-data">
-            <input name = "myFile" type = "file" class = "form-control"/>
-            <input name = "width" value = "{{model.widget.width}}" class = "displayNone"/>
-            <input name = "name" value = "{{model.widget.name}}" class = "displayNone"/>
-            <input name = "text" value = "{{model.widget.text}}" class = "displayNone"/>
-            <input name = "widgetId" value = "{{model.widget._id}}" class = "displayNone"/>
-            <input name = "userId" value = "{{model.userId}}" class = "displayNone"/>
-            <input name = "websiteId" value = "{{model.websiteId}}" class = "displayNone"/>
-            <input name = "pageId" value = "{{model.pageId}}" class = "displayNone"/>
-            <button type = "submit" class = "btn btn-block btn-primary">Upload Image</button>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-block btn-default">Upload Image</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <input name = "myFile" type = "file" class = "form-control"/>
+                        <input name = "width" value = "{{model.widget.width}}" class = "displayNone"/>
+                        <input name = "name" value = "{{model.widget.name}}" class = "displayNone"/>
+                        <input name = "text" value = "{{model.widget.text}}" class = "displayNone"/>
+                        <input name = "widgetId" value = "{{model.widget._id}}" class = "displayNone"/>
+                        <input name = "userId" value = "{{model.userId}}" class = "displayNone"/>
+                        <input name = "websiteId" value = "{{model.websiteId}}" class = "displayNone"/>
+                        <input name = "pageId" value = "{{model.pageId}}" class = "displayNone"/>
+                    </div>
+                </div>
         </form>
+        </div>
+        <div class="col-xs-6">
+            <label>Flickr Search</label>
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr"
+                    class="btn btn-block btn-primary">Flicker Search</a>
+        </div>
     </div>
-    <!--
-    <a class="btn btn-primary btn-block"
-       ng-click="">Upload Image</a>
-       -->
     <a class = "btn btn-danger btn-block"
        ng-click = "model.deleteWidget();">Delete</a>
 </div>

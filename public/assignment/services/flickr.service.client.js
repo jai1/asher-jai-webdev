@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module('WebAppMaker')
         .factory("FlickrService", FlickrService);
@@ -10,7 +10,7 @@
             "method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT";
 
         var api = {
-            searchPhotos    : searchPhotos
+            searchPhotos: searchPhotos
         };
         return api;
 

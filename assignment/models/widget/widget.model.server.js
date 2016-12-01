@@ -1,17 +1,17 @@
-module.exports = function() {
+module.exports = function () {
     var model = {};
     var mongoose = require("mongoose");
     var WidgetSchema = require("./widget.schema.server.js")();
     var WidgetModel = mongoose.model("WidgetModel", WidgetSchema);
 
     var api = {
-        setModel                : setModel,
-        createWidget            : createWidget,
-        findAllWidgetsForPage   : findAllWidgetsForPage,
-        findWidgetById          : findWidgetById,
-        updateWidget            : updateWidget,
-        deleteWidget            : deleteWidget,
-        removeWidget            : removeWidget
+        setModel: setModel,
+        createWidget: createWidget,
+        findAllWidgetsForPage: findAllWidgetsForPage,
+        findWidgetById: findWidgetById,
+        updateWidget: updateWidget,
+        deleteWidget: deleteWidget,
+        removeWidget: removeWidget
     };
     return api;
 
@@ -22,13 +22,13 @@ module.exports = function() {
     function createWidget(pageId, widget) {
         return WidgetModel
             .create(widget)
-            .then(function(widgetObj) {
+            .then(function (widgetObj) {
                 return model
                     .pageModel
                     .findPageById(pageId)
-                    .then(function(pageObj) {
+                    .then(function (pageObj) {
                         return findAllWidgetsForPage(pageId)
-                            .then(function(widgets) {
+                            .then(function (widgets) {
                                 pageObj.widgets.push(widgetObj._id);
                                 pageObj.save();
                                 widgetObj._page = pageObj._id;
@@ -56,20 +56,20 @@ module.exports = function() {
                     _id: widgetId
                 },
                 {
-                    name: widget.name?widget.name:null,
-                    text: widget.text?widget.text:null,
-                    placeholder: widget.placeholder?widget.placeholder:null,
-                    description: widget.description?widget.description:null,
-                    url: widget.url?widget.url:null,
-                    width: widget.width?widget.width:null,
-                    height: widget.height?widget.height:null,
-                    rows: widget.rows?widget.rows:null,
-                    size: widget.size?widget.size:null,
-                    class: widget.class?widget.class:null,
-                    icon: widget.icon?widget.icon:null,
-                    metadata: widget.metadata?widget.metadata:null,
-                    deletable: widget.deletable?widget.deletable:null,
-                    formatted: widget.formatted?widget.formatted:null
+                    name: widget.name ? widget.name : null,
+                    text: widget.text ? widget.text : null,
+                    placeholder: widget.placeholder ? widget.placeholder : null,
+                    description: widget.description ? widget.description : null,
+                    url: widget.url ? widget.url : null,
+                    width: widget.width ? widget.width : null,
+                    height: widget.height ? widget.height : null,
+                    rows: widget.rows ? widget.rows : null,
+                    size: widget.size ? widget.size : null,
+                    class: widget.class ? widget.class : null,
+                    icon: widget.icon ? widget.icon : null,
+                    metadata: widget.metadata ? widget.metadata : null,
+                    deletable: widget.deletable ? widget.deletable : null,
+                    formatted: widget.formatted ? widget.formatted : null
                 }
             );
     }
@@ -77,12 +77,12 @@ module.exports = function() {
     function deleteWidget(widgetId) {
         return WidgetModel
             .findById(widgetId)
-            .then(function(widgetObj) {
+            .then(function (widgetObj) {
                 var pageId = widgetObj._page;
                 return model
                     .pageModel
                     .removeWidgetFromPage(pageId, widgetId)
-                    .then(function(page) {
+                    .then(function (page) {
                         return removeWidget(widgetId);
                     });
             });

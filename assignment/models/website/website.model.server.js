@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     var model = {};
     var mongoose = require("mongoose");
     var Q = require("q");
@@ -6,14 +6,14 @@ module.exports = function() {
     var WebsiteModel = mongoose.model("WebsiteModel", WebsiteSchema);
 
     var api = {
-        setModel                : setModel,
-        createWebsiteForUser    : createWebsiteForUser,
-        findAllWebsitesForUser  : findAllWebsitesForUser,
-        findWebsiteById         : findWebsiteById,
-        updateWebsite           : updateWebsite,
-        deleteWebsite           : deleteWebsite,
-        removePageFromWebsite   : removePageFromWebsite,
-        removeWebsite           : removeWebsite
+        setModel: setModel,
+        createWebsiteForUser: createWebsiteForUser,
+        findAllWebsitesForUser: findAllWebsitesForUser,
+        findWebsiteById: findWebsiteById,
+        updateWebsite: updateWebsite,
+        deleteWebsite: deleteWebsite,
+        removePageFromWebsite: removePageFromWebsite,
+        removeWebsite: removeWebsite
     };
     return api;
 
@@ -24,11 +24,11 @@ module.exports = function() {
     function createWebsiteForUser(userId, website) {
         return WebsiteModel
             .create(website)
-            .then(function(websiteObj) {
+            .then(function (websiteObj) {
                 return model
                     .userModel
                     .findUserById(userId)
-                    .then(function(userObj) {
+                    .then(function (userObj) {
                         userObj.websites.push(websiteObj._id);
                         userObj.save();
                         websiteObj._user = userObj._id;
@@ -63,12 +63,12 @@ module.exports = function() {
     function deleteWebsite(websiteId) {
         return WebsiteModel
             .findById(websiteId)
-            .then(function(websiteObj) {
+            .then(function (websiteObj) {
                 var userId = websiteObj._user;
                 return model
                     .userModel
                     .removeWebsiteFromUser(userId, websiteId)
-                    .then(function(user) {
+                    .then(function (user) {
                         return removeWebsite(websiteId);
                     });
             });
@@ -77,15 +77,15 @@ module.exports = function() {
     function removeWebsite(websiteId) {
         return WebsiteModel
             .findById(websiteId)
-            .select({"_id":0, "pages":1})
-            .then(function(websitePages) {
-                var promises = websitePages.pages.map(function(page) {
+            .select({"_id": 0, "pages": 1})
+            .then(function (websitePages) {
+                var promises = websitePages.pages.map(function (page) {
                     return model.pageModel.removePage(page);
                 });
                 return Q
                     .all(promises)
-                    .then(function() {
-                        return WebsiteModel.remove({_id:websiteId});
+                    .then(function () {
+                        return WebsiteModel.remove({_id: websiteId});
                     });
             });
     }
@@ -93,10 +93,10 @@ module.exports = function() {
     function removePageFromWebsite(websiteId, pageId) {
         return WebsiteModel
             .findById(websiteId)
-            .then(function(websiteObj) {
+            .then(function (websiteObj) {
                 var pages = websiteObj.pages;
-                for(var p in pages) {
-                    if(pages[p].toString()===pageId) pages.splice(p,1);
+                for (var p in pages) {
+                    if (pages[p].toString() === pageId) pages.splice(p, 1);
                 }
                 websiteObj.pages = pages;
                 return websiteObj.save();

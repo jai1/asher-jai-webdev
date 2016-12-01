@@ -1,5 +1,4 @@
-
-(function() {
+(function () {
     angular
         .module("WebAppMaker")
         .controller("FlickrImageSearchController", FlickrImageSearchController);
@@ -14,31 +13,32 @@
             vm.websiteId = $routeParams.wid;
             vm.pageId = $routeParams.pid;
             vm.widgetId = $routeParams.wgid;
-            vm.error=null;
+            vm.error = null;
             WidgetService
                 .findWidgetById(vm.widgetId)
-                .success(function(widget) {
+                .success(function (widget) {
                     vm.widget = widget;
                 })
-                .error(function(err) {
+                .error(function (err) {
 
                 });
         }
+
         init();
 
         function searchPhotos(searchText) {
             FlickrService
                 .searchPhotos(searchText)
-                .then(function(response) {
-                    data = response.data.replace("jsonFlickrApi(","");
-                    data = data.substring(0,data.length - 1);
+                .then(function (response) {
+                    data = response.data.replace("jsonFlickrApi(", "");
+                    data = data.substring(0, data.length - 1);
                     data = JSON.parse(data);
                     //split the photos into rows with 3 photos each
                     var photos = [], eachRow = [];
-                    for(var p in data.photos.photo) {
-                        if(eachRow.length==3) {
+                    for (var p in data.photos.photo) {
+                        if (eachRow.length == 3) {
                             photos.push(eachRow);
-                            eachRow=[];
+                            eachRow = [];
                         }
                         eachRow.push(data.photos.photo[p]);
                     }
@@ -52,13 +52,13 @@
             vm.widget.url = url;
             WidgetService
                 .updateWidget(vm.widgetId, vm.widget)
-                .success(function(widget) {
+                .success(function (widget) {
                     console.dir(widget);
-                    if(widget)
-                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
-                    else vm.error="Could not upload image";
+                    if (widget)
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
+                    else vm.error = "Could not upload image";
                 })
-                .error(function(err) {
+                .error(function (err) {
 
                 });
         }

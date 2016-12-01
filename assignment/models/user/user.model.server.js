@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     var model = {};
     var mongoose = require("mongoose");
     var Q = require("q");
@@ -6,15 +6,15 @@ module.exports = function() {
     var UserModel = mongoose.model("UserModel", UserSchema);
 
     var api = {
-        setModel                : setModel,
-        createUser              : createUser,
-        findUserByUsername      : findUserByUsername,
-        findUserByCredentials   : findUserByCredentials,
-        findUserById            : findUserById,
-        updateUser              : updateUser,
-        deleteUser              : deleteUser,
-        removeWebsiteFromUser   : removeWebsiteFromUser,
-        count                   : count
+        setModel: setModel,
+        createUser: createUser,
+        findUserByUsername: findUserByUsername,
+        findUserByCredentials: findUserByCredentials,
+        findUserById: findUserById,
+        updateUser: updateUser,
+        deleteUser: deleteUser,
+        removeWebsiteFromUser: removeWebsiteFromUser,
+        count: count
     };
     return api;
 
@@ -34,8 +34,10 @@ module.exports = function() {
 
     function findUserByCredentials(username, password) {
         return UserModel
-            .findOne({username: username,
-                password: password});
+            .findOne({
+                username: username,
+                password: password
+            });
     }
 
     function findUserById(userId) {
@@ -64,27 +66,27 @@ module.exports = function() {
 
     function removeUser(userId) {
         return UserModel
-         .findById(userId)
-         .select({"_id":0, "websites":1})
-         .then(function(userWebsites) {
-             var promises = userWebsites.websites.map(function(website) {
-                 return model.websiteModel.removeWebsite(website);
-             });
-             return Q
-                 .all(promises)
-                 .then(function() {
-                     return UserModel.remove({_id:userId});
-                 });
-         });
+            .findById(userId)
+            .select({"_id": 0, "websites": 1})
+            .then(function (userWebsites) {
+                var promises = userWebsites.websites.map(function (website) {
+                    return model.websiteModel.removeWebsite(website);
+                });
+                return Q
+                    .all(promises)
+                    .then(function () {
+                        return UserModel.remove({_id: userId});
+                    });
+            });
     }
 
     function removeWebsiteFromUser(userId, websiteId) {
         return UserModel
             .findById(userId)
-            .then(function(userObj) {
+            .then(function (userObj) {
                 var websites = userObj.websites;
-                for(var w in websites) {
-                    if(websites[w].toString()===websiteId) websites.splice(w,1);
+                for (var w in websites) {
+                    if (websites[w].toString() === websiteId) websites.splice(w, 1);
                 }
                 userObj.websites = websites;
                 return userObj.save();

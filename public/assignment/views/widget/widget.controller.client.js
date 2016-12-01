@@ -36,9 +36,9 @@
 
         function safeCheckYoutubeURL(url) {
             var parts = url.split('/');
-            var id = parts[parts.length-1];
-            if(id.includes("watch")) id = id.split('=')[1];
-            url = "https://www.youtube.com/embed/"+id;
+            var id = parts[parts.length - 1];
+            if (id.includes("watch")) id = id.split('=')[1];
+            url = "https://www.youtube.com/embed/" + id;
             return $sce.trustAsResourceUrl(url);
         }
 
@@ -64,9 +64,9 @@
 
         function createWidget(type) {
             vm.error = null;
-            if(type!='HEADER' && type!='IMAGE' && type!='YOUTUBE' && type!='HTML' && type!='TEXT') {
+            if (type != 'HEADER' && type != 'IMAGE' && type != 'YOUTUBE' && type != 'HTML' && type != 'TEXT') {
                 vm.error = 'Widget Type not available';
-		return;
+                return;
             }
             var widget = {};
             widget.widgetType = type;
