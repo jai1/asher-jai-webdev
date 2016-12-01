@@ -1,63 +1,6 @@
 module.exports = function (app, model) {
     var multer = require('multer');
     var upload = multer({dest: __dirname + '/../../public/assignment/uploads'});
-
-    var widgets = [
-        {"_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO", "order": 0},
-        {"_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum", "order": 1},
-        {
-            "_id": "345",
-            "widgetType": "IMAGE",
-            "pageId": "321",
-            "width": "100%",
-            "url": "http://lorempixel.com/400/200/",
-            "order": 2
-        },
-        {"_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>", "order": 3},
-        {"_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum", "order": 4},
-        {
-            "_id": "678",
-            "widgetType": "YOUTUBE",
-            "pageId": "321",
-            "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E",
-            "order": 5
-        },
-        {
-            "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum" +
-        "\n" +
-        "\n" +
-        "</p>", "order": 6
-        },
-        {"_id": "123", "widgetType": "HEADER", "pageId": "1", "size": 2, "text": "GIZMODO", "order": 7},
-        {"_id": "234", "widgetType": "HEADER", "pageId": "1", "size": 4, "text": "Lorem ipsum", "order": 8},
-        {
-            "_id": "345",
-            "widgetType": "IMAGE",
-            "pageId": "1",
-            "width": "100%",
-            "url": "http://lorempixel.com/400/200/",
-            "order": 9
-        },
-        {"_id": "456", "widgetType": "HTML", "pageId": "1", "text": "<p>Lorem ipsum</p>", "order": 10},
-        {"_id": "567", "widgetType": "HEADER", "pageId": "1", "size": 4, "text": "Lorem ipsum", "order": 11},
-        {
-            "_id": "678",
-            "widgetType": "YOUTUBE",
-            "pageId": "1",
-            "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E",
-            "order": 12
-        },
-        {
-            "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum" +
-        "\n" +
-        "\n" +
-        "</p>", "order": 13
-        }
-    ];
-
-
     app.post("/api/page/:pid/widget", createWidget);
     app.get("/api/page/:pid/widget", findAllWidgetsForPage);
     app.get("/api/widget/:wgid", findWidgetById);

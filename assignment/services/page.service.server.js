@@ -1,23 +1,4 @@
 module.exports = function (app, model) {
-    var pages = [
-        {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
-        {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
-        {"_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"},
-        {"_id": "1", "name": "Post 1", "websiteId": "567", "description": "Lorem"},
-        {"_id": "2", "name": "Post 2", "websiteId": "567", "description": "Lorem"},
-        {"_id": "3", "name": "Post 3", "websiteId": "567", "description": "Lorem"},
-        {"_id": "4", "name": "Post 4", "websiteId": "567", "description": "Lorem"},
-        {"_id": "5", "name": "Post 5", "websiteId": "567", "description": "Lorem"},
-        {"_id": "6", "name": "Post 6", "websiteId": "567", "description": "Lorem"},
-        {"_id": "7", "name": "Post 7", "websiteId": "567", "description": "Lorem"},
-        {"_id": "8", "name": "Post 8", "websiteId": "567", "description": "Lorem"},
-        {"_id": "9", "name": "Post 9", "websiteId": "567", "description": "Lorem"},
-        {"_id": "10", "name": "Post 10", "websiteId": "567", "description": "Lorem"},
-        {"_id": "12", "name": "Post 11", "websiteId": "567", "description": "Lorem"},
-        {"_id": "13", "name": "Post 12", "websiteId": "567", "description": "Lorem"}
-    ];
-
-
     app.post("/api/website/:wid/page", createPage);
     app.get("/api/website/:wid/page", findPagesByWebsiteId);
     app.get("/api/page/:pid", findPageById);
