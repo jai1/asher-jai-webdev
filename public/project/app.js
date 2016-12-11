@@ -4,5 +4,5 @@
 
 (function () {
     angular
-        .module("NewsYouLike", ['ngRoute']);
+        .module("NewsYouLike", ['ngRoute', 'ngGeolocation']);
 })();

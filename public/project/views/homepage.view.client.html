@@ -1,5 +1,11 @@
-<div id="wrapper">
+<div id="wrapper" style="z-index: 1000;">
     <div class="overlay"></div>
+
+    <!--TODOs:- -->
+    <!--Romil - Beautification remaining-->
+    <!--a. Colors on homepage-->
+    <!--b. Icons for site-->
+    <!--c. Shadow for Footer-->
 
     <!-- Sidebar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
@@ -47,18 +53,63 @@
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
+        <nav class = "navbar navbar-default navbar-fixed-top" style="z-index: auto; text-align:center">
+            navbar-fixed-top navbar-fixed-top navbar-fixed-top
+        </nav>
+        <!--Tips: $scope's replacement is model - see model.hambuergerClick()-->
         <button type="button" class="hamburger is-open animated fadeInLeft" data-toggle="offcanvas" ng-click="model.hamburgerClick()">
             <span class="hamb-top"></span>
             <span class="hamb-middle"></span>
             <span class="hamb-bottom"></span>
         </button>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                </div>
+            <div class="container" style="width: 75%;
+position: fixed;
+left: 50%;
+margin-left: -23.5%;">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <div class="input-group-btn search-panel">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span id="search_concept">Filter by</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#contains">Contains</a></li>
+                                    <li><a href="#its_equal">It's equal</a></li>
+                                    <li><a href="#greather_than">Greather than ></a></li>
+                                    <li><a href="#less_than">Less than < </a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#all">Anything</a></li>
+                                </ul>
+                            </div>
+                            <input type="hidden" name="search_param" value="all" id="search_param">
+                            <input type="text" class="form-control" name="x" placeholder="Search Articles...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
-
 </div>
+<nav class = "navbar navbar-default navbar-fixed-bottom">
+    <div class = "container-fluid">
+        <!--Tips:- Google Developers Tool has bug, resize actual chrome browser to test this-->
+        <div class="row">
+            <div class = "col-sm-2 hidden-xs hideOverflow">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">
+                Latitude: {{model.location.coords.latitude}}
+                <br />
+                Longitude: {{model.location.coords.longitude}}
+                <br />
+                Timestamp: {{model.location.timestamp | date:'yyyy-MM-dd HH:mm:ss Z'}}
+            </div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">cccccccccccccccccccccccccccccc</div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">ddddddddddddddddddddddddddddd</div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">eeeeeeeeeeeeeeeeeeeeeeeeeeeee</div>
+            <div class = "col-sm-2 hidden-xs hideOverflow">ffffffffffffffffffffffffffffffff</div>
+        </div>
+    </div>
+</nav>
