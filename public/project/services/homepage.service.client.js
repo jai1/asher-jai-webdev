@@ -8,13 +8,19 @@
 
     function Service($http) {
         var apis = {
-            getTopStories: getTopStories
+            getTopStories: getTopStories,
+            getWeatherDetails: getWeatherDetails
         };
         return apis;
 
         function getTopStories() {
-            console.log("reached Services");
+            console.log("reached HomePageService.getTopStories Services");
             return $http.get("/api/getTopStories");
+        }
+
+        function getWeatherDetails() {
+            console.log("reached HomePageService.getWeatherDetails Services");
+            return $http.get("/api/getWeatherDetails");
         }
     }
 })();

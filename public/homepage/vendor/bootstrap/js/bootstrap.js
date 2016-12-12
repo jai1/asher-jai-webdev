@@ -338,7 +338,7 @@ if (typeof jQuery === 'undefined') {
     Carousel.TRANSITION_DURATION = 600
 
     Carousel.DEFAULTS = {
-        interval: 5000,
+        intervalInMs: 5000,
         pause: 'hover',
         wrap: true,
         keyboard: true
@@ -365,9 +365,9 @@ if (typeof jQuery === 'undefined') {
 
         this.interval && clearInterval(this.interval)
 
-        this.options.interval
+        this.options.intervalInMs
         && !this.paused
-        && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
+        && (this.interval = setInterval($.proxy(this.next, this), this.options.intervalInMs))
 
         return this
     }
@@ -493,7 +493,7 @@ if (typeof jQuery === 'undefined') {
             if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
             if (typeof option == 'number') data.to(option)
             else if (action) data[action]()
-            else if (options.interval) data.pause().cycle()
+            else if (options.intervalInMs) data.pause().cycle()
         })
     }
 
@@ -522,7 +522,7 @@ if (typeof jQuery === 'undefined') {
         if (!$target.hasClass('carousel')) return
         var options = $.extend({}, $target.data(), $this.data())
         var slideIndex = $this.attr('data-slide-to')
-        if (slideIndex) options.interval = false
+        if (slideIndex) options.intervalInMs = false
 
         Plugin.call($target, options)
 

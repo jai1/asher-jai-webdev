@@ -8095,11 +8095,11 @@
         }
     };
 
-    jQuery.fx.interval = 13;
+    jQuery.fx.intervalInMs = 13;
 
     jQuery.fx.start = function () {
         if (!timerId) {
-            timerId = window.setInterval(jQuery.fx.tick, jQuery.fx.interval);
+            timerId = window.setInterval(jQuery.fx.tick, jQuery.fx.intervalInMs);
         }
     };
 
