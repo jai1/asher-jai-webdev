@@ -2,6 +2,6 @@
 
 (function () {
     angular
-        .module("WebAppMaker", ['ngRoute', 'jgaDirectives']);
-    //.module("WebAppMaker", ['ngRoute', 'jgaDirectives', 'textAngular']);
+    // .module("WebAppMaker", ['ngRoute', 'jgaDirectives']);
+    .module("WebAppMaker", ['ngRoute', 'jgaDirectives', 'textAngular']);
 })();

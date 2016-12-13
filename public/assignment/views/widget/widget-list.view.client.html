@@ -50,7 +50,20 @@
         <div ng-switch-when = "HTML"
              ng-bind-html = "model.safeCheckHTML(widget.text);" class = "container-fluid">
         </div>
-        <div class = "pull-right overlay-using-z-index">
+		
+		
+		<div ng-switch-when="TEXT">
+            <div ng-if="widget.formatted" ng-model="widget.text" text-angular
+                 ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],['ul','ol'],
+                 ['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]"></div>
+            <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)" class="form-control"
+                   ng-model="widget.text" placeholder="{{widget.placeholder}}"/>
+            <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                      rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                      class="form-control">{{widget.text}}</textarea>
+        </div>
+		
+    <div class = "pull-right overlay-using-z-index">
             <a href = "#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class = "glyphicon glyphicon-cog"></span>
             </a>
