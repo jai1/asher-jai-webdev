@@ -17,6 +17,14 @@
                 controller: "LoginController",
                 controllerAs: "model"
             })
+	    .when("/user", {
+                templateUrl: "views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/user/:uid", { // Put the regex and more open matches below the exact matches
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
@@ -75,5 +83,21 @@
             .otherwise({ // Default case
                 redirectTo: "/login"
             });
+
+        function checkLoggedIn($q, $location, UserService) {
+            var deferred = $q.defer();
+            UserService
+                .checkLoggedIn()
+                .success(function(user) {
+                    if(user) {
+                        deferred.resolve();
+                    }
+                    else {
+                        deferred.reject();
+                        $location.url("/login");
+                    }
+                });
+            return deferred.promise;
+        }
     }
 })();

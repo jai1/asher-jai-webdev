@@ -29,7 +29,7 @@
         }
     }
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, $rootScope, UserService) {
         var vm = this;
         vm.register = register;
 
@@ -47,6 +47,8 @@
                     .createUser(user)
                     .success(function (user) {
                         if (user) {
+			    // Important for passportJs
+                            $rootScope.currentUser = user;
                             $location.url("/user/" + user._id);
                         }
                         else vm.error = "Username already exists";
@@ -63,18 +65,20 @@
 
         vm.deleteUser = deleteUser;
         vm.updateUserProfile = updateUserProfile;
-
+    	vm.logout = logout;
         function init() {
-            vm.userId = $routeParams.uid;
+		console.log("WTF");
             UserService
-                .findUserById(vm.userId)
+                .findCurrentUser()
                 .success(function (user) {
+		    console.log("User");
+		    console.log(user);
                     if (user) {
                         vm.user = user;
                     }
                 })
                 .error(function (err) {
-
+			console.log("Error Occured");
                 });
         }
 
@@ -113,5 +117,17 @@
 
                 });
         }
+
+        function logout() {
+            UserService
+                .logout()
+                .success(function(status) {
+                    if(status) $location.url("/login");
+                })
+                .error(function(err) {
+
+                });
+        }
+
     }
 })();

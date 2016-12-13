@@ -13,7 +13,8 @@
             login                   : login,
             checkLoggedIn           : checkLoggedIn,
             logout                  : logout,
-            updateUser: updateUser
+            updateUser: updateUser,
+	    findCurrentUser         : findCurrentUser
         };
 
         return apis;
@@ -68,5 +69,11 @@
         function deleteUser(i_userId) {
             return $http.delete("/api/user/" + i_userId);
         }
+	
+	function findCurrentUser() {
+	    console.log("WTF 2");
+            return $http.get("/api/user");
+        }
+
     }
 })();

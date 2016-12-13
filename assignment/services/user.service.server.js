@@ -44,13 +44,17 @@ module.exports = function (app, model) {
             .findUserByFacebookId(profile.id)
             .then(
                 function(user) {
+                    console.log("Profile is");
+                    console.log(profile);
                     if(user) {
                         return done(null, user);
                     } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
+                        var email="";
+                        if (profile.emails) {
+                            email = profile.emails[0];
+                        }
                         var newFacebookUser = {
-                            username:  emailParts[0],
+                            username:  profile.displayName.replace(" ", ""),
                             firstName: profile.name.givenName,
                             lastName:  profile.name.familyName,
                             email:     email,
@@ -120,6 +124,10 @@ module.exports = function (app, model) {
     }
 
     function checkLoggedIn(req, res) {
+    	console.log("req.isAuthenticated()");
+	console.log(req.isAuthenticated());
+        console.log("req.user");
+        console.log(req.user);
         res.send(req.isAuthenticated()? req.user: undefined);
     }
 
@@ -152,6 +160,7 @@ module.exports = function (app, model) {
 
     }
 
+
     function findUser(req, res) {
         var i_username = req.query.username;
         var i_password = req.query.password;
@@ -161,7 +170,10 @@ module.exports = function (app, model) {
             } else {
                 findUserByUsername(req, res);
             }
-        }
+        } else {
+		// Tips: This part is used for FB authentication
+		res.send(req.user);
+	}
     }
 
     function findUserByUsername(req, res) {
