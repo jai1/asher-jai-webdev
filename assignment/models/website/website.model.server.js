@@ -8,9 +8,9 @@ module.exports = function () {
     var api = {
         setModel: setModel,
         createWebsiteForUser: createWebsiteForUser,
-        findAllWebsitesForUser: findAllWebsitesForUser,
         findWebsiteById: findWebsiteById,
         updateWebsite: updateWebsite,
+        findAllWebsitesForUser: findAllWebsitesForUser,
         deleteWebsite: deleteWebsite,
         removePageFromWebsite: removePageFromWebsite,
         removeWebsite: removeWebsite
@@ -21,13 +21,13 @@ module.exports = function () {
         model = _model;
     }
 
-    function createWebsiteForUser(userId, website) {
+    function createWebsiteForUser(i_userId, i_website) {
         return WebsiteModel
-            .create(website)
+            .create(i_website)
             .then(function (websiteObj) {
                 return model
                     .userModel
-                    .findUserById(userId)
+                    .findUserById(i_userId)
                     .then(function (userObj) {
                         userObj.websites.push(websiteObj._id);
                         userObj.save();
@@ -37,46 +37,46 @@ module.exports = function () {
             });
     }
 
-    function findAllWebsitesForUser(userId) {
+    function findAllWebsitesForUser(i_userId) {
         return WebsiteModel
-            .find({_user: userId});
+            .find({_user: i_userId});
     }
 
-    function findWebsiteById(websiteId) {
+    function findWebsiteById(i_websiteId) {
         return WebsiteModel
-            .findById(websiteId);
+            .findById(i_websiteId);
     }
 
-    function updateWebsite(websiteId, website) {
+    function updateWebsite(i_websiteId, i_website) {
         return WebsiteModel
             .update(
                 {
-                    _id: websiteId
+                    _id: i_websiteId
                 },
                 {
-                    name: website.name,
-                    description: website.description
+                    name: i_website.name,
+                    description: i_website.description
                 }
             );
     }
 
-    function deleteWebsite(websiteId) {
+    function deleteWebsite(i_websiteId) {
         return WebsiteModel
-            .findById(websiteId)
+            .findById(i_websiteId)
             .then(function (websiteObj) {
                 var userId = websiteObj._user;
                 return model
                     .userModel
-                    .removeWebsiteFromUser(userId, websiteId)
+                    .removeWebsiteFromUser(userId, i_websiteId)
                     .then(function (user) {
-                        return removeWebsite(websiteId);
+                        return removeWebsite(i_websiteId);
                     });
             });
     }
 
-    function removeWebsite(websiteId) {
+    function removeWebsite(i_websiteId) {
         return WebsiteModel
-            .findById(websiteId)
+            .findById(i_websiteId)
             .select({"_id": 0, "pages": 1})
             .then(function (websitePages) {
                 var promises = websitePages.pages.map(function (page) {
@@ -85,18 +85,20 @@ module.exports = function () {
                 return Q
                     .all(promises)
                     .then(function () {
-                        return WebsiteModel.remove({_id: websiteId});
+                        return WebsiteModel.remove({_id: i_websiteId});
                     });
             });
     }
 
-    function removePageFromWebsite(websiteId, pageId) {
+    function removePageFromWebsite(i_websiteId, i_pageId) {
         return WebsiteModel
-            .findById(websiteId)
+            .findById(i_websiteId)
             .then(function (websiteObj) {
                 var pages = websiteObj.pages;
                 for (var p in pages) {
-                    if (pages[p].toString() === pageId) pages.splice(p, 1);
+                    if (pages[p].toString() == i_pageId) {
+                        pages.splice(p, 1);
+                    }
                 }
                 websiteObj.pages = pages;
                 return websiteObj.save();

@@ -13,6 +13,8 @@ module.exports = function () {
     else {
         console.log("Connecting to local mongo...");
     }
+
+    // TODO - check why .connect is not working
     mongoose.createConnection(connectionString);
 
     var userModel = require("./user/user.model.server")();

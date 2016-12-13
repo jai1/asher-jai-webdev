@@ -7,6 +7,8 @@ module.exports = function () {
     var api = {
         setModel: setModel,
         createWidget: createWidget,
+        findWidgetById: findWidgetById,
+        updateWidget: updateWidget,
         findAllWidgetsForPage: findAllWidgetsForPage,
         findWidgetById: findWidgetById,
         updateWidget: updateWidget,
@@ -19,15 +21,15 @@ module.exports = function () {
         model = _model;
     }
 
-    function createWidget(pageId, widget) {
+    function createWidget(i_pageId, i_widget) {
         return WidgetModel
-            .create(widget)
+            .create(i_widget)
             .then(function (widgetObj) {
                 return model
                     .pageModel
-                    .findPageById(pageId)
+                    .findPageById(i_pageId)
                     .then(function (pageObj) {
-                        return findAllWidgetsForPage(pageId)
+                        return findAllWidgetsForPage(i_pageId)
                             .then(function (widgets) {
                                 pageObj.widgets.push(widgetObj._id);
                                 pageObj.save();
@@ -39,57 +41,57 @@ module.exports = function () {
     }
 
     //use mode.pageModel.findWidgetsForPage(pageId) instead
-    function findAllWidgetsForPage(pageId) {
+    function findAllWidgetsForPage(i_pageId) {
         return WidgetModel
-            .find({_page: pageId});
+            .find({_page: i_pageId});
     }
 
-    function findWidgetById(widgetId) {
+    function findWidgetById(i_widgetId) {
         return WidgetModel
-            .findById(widgetId);
+            .findById(i_widgetId);
     }
 
-    function updateWidget(widgetId, widget) {
+    function updateWidget(i_widgetId, i_widget) {
         return WidgetModel
             .update(
                 {
-                    _id: widgetId
+                    _id: i_widgetId
                 },
                 {
-                    name: widget.name ? widget.name : null,
-                    text: widget.text ? widget.text : null,
-                    placeholder: widget.placeholder ? widget.placeholder : null,
-                    description: widget.description ? widget.description : null,
-                    url: widget.url ? widget.url : null,
-                    width: widget.width ? widget.width : null,
-                    height: widget.height ? widget.height : null,
-                    rows: widget.rows ? widget.rows : null,
-                    size: widget.size ? widget.size : null,
-                    class: widget.class ? widget.class : null,
-                    icon: widget.icon ? widget.icon : null,
-                    metadata: widget.metadata ? widget.metadata : null,
-                    deletable: widget.deletable ? widget.deletable : null,
-                    formatted: widget.formatted ? widget.formatted : null
+                    name: i_widget.name ? i_widget.name : null,
+                    text: i_widget.text ? i_widget.text : null,
+                    placeholder: i_widget.placeholder ? i_widget.placeholder : null,
+                    description: i_widget.description ? i_widget.description : null,
+                    url: i_widget.url ? i_widget.url : null,
+                    width: i_widget.width ? i_widget.width : null,
+                    height: i_widget.height ? i_widget.height : null,
+                    rows: i_widget.rows ? i_widget.rows : null,
+                    size: i_widget.size ? i_widget.size : null,
+                    class: i_widget.class ? i_widget.class : null,
+                    icon: i_widget.icon ? i_widget.icon : null,
+                    metadata: i_widget.metadata ? i_widget.metadata : null,
+                    deletable: i_widget.deletable ? i_widget.deletable : null,
+                    formatted: i_widget.formatted ? i_widget.formatted : null
                 }
             );
     }
 
-    function deleteWidget(widgetId) {
+    function deleteWidget(i_widgetId) {
         return WidgetModel
-            .findById(widgetId)
+            .findById(i_widgetId)
             .then(function (widgetObj) {
                 var pageId = widgetObj._page;
                 return model
                     .pageModel
-                    .removeWidgetFromPage(pageId, widgetId)
+                    .removeWidgetFromPage(pageId, i_widgetId)
                     .then(function (page) {
-                        return removeWidget(widgetId);
+                        return removeWidget(i_widgetId);
                     });
             });
     }
 
-    function removeWidget(widgetId) {
+    function removeWidget(i_widgetId) {
         return WidgetModel
-            .remove({_id: widgetId});
+            .remove({_id: i_widgetId});
     }
 };

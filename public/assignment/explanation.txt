@@ -71,3 +71,9 @@
 	c. Views
 	d. Controller
 	e. Service
+
+// TODO - Remove this
+export FACEBOOK_CLIENT_ID="1153402588029736"
+export FACEBOOK_CLIENT_SECRET=""
+export FACEBOOK_CLIENT_SECRET="4b46ca68ee20a56ca8c7ac156f2b4967"
+export FACEBOOK_CALLBACK_URL="http://localhost:3000/auth/facebook/callback"

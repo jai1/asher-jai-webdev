@@ -14,7 +14,8 @@ module.exports = function () {
         updateUser: updateUser,
         deleteUser: deleteUser,
         removeWebsiteFromUser: removeWebsiteFromUser,
-        count: count
+        count: count,
+	findUserByFacebookId    : findUserByFacebookId
     };
     return api;
 
@@ -22,51 +23,56 @@ module.exports = function () {
         model = _model;
     }
 
-    function createUser(user) {
+    function createUser(i_user) {
         return UserModel
-            .create(user);
+            .create(i_user);
     }
 
-    function findUserByUsername(username) {
+    function findUserByUsername(i_username) {
         return UserModel
-            .findOne({username: username});
+            .findOne({username: i_username});
     }
 
-    function findUserByCredentials(username, password) {
+    function findUserByCredentials(i_username, i_password) {
         return UserModel
             .findOne({
-                username: username,
-                password: password
+                username: i_username,
+                password: i_password
             });
     }
 
-    function findUserById(userId) {
+    function findUserById(i_userId) {
         return UserModel
-            .findById(userId);
+            .findById(i_userId);
     }
 
-    function updateUser(userId, user) {
+    function findUserByFacebookId(i_facebookId) {
+        return UserModel
+            .findOne({'facebook.id': i_facebookId});
+    }
+
+    function updateUser(i_userId, i_user) {
         return UserModel
             .update(
                 {
-                    _id: userId
+                    _id: i_userId
                 },
                 {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                    phone: user.phone
+                    firstName: i_user.firstName,
+                    lastName: i_user.lastName,
+                    email: i_user.email,
+                    phone: i_user.phone
                 }
             );
     }
 
-    function deleteUser(userId) {
-        return removeUser(userId);
+    function deleteUser(i_userId) {
+        return removeUser(i_userId);
     }
 
-    function removeUser(userId) {
+    function removeUser(i_userId) {
         return UserModel
-            .findById(userId)
+            .findById(i_userId)
             .select({"_id": 0, "websites": 1})
             .then(function (userWebsites) {
                 var promises = userWebsites.websites.map(function (website) {
@@ -75,18 +81,20 @@ module.exports = function () {
                 return Q
                     .all(promises)
                     .then(function () {
-                        return UserModel.remove({_id: userId});
+                        return UserModel.remove({_id: i_userId});
                     });
             });
     }
 
-    function removeWebsiteFromUser(userId, websiteId) {
+    function removeWebsiteFromUser(i_userId, i_websiteId) {
         return UserModel
-            .findById(userId)
+            .findById(i_userId)
             .then(function (userObj) {
                 var websites = userObj.websites;
                 for (var w in websites) {
-                    if (websites[w].toString() === websiteId) websites.splice(w, 1);
+                    if (websites[w].toString() == i_websiteId) {
+                        websites.splice(w, 1);
+                    }
                 }
                 userObj.websites = websites;
                 return userObj.save();
