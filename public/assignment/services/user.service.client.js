@@ -10,11 +10,26 @@
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             deleteUser: deleteUser,
+            login                   : login,
+            checkLoggedIn           : checkLoggedIn,
+            logout                  : logout,
             updateUser: updateUser
         };
 
         return apis;
 
+        function login(username, password) {
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/login",user);
+        }
+
+        function checkLoggedIn() {
+            return $http.post("/api/checkLoggedIn");
+        }
+	
         /* Create a new user if the username doesn't exist, return true if operation successful. */
         function createUser(i_user) {
 
@@ -22,7 +37,11 @@
                 username: i_user.username,
                 password: i_user.password
             };
-            return $http.post("/api/user", user);
+            return $http.post("/api/register", user);
+        }
+	
+	function logout() {
+            return $http.post("/api/logout");
         }
 
         /* Find a user with the given userId, else return undefined */
