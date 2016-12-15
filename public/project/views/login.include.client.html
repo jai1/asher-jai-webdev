@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" ng-controller="UserController as model">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding:5px 5px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="glyphicon glyphicon-lock"></span> Login </h4>
+            </div>
+            <div class="modal-body" style="padding:20px 25px;">
+                <div class="row" ng-show="model.error">
+                    <div class="alert alert-danger alert-box" role="alert">
+                        <b>Error! </b>
+                        {{model.error}}
+                    </div>
+                </div>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter your user name" ng-model="model.user.username">
+                    </div>
+                    <!--Tips:- ng-modela and ng-bind are different.-->
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                        <input type="password" class="form-control" id="psw" placeholder="Enter your password" ng-model="model.user.password">
+                    </div>
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox" value="">Remember me</label>
+                    </div>
+                    <a class="btn btn-success btn-block" ng-click="model.login(model.user)"><span class="glyphicon glyphicon-off"></span> Login</a>
+                    <a class = "btn btn-success btn-block"
+                       ng-click="model.createUser(model.user)" style="text-decoration: none;">
+                        <span class="glyphicon glyphicon-plus-sign">
+                        </span>
+                        Sign Up
+                    </a>
+                    <a href="/auth/facebook" class="btn btn-primary btn-block" style="text-decoration: none;">
+                        <span class="fa fa-facebook">
+                        </span>
+                        Facebook
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>

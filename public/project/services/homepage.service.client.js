@@ -9,17 +9,11 @@
     function Service($http) {
         var apis = {
             getTopStories: getTopStories,
-            getWeatherDetails: getWeatherDetails,
             getMovieReviews: getMovieReviews,
-            getPopularStories: getPopularStories
+            getPopularStories: getPopularStories,
+            getMoreArticles: getMoreArticles
         };
         return apis;
-
-
-        function getWeatherDetails() {
-            console.log("reached HomePageService.getWeatherDetails Services");
-            return $http.get("/api/getWeatherDetails");
-        }
 
         function getTopStories(type) {
             console.log("reached HomePageService.getTopStories Services");
@@ -34,6 +28,11 @@
         function getPopularStories(type) {
             console.log("Service Called HomePageService.getPopularStories with type = " + type);
             return $http.get("/api/getPopularStories/" + type);
+        }
+
+        function getMoreArticles(year, month) {
+            console.log("Service Called HomePageService.getMoreArticles with month = " + month + ' and year=' + year);
+            return $http.get("/api/getMoreArticles/" + year + "/" + month);
         }
     }
 })();

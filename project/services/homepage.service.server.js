@@ -15,13 +15,12 @@ module.exports = function (app) {
     app.get("/api/getWeatherDetails", getWeatherDetails);
     app.get("/api/getMovieReviews/:type", getMovieReviews);
     app.get("/api/getPopularStories/:type", getPopularStories);
+    app.get("/api/getMoreArticles/:year/:month", getMoreArticles);
+
 
     function getPopularStories(req, res) {
         var type = req.params.type;
-        // TODO - refactor this
-        var APIString = "";
-        var result = '';
-
+        console.log("getPopularStories called with type = ", type);
         request.get({
             url: "https://api.nytimes.com/svc/mostpopular/v2/" + type + "/all-sections/30.json",
             qs: {
@@ -29,19 +28,22 @@ module.exports = function (app) {
             },
         }, function (err, response, body) {
             // TODO - error handling
-            body = JSON.parse(body);
-            console.log(body);
+            try {
+                body = JSON.parse(body);
+            } catch (err) {
+                console.log("Error Occured:");
+                console.log("body");
+                res.sendStatus(400);
+            }
+            // console.log(body);
             // console.log(body.results[0]);
-            // console.log(body.results[0].multimedia);
-            res.send(body);
+            console.dir(body.results,  { depth: null });
+            res.send(body.results);
         });
     }
 
     function getMovieReviews(req, res) {
-        // TODO - refactor this
         var type = req.params.type;
-        var APIString = "";
-        var result = '';
 
         request.get({
             url: "https://api.nytimes.com/svc/movies/v2/reviews/" + type + ".json",
@@ -51,16 +53,12 @@ module.exports = function (app) {
         }, function (err, response, body) {
             console.log(body);
             // TODO - error handling
-            res.send(body);
+            res.send(body.results);
         });
     }
 
     function getTopStories(req, res) {
         var type = req.params.type;
-        // TODO - refactor this
-        var APIString = "";
-        var result = '';
-
         request.get({
             url: "https://api.nytimes.com/svc/topstories/v2/" + type + ".json",
             qs: {
@@ -95,7 +93,7 @@ module.exports = function (app) {
                 console.log("ERROR OCCURED");
                 return getWeatherDetails(req, res);
             }
-            console.log(body);
+            // console.log(body);
             getWeatherDetailsUsingRequestUrl(body.location.requesturl.replace("\.html", "\.json"), API_WUNDERGROUND_KEY2, res);
         });
     }
@@ -111,15 +109,33 @@ module.exports = function (app) {
                 console.log("ERROR OCCURED");
                 return getWeatherDetailsUsingRequestUrl(requesturl, API_KEY, res);
             }
-            console.log(body);
+            // console.log(body);
             var weather = {
                 city: body.current_observation.display_location.full,
                 image: body.current_observation.icon_url,
                 degreesFahrenheit: body.current_observation.temp_f,
                 feelsLikeDegreesFahrenheit: body.current_observation.feelslike_f
             };
-            console.log(weather);
+            // console.log(weather);
             res.send(weather);
+        });
+    }
+
+    function getMoreArticles(req, res) {
+        // TODO - refactor this
+        var month = req.params.month;
+        var year = req.params.year;
+        console.log("HomepageService.getMoreArticles called with month="+month+", year="+year);
+        request.get({
+            url: "https://api.nytimes.com/svc/archive/v1/" + year + "/" + month + ".json",
+            qs: {
+                'api-key': API_NY_TIMES_KEY
+            },
+        }, function (err, response, body) {
+            // TODO - error handling
+            body = JSON.parse(body);
+            // console.dir(body,  { depth: null });
+            res.send(body.response);
         });
     }
 };

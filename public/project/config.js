@@ -8,9 +8,19 @@
 
     function Router($routeProvider) {
         $routeProvider
-            .when("/homepage", {
+            .when("/homepage/:uid?", {
                 templateUrl: "views/homepage.view.client.html",
                 controller: "HomePageController",
+                controllerAs: "model"
+            })
+            .when("/popular/:type?/:uid?", {
+                templateUrl: "views/popular.view.client.html",
+                controller: "PopularPageController",
+                controllerAs: "model"
+            })
+            .when("/top/:type?/:uid?", {
+                templateUrl: "views/top.view.client.html",
+                controller: "TopPageController",
                 controllerAs: "model"
             })
             .otherwise({

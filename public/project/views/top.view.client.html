@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class = "col-xs-2">
-                    <a class="btn btn-primary" data-toggle="modal" href="#myModal" >Login</a>
+                    <p>Login</p>
                 </div>
             </div>
         </nav>
@@ -103,45 +103,39 @@
             <span class = "hamb-bottom"></span>
         </button>
 
-        <div ng-include="'views/login.include.client.html'"></div>
-
-
-
         <!--Tips- Difference between pages - Start-->
         <div>
             <!--TODO - add border shade-->
-            <div infinite-scroll='model.getMoreArticles()' infinite-scroll-distance='2'>
-                <ul ng-repeat = "story in model.articles" style = "list-style: none;">
-                    <li>
-                        <div class = "card" style = "background-color: white; margin-right: 15px">
-                            <div class = "row">
-                                <div class = " col-sm-4 col-md-3">
-                                    <img style = "width: 100%;display: block;"
-                                         src = "{{story.multimedia[1].url? model.IMAGE_PRE + story.multimedia[1].url : model.empty}}"
-                                         alt = "Card image cap">
-                                </div>
-                                <div class = " col-sm-8 col-md-9">
-                                    <h6>
-                                        <a href = "{{ story.web_url }}" style = "color: black;">{{ story.headline.main }}</a>
-                                    </h6>
-                                    <p style = "color: black;line-height: 95%;"> {{ story.snippet }}</p>
-                                    <div>
-                                        <div class="pull-left">
-                                            {{ story.pub_date }} {{story._id}}
-                                        </div>
-                                        <div class="pull-right">
-                                            <ng-rating ng-model = "model.rate"
-                                                       editable = "false"
-                                                       show-grade = "true">
-                                            </ng-rating>
-                                        </div>
+            <ul ng-repeat = "story in model.topStories" style = "list-style: none;">
+                <li>
+                    <div class = "card" style = "background-color: white; margin-right: 15px">
+                        <div class = "row">
+                            <div class = " col-sm-4 col-md-2">
+                                <img style = "width: 100%;"
+                                     src = "{{story.multimedia[1].url? story.multimedia[1].url : model.empty}}"
+                                     alt = "Card image cap">
+                            </div>
+                            <div class = " col-sm-8 col-md-10">
+                                <h6>
+                                    <a href = "{{ story.url }}" style = "color: black;">{{ story.title }}</a>
+                                </h6>
+                                <p style = "color: black;"> {{ story.abstract }}</p>
+                                <div>
+                                    <div class="pull-left">
+                                        {{ story.published_date }} {{story.byline}} {{story.id}}
+                                    </div>
+                                    <div class="pull-right">
+                                        <ng-rating ng-model = "model.rate"
+                                                   editable = "false"
+                                                   show-grade = "true">
+                                        </ng-rating>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </li>
+            </ul>
         </div>
         <!--Tips- Difference between pages - End-->
 
@@ -160,7 +154,7 @@
                 <div style = "font-family: 'Orbitron', sans-serif;">
                     <div>
                         <!--TODO: Change this format - make it presentable-->
-                        <label style="color: black;" >{{ model.clock.time | date:'medium'}}</label>
+                        <p>{{ model.clock.time | date:'medium'}}</p>
                     </div>
                 </div>
             </div>
@@ -176,7 +170,7 @@
             <div class = "col-sm-2 col-xs-3 hideOverflow">
                 {{ model.sensex }}
             </div>
-            <div class = "col-sm-2 hidden-xs hideOverflow"></div>
+            <div class = "col-sm-2 hidden-xs hideOverflow">ffffffffffffffffffffffffffffffff</div>
         </div>
     </div>
 </nav>
