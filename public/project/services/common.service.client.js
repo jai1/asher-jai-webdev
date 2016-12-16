@@ -16,8 +16,21 @@
             getPopularStoryTypes: getPopularStoryTypes,
             getMovieTypes: getMovieTypes,
             getEmptyImageURL: getEmptyImageURL,
-            hamburgerClick: hamburgerClick
+            hamburgerClick: hamburgerClick,
+            updateLikedArticle: updateLikedArticle,
+            getlikedArticles: getlikedArticles
         };
+
+        function getlikedArticles(username) {
+            console.log("Service Client - Calling Get liked articles");
+            return $http.get("/api/likedArticles/"+ username + "/");
+        }
+
+        function updateLikedArticle(article) {
+            console.log("reached HomePageService.updateArticle Services");
+            return $http.put("/api/likedArticles/", article);
+        }
+
         // TODO - store in DB
         var stocks = ["FOXA ", "AAPL", "MSFT", "SIRI", "MU", "CSCO", "QQQ", "FTR", "SGYP", "FB", "HBAN", "INTC", "ZNGA", "GRPN", "TLT", "EBAY", "FOX", "ODP", "FNSR", "ON", "NVDA", "AAPL", "QQQ", "FB", "AMZN", "BIIB", "TLT", "MSFT", "GOOGL", "GOOG", "AVGO", "FOXA", "WYNN", "NVDA", "GILD", "AMGN", "CSCO", "AMD", "CMCSA", "IBB", "INTC"];
         var stocksString = stocks.join(",");

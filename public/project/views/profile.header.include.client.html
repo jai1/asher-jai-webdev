@@ -1,25 +1,32 @@
-<nav id = "header" class = "navbar navbar-default navbar-fixed-top" style = "z-index: auto; margin-left: 50px">
-    <div class = "row">
+<nav id = "header" class = "navbar navbar-default navbar-fixed-top"
+     style = " background-color: black; z-index: 1" >
+    <div class = "row" style="margin-left: 50px; margin-top: 2px">
         <!--Title-->
-        <div class = "col-xs-4 col-md-3">
-            <a href = "#" class = "navbar-brand" style = "padding-right: 0px">News You Like </a>
+        <div class = "col-xs-5 col-md-3" >
+            <a href = "#" class = "navbar-brand"
+               style = "font-size:28px; padding-right: 0px; font-family: 'Flamenco';text-decoration: none; color: #63d297;">
+                News You Like
+            </a>
         </div>
-        <!--Search Box-->
-        <div class = "col-xs-6 col-md-8" style = "padding-left: 5px; padding-right: 5px">
-            <a ng-click = "model.logout()" href = "#/homepage" class = "pull-right">
+
+        <div class = "col-xs-5 col-md-8" style = "padding-left: 5px; padding-right: 5px">
+            <a ng-click = "model.logout()"
+               href = "#/homepage"
+               class = "pull-right"
+               style = "padding-top: 10px; padding-right: 18px; font-family: 'Flamenco';text-decoration: none; color: #63d297;">
                 <span class = "fa fa-sign-out"></span>
                 Logout
             </a>
         </div>
+
         <div class = "col-xs-2 col-md-1">
             <!--Tips - $root is used to access $rootScope variables-->
             <div ng-if = "$root.user.username">
-                <a href = "#/profile" class = "pull-right"><span class = "fa fa-cog">{{ $root.user.username
-                    }}</span></a>
+                <a href = "#/profile"
+                   class = "pull-right"
+                   style = "padding-top: 10px; padding-right: 18px; font-family: 'Flamenco';text-decoration: none; color: #63d297;"><span class = "fa fa-cog">{{ $root.user.username}}</span></a>
             </div>
-            <div ng-if = "!$root.user.username">
-                <a class = "btn btn-primary" data-toggle = "modal" href = "#myModal">Login</a>
-            </div>
+
         </div>
     </div>
 </nav>

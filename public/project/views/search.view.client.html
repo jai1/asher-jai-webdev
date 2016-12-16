@@ -19,14 +19,13 @@
         <!--Tips- Difference between pages - Start-->
         <div id="jai">
             <!--TODO - add border shade-->
-            <div infinite-scroll = "model.getMoreArticles()" infinite-scroll-distance = "2">
                 <ul ng-repeat = "article in model.articles" style = "list-style: none;">
                     <li>
                         <div class = "card" style = "background-color: white; float: left; margin: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                             <div class = "row">
                                 <div class = " col-sm-3 col-md-3" >
                                     <img style = "width: 100%; width: 250px; height: 180px ;display: block; float: left"
-                                         ng-src = "{{article.multimedia[1].url? article.multimedia[1].url : model.empty}}"
+                                         ng-src  = "{{article.multimedia[1].url? article.multimedia[1].url : model.empty}}"
                                          alt = "Card image cap">
                                 </div>
                                 <div class = " col-sm-9 col-md-9">
@@ -50,13 +49,12 @@
                                                ng-click="article.like = true; model.update(article)" >
                                                 <span class="glyphicon glyphicon-thumbs-up" style="color: black"></span>
                                             </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </li>
                 </ul>
-            </div>
         </div>
         <!--Tips- Difference between pages - End-->
     </div>

@@ -4,9 +4,9 @@
 (function () {
     angular
         .module("NewsYouLike")
-        .controller("HomePageController", Controller);
+        .controller("SearchPageController", Controller);
 
-    function Controller($interval, $routeParams, $rootScope, HomePageService, CommonService) {
+    function Controller($interval, $routeParams, $rootScope, SearchPageService, CommonService ) {
 
         /** Common For All Controllers - Start **/
         var vm = this;
@@ -36,7 +36,7 @@
             .error(function (err) {
             });
 
-        vm.sensex = {intervalInMs: 3000, stock: {exchange: "", name: "", latestPrice: 0, change: 0}};
+        vm.sensex = {intervalInMs: 4000, stock: {exchange: "", name: "", latestPrice: 0, change: 0}};
         $interval(function () {
             vm.sensex.stock = CommonService.getStockDetails();
         }, vm.sensex.intervalInMs);
@@ -45,6 +45,11 @@
         vm.topStoryTypes = CommonService.getTopStoryTypes();
         vm.movieTypes = CommonService.getMovieTypes();
         /** Common For All Controllers - End **/
+
+        type = $routeParams.type;
+        if (!type) {
+            type = '';
+        }
 
         vm.likedArticlesTitle = [];
 
@@ -78,72 +83,37 @@
             }
         };
 
-        vm.IMAGE_PRE = "https://static01.nyt.com/"
+        vm.IMAGE_PRE = "https://static01.nyt.com/";
 
-        vm.year = new Date().getFullYear();
-        vm.month = new Date().getMonth(); // Get the month (0-11)
-        vm.month += 1; // Get the month (1-12)
-        var cachedArticles = [];
-        var currentCachedArticleIndex = 0;
-        vm.articles = [];
-        var NUMBER_OF_ARTICLES_RETREIVED = 20;
+        getSearchArticles();
 
-        vm.getMoreArticles = function () {
-            if (currentCachedArticleIndex >= cachedArticles.length - NUMBER_OF_ARTICLES_RETREIVED) {
-                $rootScope.populateLikedArticles();
-                HomePageService
-                    .getMoreArticles(vm.year, vm.month)
-                    .success(function (articles) {
-                        articles = articles.docs;
-                        for (i = articles.length - 1; i >= 0; i--) {
-                            if (vm.likedArticlesTitle.indexOf(articles[i].headline.main) != -1) {
-                                articles[i].like = true;
-                            }
-                            if (articles[i].multimedia.length >= 2) {
-                                articles[i].multimedia[1].url = vm.IMAGE_PRE + articles[i].multimedia[1].url;
-                            }
-                            var difference = 120 - articles[i].snippet.length;
-                            if (difference > 0) {
-                                articles[i].snippet = articles[i].snippet + articles[i].snippet;
-                            }
-                            cachedArticles.push(articles[i]);
+        function getSearchArticles() {
+            vm.articles = [];
+            $rootScope.populateLikedArticles();
+            SearchPageService
+                .getSearchedArticles(type, $routeParams.q)
+                .success(function (articles) {
+                    articles = articles.docs;
+                    for (i = articles.length - 1; i >= 0; i--) {
+                        if (vm.likedArticlesTitle.indexOf(articles[i].headline.main) != -1) {
+                            articles[i].like = true;
                         }
-                        populateArticles();
-                        if (vm.month == 1) {
-                            vm.month = 12;
-                            vm.year -= 1;
-                        } else {
-                            vm.month -= 1;
+                        var difference = 120 - articles[i].snippet.length;
+                        while (difference > 0) {
+                            articles[i].snippet = articles[i].snippet + articles[i].snippet;
+                            difference = 120 - articles[i].snippet.length;
                         }
-                    })
-                    .error(function (err) {
-                        console.log("ERROR");
-                        populateArticles();
-                    });
-            }
-            populateArticles();
-        };
-
-        function populateArticles() {
-            var numberOfArticlesRetreived = Math.min(NUMBER_OF_ARTICLES_RETREIVED, cachedArticles.length - currentCachedArticleIndex);
-            while (numberOfArticlesRetreived > 0) {
-                vm.articles.push(cachedArticles[currentCachedArticleIndex]);
-                currentCachedArticleIndex++;
-                numberOfArticlesRetreived--;
-            }
-        }
-
-        vm.getMovieReviews = function (type) {
-            console.log("Movie Type = " + type);
-            HomePageService
-                .getMovieReviews(type)
-                .success(function (reviews) {
-                    vm.movieReviews = reviews;
+                        if (articles[i].multimedia.length >= 2) {
+                            articles[i].multimedia[1].url = vm.IMAGE_PRE + articles[i].multimedia[1].url;
+                        }
+                        vm.articles.push(articles[i]);
+                    }
                 })
                 .error(function (err) {
-
+                    console.log("ERROR");
                 });
-        };
+        }
+
 
         vm.update = function(article) {
             article.username = $rootScope.user.username;

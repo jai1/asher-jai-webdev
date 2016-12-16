@@ -1,0 +1,78 @@
+<div id = "wrapper" style = "z-index: 1000;">
+    <!--Sidebar-->
+    <div ng-include = "'views/profile.sidebar.include.client.html'"></div>
+    <!-- Page Content -->
+    <div id = "page-content-wrapper">
+        <!--Top Bar-->
+        <div ng-include = "'views/profile.header.include.client.html'"></div>
+        <!--Tips: $scope's replacement is model - see model.hambuergerClick()-->
+        <button type = "button" class = "hamburger is-closed animated fadeInLeft" data-toggle = "offcanvas"
+                ng-click = "model.hamburgerClick()">
+            <span class = "hamb-top"></span>
+            <span class = "hamb-middle"></span>
+            <span class = "hamb-bottom"></span>
+        </button>
+        <!--Tips - For login and sign up-->
+        <div ng-include = "'views/login.include.client.html'"></div>
+        <!--Tips- Difference between pages - Start-->
+        <div>
+            <div class = "row text-center">
+                <div class = "col-xs-4 col-sm-6"></div>
+                <div class = "col-xs-4 col-sm-3">
+                    <a>
+                        <div class = "row">
+                            <h8>
+                                <i class = "fa fa-users"></i>
+                                Followers
+                            </h8>
+                        </div>
+                        <div class = "row">
+                            7
+                        </div>
+                    </a>
+                </div>
+                <div class = "col-xs-4 col-sm-3">
+                    <a>
+                        <div class = "row">
+                            <h8>
+                                <i class = "fa fa-users"></i>
+                                Following
+                            </h8>
+                        </div>
+                        <div class = "row">
+                            5
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <ul ng-repeat = "article in model.likedArticles" style = "list-style: none;">
+                <li>
+                    <div class = "card" style = "background-color: white; float: left; margin: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                        <div class = "row">
+                            <div class = " col-sm-3 col-md-3" >
+                                <img style = "width: 100%; width: 250px; height: 180px ;display: block; float: left"
+                                     ng-src = "{{article.imgUrl ? article.imgUrl : model.empty}}"
+                                     alt = "Card image cap">
+                            </div>
+                            <div class = " col-sm-9 col-md-9">
+                                <h6>
+                                    <a href = "{{ article.webUrl }}" style = "color: black;">
+                                        {{ article.title}}
+                                    </a>
+                                </h6>
+                                <div>
+                                    <p style = "color: black;">
+                                        {{ article.abstract }}. 
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <!--Tips- Difference between pages - End-->
+    </div>
+</div>
+<!--Footer-->
+<div ng-include = "'views/footer.include.client.html'"></div>

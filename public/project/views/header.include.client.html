@@ -14,21 +14,28 @@
                 <div class = "input-group-btn search-panel" style="border: 0">
                     <button style ="background-color: rgba(255, 255,255,0.3); border: 0"
                             type = "button" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown">
-                        <span id = "search_concept" >Filter by</span> <span class = "caret"></span>
+                        <span id = "search_concept" >Filter by {{ model.search.filter }}</span> 
+                        <span class = "caret"></span>
                     </button>
-                    <ul class = "dropdown-menu" role = "menu">
-                        <li><a href = "#contains">Contains</a></li>
-                        <li><a href = "#its_equal">It's equal</a></li>
-                        <li><a href = "#greather_than">Greather than ></a></li>
-                        <li><a href = "#less_than">Less than < </a></li>
-                        <li class = "divider"></li>
-                        <li><a href = "#all">Anything</a></li>
+                    <div class = "dropdown-menu" role = "menu" style="color: black">
+                    <ul id="searchList" style="color: black; list-style-type: none;">
+                        <!--TODO - refactor this and put it into controller-->
+                        <li><a ng-click="model.search.filter = 'Arts'">Arts</a></li>
+                        <li><a ng-click="model.search.filter = 'Business'">Business</a></li>
+                        <li><a ng-click="model.search.filter = 'Sports'">Sports</a></li>
+                        <li><a ng-click="model.search.filter = 'Technology'">Technology</a></li>
+                        <li><a ng-click="model.search.filter = 'Fashion'">Fashion</a></li>
+                        <li><a ng-click="model.search.filter = 'Financial'">Financial</a></li>
+                        <li><a ng-click="model.search.filter = 'Politics'">Politics</a></li>
                     </ul>
+                    </div>
                 </div>
                 <input type = "hidden" name = "search_param" value = "all" id = "search_param">
-                <input type = "text" style="border: 0" class = "form-control" name = "x" placeholder = "Search term...">
+                <input ng-model="$root.search.string" type = "text"
+                       style="border: 0" class = "form-control" name = "x"
+                       placeholder = "Search term...">
                 <span class = "input-group-btn" style="border: 0">
-                    <a class = "btn btn-default" style ="border: 0;background-color: rgba(255, 255,255,0.3);"><span class = "glyphicon glyphicon-search"></span></a>
+                    <a class = "btn btn-default" href="#/search/{{model.search.filter}}?q='{{$root.search.string}}'" style ="border: 0;background-color: rgba(255, 255,255,0.3);"><span class = "glyphicon glyphicon-search"></span></a>
                 </span>
             </div>
         </div>
@@ -39,7 +46,8 @@
             </div>
             <div ng-if = "!$root.user.username">
                 <!--Tips:- Since myModal is present in other include, if you don't do this (views/...#myModal)it first goes to index.html (homepage) and then trys to search-->
-                <a class="pull-right"  style = "padding-top: 10px; padding-right: 18px; font-family: 'Flamenco';text-decoration: none; color: #63d297;" data-toggle = "modal"
+                <a class="pull-right"
+                   style = "padding-top: 10px; padding-right: 18px; font-family: 'Flamenco';text-decoration: none; color: #63d297;" data-toggle = "modal"
                    href = "/views/login.include.view.html#myModal">Login</a>
             </div>
         </div>

@@ -11,21 +11,9 @@
             getTopStories: getTopStories,
             getMovieReviews: getMovieReviews,
             getPopularStories: getPopularStories,
-            getMoreArticles: getMoreArticles,
-            updateArticle: updateArticle,
-            getlikedArticles: getlikedArticles
+            getMoreArticles: getMoreArticles
         };
         return apis;
-
-        function getlikedArticles(username) {
-            console.log("Service Client - Calling Get liked articles");
-            return $http.get("/api/likedArticles/"+ username + "/");
-        }
-
-        function updateArticle(article) {
-            console.log("reached HomePageService.updateArticle Services");
-            return $http.put("/api/articles/", article);
-        }
 
         function getTopStories(type) {
             console.log("reached HomePageService.getTopStories Services");

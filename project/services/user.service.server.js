@@ -103,28 +103,40 @@ module.exports = function (app, model) {
         console.log(reqUser);
         model
             .userModel
-            .createUser(reqUser)
-            .then(
-                function (user) {
-                    console.log("Created user");
-                    console.log(user);
-                    if (user) {
-                        req.login(user, function (err) {
-                            if (err) {
+            .findUserByUsername(reqUser.username)
+            .then(function(user) {
+                if (! user) {
+                    model
+                        .userModel
+                        .createUser(reqUser)
+                        .then(
+                            function (user) {
+                                console.log("Created user");
+                                console.log(user);
+                                if (user) {
+                                    req.login(user, function (err) {
+                                        if (err) {
+                                            res.status(400).send(err);
+                                        }
+                                        else {
+                                            res.json(user);
+                                        }
+                                    });
+                                }
+                            },
+                            function (err) {
+                                console.log("Error Occured");
+                                console.log(err);
                                 res.status(400).send(err);
-                            }
-                            else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                },
-                function (err) {
-                    console.log("Error Occured");
-                    console.log(err);
-                    res.status(400).send(err);
+                            });
+                } else {
+                    res.status(400).send("User already exists");
                 }
-            );
+            }, function (err) {
+                console.log("findUserByUsername failed");
+                console.log(err);
+                res.status(400).send(err);
+            });
     }
 
     function updateUser(req, res) {

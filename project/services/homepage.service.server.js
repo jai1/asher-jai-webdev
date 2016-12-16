@@ -16,7 +16,7 @@ module.exports = function (app, model) {
     app.get("/api/movieReviews/:type", getMovieReviews);
     app.get("/api/popularStories/:type", getPopularStories);
     app.get("/api/articles/:year/:month", getMoreArticles);
-    app.put("/api/articles/", updateArticles);
+    app.put("/api/likedArticles/", updateLikedArticles);
     app.get("/api/likedArticles/:username", getLikedArticles);
 
     function getLikedArticles(req, res) {
@@ -31,7 +31,7 @@ module.exports = function (app, model) {
             }, function (error) {res.sendStatus(400);});
     }
 
-    function updateArticles(req, res) {
+    function updateLikedArticles(req, res) {
         var i_article = req.body;
         console.log("Home page Service - updateArticle called");
         console.log(i_article);

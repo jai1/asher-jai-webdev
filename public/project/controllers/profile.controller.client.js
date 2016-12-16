@@ -3,7 +3,14 @@
         .module("NewsYouLike")
         .controller("ProfilePageController", Controller);
 
-    function Controller($interval, $routeParams, $rootScope, UserService, CommonService) {
+    function Controller($interval, $location, $routeParams, $rootScope, UserService, CommonService) {
+
+        console.log("WTF");
+        console.log($rootScope.user);
+
+        if (!$rootScope.user || !$rootScope.user.username) {
+            $location.path("#/homepage");
+        }
 
         /** Common For All Controllers - Start **/
         var vm = this;
@@ -42,7 +49,6 @@
         vm.movieTypes = CommonService.getMovieTypes();
         /** Common For All Controllers - End **/
 
-        delete $rootScope.user;
         vm.logout = function () {
             delete $rootScope.user;
             UserService.logout();
@@ -62,7 +68,26 @@
                         alert("Error updating user information!")
                     }
                 });
-        }
+        };
+
+        vm.likedArticles = [];
+
+        // Tips when the controller loads the $rootScope.user is empty hence need to call this function later
+        $rootScope.populateLikedArticles = function () {
+            if ($rootScope.user) {
+                console.log("Calling Get liked articles");
+                CommonService
+                    .getlikedArticles($rootScope.user.username)
+                    .success(function (likedArticles) {
+                        vm.likedArticles = likedArticles;
+                    })
+                    .error(function (error) {
+                        vm.likedArticles = [];
+                    });
+            }
+        };
+        $rootScope.populateLikedArticles();
+
     }
 })();
 /* Tips: (function() {})(); without the last () the function is not called hence iffy is useless */

@@ -107,6 +107,10 @@
                             var resUser = response.data;
                             if (resUser) {
                                 UserService.setCurrentUser(resUser);
+                                $('#myModal').modal('hide');
+                                if ($rootScope.populateLikedArticles) {
+                                    $rootScope.populateLikedArticles();
+                                }
                             }
                         },
                         function (err) {

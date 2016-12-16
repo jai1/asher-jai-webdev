@@ -41,6 +41,22 @@
                     getLoggedIn: getLoggedIn
                 }
             })
+            .when("/search/:type?", {
+                templateUrl: "views/search.view.client.html",
+                controller: "SearchPageController",
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
+            })
+            .when("/profile/likes", {
+                templateUrl: "views/profile.likes.view.client.html",
+                controller: "ProfilePageController",
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
+            })
             .otherwise({
                 redirectTo: "/homepage"
             });
