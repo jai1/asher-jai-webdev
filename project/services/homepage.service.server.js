@@ -175,6 +175,9 @@ module.exports = function (app, model) {
     }
 
     function getWeatherDetailsUsingRequestUrl(requesturl, API_KEY, res) {
+        // TODO - Hardcoded because this takes server ip and not clients
+        // Tips -  Should have put this code on client side
+        requesturl = "US/MA/Boston.json";
         var APIString = "http://api.wunderground.com/api/" + API_KEY + "/conditions/q/" + requesturl;
         console.log(APIString);
 
