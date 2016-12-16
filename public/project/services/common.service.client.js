@@ -18,7 +18,8 @@
             getEmptyImageURL: getEmptyImageURL,
             hamburgerClick: hamburgerClick,
             updateLikedArticle: updateLikedArticle,
-            getlikedArticles: getlikedArticles
+            getlikedArticles: getlikedArticles,
+            initHamburgerMenu: initHamburgerMenu
         };
 
         function getlikedArticles(username) {
@@ -778,9 +779,18 @@
         var currentStockIndex = 0;
         var SENSEX = "NASDAQ";
 
-        var isHamburgerMenuClosed = false;
+        var isHamburgerMenuOpen = false;
 
         return apis;
+
+        function initHamburgerMenu() {
+            var trigger = $('.hamburger');
+            var overlay = $('.overlay');
+            overlay.hide();
+            trigger.removeClass('is-open');
+            trigger.addClass('is-closed');
+            isHamburgerMenuOpen = false;
+        }
 
         function getPopularStoryTypes() {
             // TODO - Throw this list in DB
@@ -821,8 +831,7 @@
 
         function getMovieTypes() {
             // TODO - Throw this list in DB
-            return [{displayName: "Currently Showing", type: "picks"}, {displayName: "All Movies", type: "all"}];
-            ;
+            return [{displayName: "Currently Showing", type: "picks"}, {displayName: "All Movies", type: "all"}];;
         }
 
         function getWeatherDetails() {
@@ -879,16 +888,16 @@
         function hamburgerClick() {
             var trigger = $('.hamburger');
             var overlay = $('.overlay');
-            if (isHamburgerMenuClosed == true) {
+            if (isHamburgerMenuOpen == true) {
                 overlay.hide();
                 trigger.removeClass('is-open');
                 trigger.addClass('is-closed');
-                isHamburgerMenuClosed = false;
+                isHamburgerMenuOpen = false;
             } else {
                 overlay.show();
                 trigger.removeClass('is-closed');
                 trigger.addClass('is-open');
-                isHamburgerMenuClosed = true;
+                isHamburgerMenuOpen = true;
             }
             $('#wrapper').toggleClass('toggled');
         }

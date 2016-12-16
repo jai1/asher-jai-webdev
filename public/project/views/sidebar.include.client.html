@@ -46,22 +46,28 @@
                     topStory.displayName }}</a></li>
             </ul>
         </li>
-        <li class = "dropdown">
-            <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
-            <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
-                <i class = "glyphicon glyphicon-film"></i>
-                &nbsp; Movie Reviews
-                <span class = "caret"></span></a>
-            <ul class = "dropdown-menu" role = "menu" ng-repeat = "movieType in model.movieTypes">
-                <li><a href = "#/movie/{{ movieType.type }}/{{ model.userId }}" ng-click = "model.hamburgerClick()">{{
-                    movieType.displayName }}</a></li>
-            </ul>
-        </li>
+
+        <!--TODO - fix this-->
+        <!--<li class = "dropdown">-->
+            <!--&lt;!&ndash;Tips:- Could have used data-target and data-parent to put list options in other locations&ndash;&gt;-->
+            <!--<a href = "" class = "dropdown-toggle" data-toggle = "dropdown">-->
+                <!--<i class = "glyphicon glyphicon-film"></i>-->
+                <!--&nbsp; Movie Reviews-->
+                <!--<span class = "caret"></span></a>-->
+            <!--<ul class = "dropdown-menu" role = "menu" ng-repeat = "movieType in model.movieTypes">-->
+                <!--<li><a href = "#/movie/{{ movieType.type }}/{{ model.userId }}" ng-click = "model.hamburgerClick()">{{-->
+                    <!--movieType.displayName }}</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a href = "#"><i class = "fa fa-line-chart"></i>&nbsp; Stocks </a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<a href = "#"><i class = "fa fa-youtube-square"></i>&nbsp; Live Stream</a>-->
+        <!--</li>-->
+
         <li>
-            <a href = "#"><i class = "fa fa-line-chart"></i>&nbsp; Stocks</a>
-        </li>
-        <li>
-            <a href = "#"><i class = "fa fa-youtube-square"></i>&nbsp; Live Stream</a>
+            <a href = "#/homepage"><i class = "fa fa-newspaper-o"></i>&nbsp; All Articles </a>
         </li>
     </ul>
 </nav>

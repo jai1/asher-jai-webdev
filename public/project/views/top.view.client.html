@@ -1,107 +1,10 @@
 <div id = "wrapper" style = "z-index: 1000;">
-    <div class = "overlay"></div>
-    <!--TODOs:- -->
-    <!--Romil - Beautification remaining-->
-    <!--a. Colors on homepage-->
-    <!--b. Icons for site-->
-    <!--c. Shadow for Footer-->
-    <!-- Sidebar -->
-    <nav class = "navbar navbar-inverse navbar-fixed-top" id = "sidebar-wrapper" role = "navigation">
-        <!--TODO- Create directive to stop the drop down from closing on click-->
-        <ul class = "nav sidebar-nav">
-            <li class = "sidebar-brand">
-                <a href = "" id = "category-header">
-                    CATEGORIES
-                </a>
-            </li>
-            <!--Tips:- Use &nbsp for non beaking space-->
-            <!--TODO - Change Opacity Option-->
-            <li class = "dropdown">
-                <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
-                <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
-                    <i class = "fa fa-newspaper-o"></i>
-                    &nbsp;Popular Stories
-                    <span class = "caret"></span></a>
-                <ul class = "dropdown-menu" role = "menu" ng-repeat = "popularStory in model.popularStoryTypes">
-                    <li><a href = "#/popular/{{ popularStory.type }}/{{ model.userId }}"
-                           ng-click = "model.hamburgerClick()">{{ popularStory.displayName }}</a></li>
-                </ul>
-            </li>
-            <li class = "dropdown">
-                <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
-                <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
-                    <i class = "fa fa-newspaper-o"></i>
-                    &nbsp; Top Stories
-                    <span class = "caret"></span></a>
-                <ul class = "dropdown-menu" role = "menu" ng-repeat = "topStory in model.topStoryTypes">
-                    <li><a href = "#/top/{{ topStory.type }}/{{ model.userId }}" ng-click = "model.hamburgerClick()">{{
-                        topStory.displayName }}</a></li>
-                </ul>
-            </li>
-            <li class = "dropdown">
-                <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
-                <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
-                    <i class = "glyphicon glyphicon-film"></i>
-                    &nbsp; Movie Reviews
-                    <span class = "caret"></span></a>
-                <ul class = "dropdown-menu" role = "menu" ng-repeat = "movieType in model.movieTypes">
-                    <li><a href = "#/movie/{{ movieType.type }}/{{ model.userId }}" ng-click = "model.hamburgerClick()">{{
-                        movieType.displayName }}</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href = "#"><i class = "fa fa-line-chart"></i>&nbsp; Stocks</a>
-            </li>
-            <li>
-                <a href = "#"><i class = "fa fa-youtube-square"></i>&nbsp; Live Stream</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- /#sidebar-wrapper -->
+    <!--Sidebar-->
+    <div ng-include = "'views/sidebar.include.client.html'"></div>
     <!-- Page Content -->
-    <div id = "page-content-wrapper">
+    <div id = "page-content-wrapper" style="background-color: black" >
         <!--Top Bar-->
-        <nav id = "header" class = "navbar navbar-default navbar-fixed-top" style = "z-index: auto; margin-left: 50px">
-            <div class = "row">
-                <!--Title-->
-                <div class = "col-xs-4 col-md-3">
-                    <a href = "#" class = "navbar-brand" style = "padding-right: 0px">News You Like </a>
-                </div>
-                <!--Search Box-->
-                <div class = "col-xs-6 col-md-7" style = "padding-left: 5px; padding-right: 5px">
-                    <div class = "input-group" style = "margin-top: 5px">
-                        <div class = "input-group-btn search-panel">
-                            <button type = "button" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown">
-                                <span id = "search_concept">Filter by</span> <span class = "caret"></span>
-                            </button>
-                            <ul class = "dropdown-menu" role = "menu">
-                                <li><a href = "#contains">Contains</a></li>
-                                <li><a href = "#its_equal">It's equal</a></li>
-                                <li><a href = "#greather_than">Greather than ></a></li>
-                                <li><a href = "#less_than">Less than < </a></li>
-                                <li class = "divider"></li>
-                                <li><a href = "#all">Anything</a></li>
-                            </ul>
-                        </div>
-                        <input type = "hidden" name = "search_param" value = "all" id = "search_param">
-                        <input type = "text" class = "form-control" name = "x" placeholder = "Search term...">
-                        <span class = "input-group-btn">
-                            <a class = "btn btn-default"><span class = "glyphicon glyphicon-search"></span></a>
-                        </span>
-                    </div>
-                </div>
-                <div class = "col-xs-2">
-                    <!--Tips - $root is used to access $rootScope variables-->
-                    <div ng-if = "$root.user">
-                        <a href = "#/profile"><span class = "fa fa-cog">{{ $root.user.username }}</span></a>
-                    </div>
-                    <div ng-if = "!$root.user">
-                        <a class = "btn btn-primary" data-toggle = "modal"
-                           href = "/views/login.include.view.html#myModal">Login</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <div ng-include = "'views/header.include.client.html'"></div>
         <!--Tips: $scope's replacement is model - see model.hambuergerClick()-->
         <button type = "button" class = "hamburger is-closed animated fadeInLeft" data-toggle = "offcanvas"
                 ng-click = "model.hamburgerClick()">
@@ -109,10 +12,11 @@
             <span class = "hamb-middle"></span>
             <span class = "hamb-bottom"></span>
         </button>
+    </div>
         <!--Tips - For login and sign up-->
         <div ng-include = "'views/login.include.client.html'"></div>
         <!--Tips- Difference between pages - Start-->
-        <div>
+        <div id="jai">
             <!--TODO - add border shade-->
             <ul ng-repeat = "story in model.topStories" style = "list-style: none;">
                 <li>
@@ -130,13 +34,7 @@
                                 <p style = "color: black;"> {{ story.abstract }}</p>
                                 <div>
                                     <div class = "pull-left">
-                                        {{ story.published_date }} {{story.byline}} {{story.id}}
-                                    </div>
-                                    <div class = "pull-right">
-                                        <ng-rating ng-model = "model.rate"
-                                                   editable = "false"
-                                                   show-grade = "true">
-                                        </ng-rating>
+                                         {{story.byline}}
                                     </div>
                                 </div>
                             </div>
@@ -149,33 +47,4 @@
     </div>
 </div>
 <!--Footer-->
-<nav class = "navbar navbar-default navbar-fixed-bottom" style = "max-height: 50px; min-height: 50px; ">
-    <div class = "container-fluid">
-        <!--Tips:- Google Developers Tool has bug, resize actual chrome browser to test this-->
-        <div class = "row">
-            <div class = "col-sm-2 hidden-xs hideOverflow">
-            </div>
-            <div class = "col-sm-2 col-xs-3 hideOverflow">
-                <div style = "font-family: 'Orbitron', sans-serif;">
-                    <div>
-                        <!--TODO: Change this format - make it presentable-->
-                        <p>{{ model.clock.time | date:'medium'}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-sm-2 col-xs-3 hideOverflow">
-                <span class = "glyphicon glyphicon-map-marker pull-left" aria-hidden = "true">{{ model.weather.city
-                    }}</span>
-            </div>
-            <div class = "col-sm-2 col-xs-3 hideOverflow">
-                <img src = "{{ model.weather.image }}" alt = "{{model.weather.city}}'s Weather"/>
-                Actual - {{model.weather.degreesFahrenheit}}&#8457;;
-                Feels Like - {{model.weather.feelsLikeDegreesFahrenheit}} &#8457;
-            </div>
-            <div class = "col-sm-2 col-xs-3 hideOverflow">
-                {{ model.sensex }}
-            </div>
-            <div class = "col-sm-2 hidden-xs hideOverflow">ffffffffffffffffffffffffffffffff</div>
-        </div>
-    </div>
-</nav>
+<div ng-include = "'views/footer.include.client.html'"></div>

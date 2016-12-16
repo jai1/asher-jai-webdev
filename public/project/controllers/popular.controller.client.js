@@ -43,6 +43,7 @@
         vm.popularStoryTypes = CommonService.getPopularStoryTypes();
         vm.topStoryTypes = CommonService.getTopStoryTypes();
         vm.movieTypes = CommonService.getMovieTypes();
+        CommonService.initHamburgerMenu();
         /** Common For All Controllers - End **/
 
 
