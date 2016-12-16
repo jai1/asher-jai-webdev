@@ -1,15 +1,20 @@
-<nav id = "header" class = "navbar navbar-default navbar-fixed-top" style = "z-index: auto; margin-left: 50px">
-    <div class = "row">
+<nav id = "header" class = "navbar navbar-default navbar-fixed-top"
+     style = " background-color: black; z-index: 1" >
+    <div class = "row" style="margin-left: 50px; margin-top: 2px">
         <!--Title-->
-        <div class = "col-xs-4 col-md-3">
-            <a href = "#" class = "navbar-brand" style = "padding-right: 0px">News You Like </a>
+        <div class = "col-xs-5 col-md-3" >
+            <a href = "#" class = "navbar-brand"
+               style = "font-size:28px; padding-right: 0px; font-family: 'Flamenco';text-decoration: none; color: #63d297;">
+                News You Like
+            </a>
         </div>
         <!--Search Box-->
-        <div class = "col-xs-6 col-md-7" style = "padding-left: 5px; padding-right: 5px">
-            <div class = "input-group" style = "margin-top: 5px">
-                <div class = "input-group-btn search-panel">
-                    <button type = "button" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown">
-                        <span id = "search_concept">Filter by</span> <span class = "caret"></span>
+        <div class = "col-xs-5 col-md-7" style = "padding-left: 5px; padding-right: 5px; border: 0">
+            <div class = "input-group" style = "margin-top: 5px; border: 0">
+                <div class = "input-group-btn search-panel" style="border: 0">
+                    <button style ="background-color: rgba(255, 255,255,0.3); border: 0"
+                            type = "button" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown">
+                        <span id = "search_concept" >Filter by</span> <span class = "caret"></span>
                     </button>
                     <ul class = "dropdown-menu" role = "menu">
                         <li><a href = "#contains">Contains</a></li>
@@ -21,20 +26,20 @@
                     </ul>
                 </div>
                 <input type = "hidden" name = "search_param" value = "all" id = "search_param">
-                <input type = "text" class = "form-control" name = "x" placeholder = "Search term...">
-                <span class = "input-group-btn">
-                    <a class = "btn btn-default"><span class = "glyphicon glyphicon-search"></span></a>
+                <input type = "text" style="border: 0" class = "form-control" name = "x" placeholder = "Search term...">
+                <span class = "input-group-btn" style="border: 0">
+                    <a class = "btn btn-default" style ="border: 0;background-color: rgba(255, 255,255,0.3);"><span class = "glyphicon glyphicon-search"></span></a>
                 </span>
             </div>
         </div>
         <div class = "col-xs-2">
             <!--Tips - $root is used to access $rootScope variables-->
             <div ng-if = "$root.user.username">
-                <a href = "#/profile"><span class = "fa fa-cog">{{ $root.user.username }}</span></a>
+                <a class="pull-right" style = "padding-top: 10px; padding-right: 10px; font-family: 'Flamenco';text-decoration: none; color: #63d297;" href = "#/profile"><span class = "fa fa-cog">{{ $root.user.username }}</span></a>
             </div>
             <div ng-if = "!$root.user.username">
                 <!--Tips:- Since myModal is present in other include, if you don't do this (views/...#myModal)it first goes to index.html (homepage) and then trys to search-->
-                <a class = "btn btn-primary" data-toggle = "modal"
+                <a class="pull-right"  style = "padding-top: 10px; padding-right: 18px; font-family: 'Flamenco';text-decoration: none; color: #63d297;" data-toggle = "modal"
                    href = "/views/login.include.view.html#myModal">Login</a>
             </div>
         </div>

@@ -87,8 +87,8 @@
                             </div>
                         </div>
                     </div>
-                    {{ model.user }}
-                    <a class = "btn btn-success btn-block" ng-click = "model.login(model.user);"><span
+                    <!--{{ model.user }}-->
+                    <a class = "btn btn-success btn-block" ng-click = "model.login(model.user)"><span
                             class = "glyphicon glyphicon-off"></span> Login</a>
                     <a class = "btn btn-success btn-block" data-target = "#collapseExample"
                        style = "text-decoration: none;" ng-click = "model.createUser(model.user);">
@@ -97,7 +97,7 @@
                         Sign Up
                     </a>
                     <a href = "/auth/facebook" class = "btn btn-primary btn-block" style = "text-decoration: none;">
-                        <span class = "fa fa-facebook">
+                        <span class = "fa fa-facebook" readonly>
                         </span>
                         Facebook
                     </a>
@@ -105,3 +105,4 @@
             </div>
         </div>
     </div>
+</div>

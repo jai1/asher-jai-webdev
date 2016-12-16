@@ -26,6 +26,7 @@
         var SENSEX = "NASDAQ";
 
         var isHamburgerMenuClosed = false;
+
         return apis;
 
         function getPopularStoryTypes() {

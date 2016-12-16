@@ -99,6 +99,10 @@
                             if (vm.likedArticlesTitle.indexOf(articles[i].headline.main) != -1) {
                                 articles[i].like = true;
                             }
+                            var difference = 120 - articles[i].snippet.length;
+                            if (difference > 0) {
+                                articles[i].snippet = articles[i].snippet + articles[i].snippet;
+                            }
                             cachedArticles.push(articles[i]);
                         }
                         populateArticles();

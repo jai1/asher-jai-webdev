@@ -2,44 +2,47 @@
     <!--Sidebar-->
     <div ng-include = "'views/sidebar.include.client.html'"></div>
     <!-- Page Content -->
-    <div id = "page-content-wrapper">
+    <div id = "page-content-wrapper" style="background-color: black" >
         <!--Top Bar-->
         <div ng-include = "'views/header.include.client.html'"></div>
         <!--Tips: $scope's replacement is model - see model.hambuergerClick()-->
+        <div style="z-index: 1000"></div>
         <button type = "button" class = "hamburger is-closed animated fadeInLeft" data-toggle = "offcanvas"
                 ng-click = "model.hamburgerClick()">
             <span class = "hamb-top"></span>
             <span class = "hamb-middle"></span>
             <span class = "hamb-bottom"></span>
         </button>
+        </div>
         <!--Tips - For login and sign up-->
         <div ng-include = "'views/login.include.client.html'"></div>
         <!--Tips- Difference between pages - Start-->
-        <div>
+        <div id="jai">
             <!--TODO - add border shade-->
             <div infinite-scroll = "model.getMoreArticles()" infinite-scroll-distance = "2">
                 <ul ng-repeat = "article in model.articles" style = "list-style: none;">
                     <li>
-                        <div class = "card" style = "background-color: white; margin-right: 15px;">
+                        <div class = "card" style = "background-color: white; float: left; margin: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                             <div class = "row">
-                                <div class = " col-sm-4 col-md-3">
-                                    <img style = "width: 100%;display: block;"
+                                <div class = " col-sm-3 col-md-3" >
+                                    <img style = "width: 100%; width: 250px; height: 180px ;display: block; float: left"
                                          src = "{{article.multimedia[1].url? model.IMAGE_PRE + article.multimedia[1].url : model.empty}}"
                                          alt = "Card image cap">
                                 </div>
-                                <div class = " col-sm-8 col-md-9">
+                                <div class = " col-sm-9 col-md-9">
                                     <h6>
                                         <a href = "{{ article.web_url }}" style = "color: black;">
                                             {{ article.headline.main}}
                                         </a>
                                     </h6>
-                                    <p style = "color: black;line-height: 95%;"> {{ article.snippet }}</p>
                                     <div>
-                                        <div class = "pull-left">
-                                            <!--{{ article.pub_date }} {{ model.likedArticlesTitle }} {{article.multimedia}}-->
-                                             <!--{{article._id}}-->
-                                        </div>
-                                            <a class="btn btn-circle-sm btn-primary"
+                                        <p style = "color: black;">
+                                            {{ article.snippet }}.
+                                            <br/>
+                                            <small class="pull-left">Click <a style="color: blue;">Here</a> for the Full Article
+                                            </small>
+                                        </p>
+                                            <a class="btn btn-circle-sm btn-primary pull-right"
                                                ng-show = "article.like"
                                                ng-click="article.like = false; model.update(article)" >
                                                 <span class="glyphicon glyphicon-thumbs-up" style="color: black"></span>
@@ -50,12 +53,6 @@
                                                ng-click="article.like = true; model.update(article)" >
                                                 <span class="glyphicon glyphicon-thumbs-up" style="color: black"></span>
                                             </a>
-                                        <div class = "pull-right">
-                                            <ng-rating ng-model = "model.rate"
-                                                       editable = "false"
-                                                       show-grade = "true">
-                                            </ng-rating>
-                                        </div>
                                     </a>
                                 </div>
                             </div>
