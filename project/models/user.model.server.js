@@ -12,7 +12,8 @@ module.exports = function () {
         setModel: setModel,
         findUserByUsername: findUserByUsername,
         findUserById: findUserById,
-        createUser: createUser
+        createUser: createUser,
+        updateUser: updateUser
     };
 
     function findUserById(i_userId) {
@@ -35,6 +36,15 @@ module.exports = function () {
         console.log("Reached Create User");
         return UserModel.create(user);
     }
+
+    function updateUser(user) {
+        console.log("User id is ");
+        userId = user._id;
+        console.log(userId);
+        delete user._id;
+        return UserModel.update({_id: userId}, {$set: user});
+    }
+
 
     return api;
 };

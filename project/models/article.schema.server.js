@@ -10,7 +10,8 @@ module.exports = function () {
         byLine: String,
         imgUrl: String,
         // Username
-        likedBy: [String]
+        likedBy: [String],
+        publishDate: {type: Date, default: Date.now()}
     });
     return ArticleSchema;
 };

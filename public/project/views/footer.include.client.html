@@ -1,0 +1,30 @@
+<nav class = "navbar navbar-default navbar-fixed-bottom" style = "max-height: 50px; min-height: 50px; ">
+    <div class = "container-fluid">
+        <!--Tips:- Google Developers Tool has bug, resize actual chrome browser to test this-->
+        <div class = "row">
+            <div class = "col-sm-2 hidden-xs hideOverflow">
+            </div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">
+                <div style = "font-family: 'Orbitron', sans-serif;">
+                    <div>
+                        <!--TODO: Change this format - make it presentable-->
+                        <label style = "color: black;">{{ model.clock.time | date:'medium'}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">
+                <span class = "glyphicon glyphicon-map-marker pull-left" aria-hidden = "true">{{ model.weather.city
+                    }}</span>
+            </div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">
+                <img src = "{{ model.weather.image }}" alt = "{{model.weather.city}}'s Weather"/>
+                Actual - {{model.weather.degreesFahrenheit}}&#8457;;
+                Feels Like - {{model.weather.feelsLikeDegreesFahrenheit}} &#8457;
+            </div>
+            <div class = "col-sm-2 col-xs-3 hideOverflow">
+                {{ model.sensex }}
+            </div>
+            <div class = "col-sm-2 hidden-xs hideOverflow"></div>
+        </div>
+    </div>
+</nav>

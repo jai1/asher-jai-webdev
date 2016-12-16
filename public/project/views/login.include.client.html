@@ -1,42 +1,103 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog" ng-controller="UserController as model">
-    <div class="modal-dialog">
-
+<div class = "modal fade" id = "myModal" role = "dialog" ng-controller = "UserController as model">
+    <div class = "modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="padding:5px 5px;">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4><span class="glyphicon glyphicon-lock"></span> Login </h4>
+        <div class = "modal-content">
+            <div class = "modal-header" style = "padding:5px 5px;">
+                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                <h4><span class = "glyphicon glyphicon-lock"></span> Login </h4>
             </div>
-            <div class="modal-body" style="padding:20px 25px;">
-                <div class="row" ng-show="model.error">
-                    <div class="alert alert-danger alert-box" role="alert">
+            <div class = "modal-body" style = "padding:20px 25px;">
+                <div class = "row" ng-show = "model.error">
+                    <div class = "alert alert-danger alert-box" role = "alert">
                         <b>Error! </b>
                         {{model.error}}
                     </div>
                 </div>
-                <form role="form">
-                    <div class="form-group">
-                        <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                        <input type="text" class="form-control" id="usrname" placeholder="Enter your user name" ng-model="model.user.username">
+                <div class = "row" ng-show = "model.message">
+                    <div class = "alert alert-warning" role = "alert">
+                        {{model.message}}
                     </div>
-                    <!--Tips:- ng-modela and ng-bind are different.-->
-                    <div class="form-group">
-                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                        <input type="password" class="form-control" id="psw" placeholder="Enter your password" ng-model="model.user.password">
+                </div>
+                <form role = "form">
+                    <div class = "collapse" id = "collapse1">
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <span class = "input-group-addon" title = "First Name">
+                                    <i class = "glyphicon glyphicon-option-horizontal" style = "color: black"></i>
+                                </span>
+                                <input type = "text" class = "form-control" placeholder = "First Name"
+                                       ng-model = "model.user.firstName" autofocus title = "First Name">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <span class = "input-group-addon" title = "Last Name">
+                                    <i class = "glyphicon glyphicon-option-horizontal" style = "color: black"></i>
+                                </span>
+                                <input type = "text" class = "form-control" placeholder = "Last Name"
+                                       ng-model = "model.user.lastName" title = "Last Name">
+                            </div>
+                        </div>
                     </div>
-                    <div class="checkbox-inline">
-                        <label><input type="checkbox" value="">Remember me</label>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon" title = "UserName">
+                                <i class = "glyphicon glyphicon-user" style = "color: black"></i>
+                            </span>
+                            <input type = "text" class = "form-control" placeholder = "Username"
+                                   ng-model = "model.user.username" title = "UserName">
+                        </div>
                     </div>
-                    <a class="btn btn-success btn-block" ng-click="model.login(model.user)"><span class="glyphicon glyphicon-off"></span> Login</a>
-                    <a class = "btn btn-success btn-block"
-                       ng-click="model.createUser(model.user)" style="text-decoration: none;">
-                        <span class="glyphicon glyphicon-plus-sign">
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon" title = "Password">
+                                <i class = "glyphicon glyphicon-lock" style = "color: black"></i>
+                            </span>
+                            <input type = "password" class = "form-control" placeholder = "Password"
+                                   ng-model = "model.user.password" title = "Password">
+                        </div>
+                    </div>
+                    <div class = "collapse" id = "collapse2">
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <span class = "input-group-addon" title = "Verify Password">
+                                    <i class = "glyphicon glyphicon-lock" style = "color: black"></i>
+                                </span>
+                                <input type = "password" class = "form-control" placeholder = "Verify Password"
+                                       ng-model = "model.user.confirmPassword" title = "Verify Password">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <span class = "input-group-addon" title = "Email">
+                                    <i class = "glyphicon glyphicon-envelope" style = "color: black"></i>
+                                </span>
+                                <input type = "email" class = "form-control" placeholder = "Email"
+                                       ng-model = "model.user.email" title = "Email">
+                            </div>
+                        </div>
+                        <div class = "form-group">
+                            <div class = "input-group">
+                                <span class = "input-group-addon" title = "Phone">
+                                    <i class = "glyphicon glyphicon-phone-alt" style = "color: black"></i>
+                                </span>
+                                <input type = "phone" class = "form-control" placeholder = "Phone"
+                                       ng-model = "model.user.phone" title = "Phone">
+                            </div>
+                        </div>
+                    </div>
+                    {{ model.user }}
+                    <a class = "btn btn-success btn-block" ng-click = "model.login(model.user);"><span
+                            class = "glyphicon glyphicon-off"></span> Login</a>
+                    <a class = "btn btn-success btn-block" data-target = "#collapseExample"
+                       style = "text-decoration: none;" ng-click = "model.createUser(model.user);">
+                        <span class = "glyphicon glyphicon-plus-sign">
                         </span>
                         Sign Up
                     </a>
-                    <a href="/auth/facebook" class="btn btn-primary btn-block" style="text-decoration: none;">
-                        <span class="fa fa-facebook">
+                    <a href = "/auth/facebook" class = "btn btn-primary btn-block" style = "text-decoration: none;">
+                        <span class = "fa fa-facebook">
                         </span>
                         Facebook
                     </a>

@@ -9,13 +9,32 @@ module.exports = function () {
     var ArticleModel = mongoose.model("ArticleModel", ArticleSchema);
 
     var api = {
-        setModel : setModel
+        setModel: setModel,
+        findArticlesForUser: findArticlesForUser,
+        findArticleByTitle: findArticleByTitle,
+        updateArticle: updateArticle,
+        createArticle: createArticle
     };
 
+    return api;
+    function findArticlesForUser(username) {
+        return ArticleModel.find({likedBy: username});
+    }
+    function findArticleByTitle(title) {
+        return ArticleModel.findOne({title: title});
+    }
+    function updateArticle(article) {
+        return ArticleModel.update({title: article.title}, {$set: article});
+    }
+    function createArticle(article) {
+        console.log("Creating new article");
+        console.log(article);
+        return ArticleModel.create(article);
+    }
 
     function setModel(_model) {
         model = _model;
     }
 
-    return api;
+
 };

@@ -10,7 +10,10 @@
         var apis = {
             login: login,
             createUser: createUser,
-            setCurrentUser: setCurrentUser
+            setCurrentUser: setCurrentUser,
+            updateUser: updateUser,
+            getCurrentUser: getCurrentUser,
+            logout: logout
         };
         return apis;
 
@@ -24,6 +27,19 @@
 
         function setCurrentUser(user) {
             $rootScope.user = user;
+        }
+
+        function updateUser(user) {
+            return $http.put("/api/user", user);
+        }
+
+        function getCurrentUser() {
+            return $http.get("/api/loggedin");
+        }
+
+
+        function logout() {
+            return $http.get("/api/logout");
         }
     }
 })();

@@ -1,7 +1,7 @@
 /**
  * Created by jai1 on 12/10/2016.
  */
-module.exports = function (app) {
+module.exports = function (app, model) {
     var request = require('request');
 
     var API_WUNDERGROUND_CURRENT_KEY = "";
@@ -11,13 +11,89 @@ module.exports = function (app) {
 
     var API_NY_TIMES_KEY = "f079aa2561f6444f8914ab709171fd1a";
 
-    app.get("/api/getTopStories/:type", getTopStories);
-    app.get("/api/getWeatherDetails", getWeatherDetails);
-    app.get("/api/getMovieReviews/:type", getMovieReviews);
-    app.get("/api/getPopularStories/:type", getPopularStories);
-    app.get("/api/getMoreArticles/:year/:month", getMoreArticles);
+    app.get("/api/topStories/:type", getTopStories);
+    app.get("/api/weatherDetails", getWeatherDetails);
+    app.get("/api/movieReviews/:type", getMovieReviews);
+    app.get("/api/popularStories/:type", getPopularStories);
+    app.get("/api/articles/:year/:month", getMoreArticles);
+    app.put("/api/articles/", updateArticles);
+    app.get("/api/likedArticles/:username", getLikedArticles);
 
+    function getLikedArticles(req, res) {
+        console.log("Get liked articles called");
+        model
+            .articleModel
+            .findArticlesForUser(req.params.username)
+            .then(function(likedArticles) {
+                console.log("Articles for user " + req.params.username);
+                console.log(likedArticles);
+                res.send(likedArticles);
+            }, function (error) {res.sendStatus(400);});
+    }
 
+    function updateArticles(req, res) {
+        var i_article = req.body;
+        console.log("Home page Service - updateArticle called");
+        console.log(i_article);
+        model
+            .articleModel
+            .findArticleByTitle(i_article.headline.main)
+            .then(
+                function (article) {
+                    console.log("findArticleByTitle returned");
+                    console.log(article);
+                    if (article) {
+                        console.log("Article found - updating it");
+                        var indexOfUser = article.likedBy.indexOf(i_article.username);
+                        if (i_article.like) {
+                            if (indexOfUser == -1) {
+                                article.likedBy.push(i_article.username);
+                            }
+                        } else {
+                            if (indexOfUser != -1) {
+                                article.likedBy.splice(indexOfUser, 1);
+                            }
+                        }
+                        model.articleModel
+                            .updateArticle(article).then(function(article) {
+                                console.log("Updated Article");
+                                console.log(article);
+                                res.send(200);
+                            }, function(error) {res.sendStatus(400)});
+                    } else {
+                        if (i_article.like) {
+
+                            var article = {
+                                title: i_article.headline.main,
+                                abstract: i_article.snippet,
+                                // Username
+                                likedBy: [i_article.username],
+                                publishDate: i_article.pub_date};
+
+                            if (i_article.multimedia.length >= 2) {
+                                article.imgUrl = i_article.multimedia[1].url;
+                            }
+
+                            console.log("Article to be created is ");
+                            console.log(article);
+                            model.articleModel
+                                .createArticle(article).then(function(article) {
+                                    console.log("Created Article");
+                                    console.log(article);
+                                    res.send(200);
+                                }, function(error) {
+                                    console.log("Error occured");
+                                    console.log(error);
+                                    res.sendStatus(400)
+                                });
+                        }
+                    }
+                },
+                function (error) {
+                    res.sendStatus(400);
+                }
+        );
+    }
     function getPopularStories(req, res) {
         var type = req.params.type;
         console.log("getPopularStories called with type = ", type);
@@ -37,7 +113,7 @@ module.exports = function (app) {
             }
             // console.log(body);
             // console.log(body.results[0]);
-            console.dir(body.results,  { depth: null });
+            console.dir(body.results, {depth: null});
             res.send(body.results);
         });
     }
@@ -125,7 +201,7 @@ module.exports = function (app) {
         // TODO - refactor this
         var month = req.params.month;
         var year = req.params.year;
-        console.log("HomepageService.getMoreArticles called with month="+month+", year="+year);
+        console.log("HomepageService.getMoreArticles called with month=" + month + ", year=" + year);
         request.get({
             url: "https://api.nytimes.com/svc/archive/v1/" + year + "/" + month + ".json",
             qs: {

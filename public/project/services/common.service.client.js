@@ -6,7 +6,7 @@
         .module("NewsYouLike")
         .factory("CommonService", Service);
 
-    function Service($http) {
+    function Service($http, $route) {
         data = {weather: {}, sensex: {}, time: "", topStoryTypes: [], popularStoryTypes: [], movieTypes: []};
         var apis = {
             getWeatherDetails: getWeatherDetails,
@@ -19,7 +19,7 @@
             hamburgerClick: hamburgerClick
         };
         // TODO - store in DB
-        var stocks = ["FOXA ","AAPL","MSFT","SIRI","MU","CSCO","QQQ","FTR","SGYP","FB","HBAN","INTC","ZNGA","GRPN","TLT","EBAY","FOX","ODP","FNSR","ON","NVDA","AAPL","QQQ","FB","AMZN","BIIB","TLT","MSFT","GOOGL","GOOG","AVGO","FOXA","WYNN","NVDA","GILD","AMGN","CSCO","AMD","CMCSA","IBB","INTC"];
+        var stocks = ["FOXA ", "AAPL", "MSFT", "SIRI", "MU", "CSCO", "QQQ", "FTR", "SGYP", "FB", "HBAN", "INTC", "ZNGA", "GRPN", "TLT", "EBAY", "FOX", "ODP", "FNSR", "ON", "NVDA", "AAPL", "QQQ", "FB", "AMZN", "BIIB", "TLT", "MSFT", "GOOGL", "GOOG", "AVGO", "FOXA", "WYNN", "NVDA", "GILD", "AMGN", "CSCO", "AMD", "CMCSA", "IBB", "INTC"];
         var stocksString = stocks.join(",");
         var stockQuotesArray = [];
         var currentStockIndex = 0;
@@ -31,8 +31,8 @@
         function getPopularStoryTypes() {
             // TODO - Throw this list in DB
             return [{displayName: "Most Viewed", type: "mostviewed"},
-                    {displayName: "Most Emailed", type: "mostemailed"},
-                    {displayName: "Most Shared", type: "mostshared"}];
+                {displayName: "Most Emailed", type: "mostemailed"},
+                {displayName: "Most Shared", type: "mostshared"}];
         }
 
         function getTopStoryTypes() {
@@ -64,14 +64,16 @@
                 {displayName: "Obituaries", type: "obituaries"},
                 {displayName: "Insider", type: "insider"}];
         }
+
         function getMovieTypes() {
             // TODO - Throw this list in DB
-            return [{displayName: "Currently Showing", type: "picks"}, {displayName: "All Movies", type: "all"}];;
+            return [{displayName: "Currently Showing", type: "picks"}, {displayName: "All Movies", type: "all"}];
+            ;
         }
 
         function getWeatherDetails() {
             console.log("reached HomePageService.getWeatherDetails Services");
-            return $http.get("/api/getWeatherDetails");
+            return $http.get("/api/weatherDetails");
         }
 
         function getCurrentTime() {
@@ -82,7 +84,7 @@
             if (currentStockIndex == 0) {
                 $http({
                     method: 'GET',
-                    url: 'http://finance.google.com/finance/info?client=ig&q='+ SENSEX + ':' + stocksString
+                    url: 'http://finance.google.com/finance/info?client=ig&q=' + SENSEX + ':' + stocksString
                 }).then(function successCallback(response) {
                     // TODO - error handling
                     // TODO - Clean data cleaning part
@@ -116,7 +118,7 @@
 
         // Tips: hamburger won't work need to have it as this.hamburger
         // Tips: JQuery code can't run directly with angular, it needs to be embedded in angular vm.hambuergerClick() in Controller
-       function hamburgerClick() {
+        function hamburgerClick() {
             var trigger = $('.hamburger');
             var overlay = $('.overlay');
             if (isHamburgerMenuClosed == true) {
@@ -131,6 +133,6 @@
                 isHamburgerMenuClosed = true;
             }
             $('#wrapper').toggleClass('toggled');
-       }
+        }
     }
 })();

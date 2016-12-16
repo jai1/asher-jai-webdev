@@ -14,7 +14,7 @@
         // Default Ratings - to be removed
         vm.rate = 2;
         // Used to show empty image if image not present
-        vm.empty= CommonService.getEmptyImageURL();
+        vm.empty = CommonService.getEmptyImageURL();
 
         // Tips:- one Function Assigned to another
         vm.hamburgerClick = CommonService.hamburgerClick;
@@ -37,7 +37,7 @@
             });
 
         vm.sensex = {intervalInMs: 4000, stock: {exchange: "", name: "", latestPrice: 0, change: 0}};
-        $interval(function() {
+        $interval(function () {
             vm.sensex.stock = CommonService.getStockDetails();
         }, vm.sensex.intervalInMs);
         vm.popularStoryTypes = CommonService.getPopularStoryTypes();
@@ -47,13 +47,13 @@
 
 
         vm.userId = $routeParams.uid;
-        if (! vm.userId) {
+        if (!vm.userId) {
             vm.userId = "";
         }
 
         type = $routeParams.type;
-        if (! type) {
-            type=vm.popularStoryTypes[0].type;
+        if (!type) {
+            type = vm.popularStoryTypes[0].type;
         }
 
         getPopularStories(type);

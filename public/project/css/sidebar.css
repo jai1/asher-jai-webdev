@@ -119,6 +119,13 @@ html {
     background-color: #1a1a1a;
 }
 
+#sidebar-image {
+    max-height: 100px;
+    background-color: #1a1a1a;
+    margin: auto;
+    width: 100%;
+}
+
 .sidebar-nav li:nth-child(N):before {
     background-color: #402d5c;
 }

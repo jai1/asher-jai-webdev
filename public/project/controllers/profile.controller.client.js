@@ -1,17 +1,14 @@
-/**
- * Created by jai1 on 12/9/2016.
- */
 (function () {
     angular
         .module("NewsYouLike")
-        .controller("TopPageController", Controller);
+        .controller("ProfilePageController", Controller);
 
-    function Controller($interval, $routeParams, HomePageService, CommonService) {
+    function Controller($interval, $routeParams, $rootScope, UserService, CommonService) {
 
         /** Common For All Controllers - Start **/
         var vm = this;
 
-        // Default Ratings - to be removed
+        // TODO - remove this default rating
         vm.rate = 2;
         // Used to show empty image if image not present
         vm.empty = CommonService.getEmptyImageURL();
@@ -40,36 +37,32 @@
         $interval(function () {
             vm.sensex.stock = CommonService.getStockDetails();
         }, vm.sensex.intervalInMs);
-
         vm.popularStoryTypes = CommonService.getPopularStoryTypes();
         vm.topStoryTypes = CommonService.getTopStoryTypes();
         vm.movieTypes = CommonService.getMovieTypes();
         /** Common For All Controllers - End **/
 
-        vm.userId = $routeParams.uid;
-        if (!vm.userId) {
-            vm.userId = "";
-        }
-
-        type = $routeParams.type;
-        if (!type) {
-            type = vm.topStoryTypes[0].type;
-        }
-
-        getTopStories(type);
-        return;
-
-        function getTopStories(type) {
-            console.log("Top Story Type = " + type);
-            HomePageService
-                .getTopStories(type)
-                .success(function (topStories) {
-                    vm.topStories = topStories;
-                })
-                .error(function (err) {
-
-                });
+        delete $rootScope.user;
+        vm.logout = function () {
+            delete $rootScope.user;
+            UserService.logout();
         };
+
+
+        vm.update = function () {
+            user = $rootScope.user;
+            UserService
+                .updateUser(user)
+                .then(function (response) {
+                    if (response.data) {
+                        $rootScope.user = response.data;
+                        alert("Profile updated successfully!");
+                    }
+                    else {
+                        alert("Error updating user information!")
+                    }
+                });
+        }
     }
 })();
 /* Tips: (function() {})(); without the last () the function is not called hence iffy is useless */

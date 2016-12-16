@@ -33,20 +33,39 @@ module.exports = function (app, model) {
 
     app.post("/api/login", passport.authenticate('local'), login);
     app.post("/api/user", createUser);
+    app.put("/api/user/", updateUser);
+    app.get("/api/loggedin", loggedin);
+    app.get("/api/logout", logout);
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : null);
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
 
     function localStrategy(username, password, done) {
+        console.log("localStrategy called");
+        console.log(username);
+        console.log(password);
         model
             .userModel
             .findUserByUsername(username)
             .then(
-                function(user) {
-                    if(user && bcrypt.compareSync(password, user.password)) {
+                function (user) {
+                    console.log("findUserByUsername returned");
+                    console.log(user);
+                    if (user && password == user.password) {
+                        console.log("Password same");
                         return done(null, user);
                     } else {
+                        console.log("Password not same");
                         return done(null, false);
                     }
                 },
-                function(error) {
+                function (error) {
                     return done(error);
                 }
             );
@@ -62,27 +81,33 @@ module.exports = function (app, model) {
             .userModel
             .findUserById(user._id)
             .then(
-                function(user) {
+                function (user) {
                     done(null, user);
                 },
-                function(error) {
+                function (error) {
                     done(error);
                 }
             )
     }
 
     function login(req, res) {
+        console.log("Login called");
+        console.log(req.user);
         var user = req.user;
         res.json(user);
     }
 
     function createUser(req, res) {
         var reqUser = req.body;
+        console.log("create user input is ");
+        console.log(reqUser);
         model
             .userModel
             .createUser(reqUser)
             .then(
                 function (user) {
+                    console.log("Created user");
+                    console.log(user);
                     if (user) {
                         req.login(user, function (err) {
                             if (err) {
@@ -95,6 +120,38 @@ module.exports = function (app, model) {
                     }
                 },
                 function (err) {
+                    console.log("Error Occured");
+                    console.log(err);
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateUser(req, res) {
+        var reqUser = req.body;
+        model
+            .userModel
+            .updateUser(reqUser)
+            .then(
+                function (user) {
+                    return model.userModel.findUserByUsername(reqUser.username);
+                },
+                function (err) {
+                    console.log("Update failed");
+                    console.log(err);
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (user) {
+                    if (user) {
+                        req.session.currentUser = user;
+                    }
+                    res.json(user);
+                },
+                function (err) {
+                    console.log("findUserByUsername failed");
+                    console.log(err);
                     res.status(400).send(err);
                 }
             );

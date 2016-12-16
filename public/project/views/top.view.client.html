@@ -91,7 +91,14 @@
                     </div>
                 </div>
                 <div class = "col-xs-2">
-                    <p>Login</p>
+                    <!--Tips - $root is used to access $rootScope variables-->
+                    <div ng-if = "$root.user">
+                        <a href = "#/profile"><span class = "fa fa-cog">{{ $root.user.username }}</span></a>
+                    </div>
+                    <div ng-if = "!$root.user">
+                        <a class = "btn btn-primary" data-toggle = "modal"
+                           href = "/views/login.include.view.html#myModal">Login</a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -102,7 +109,8 @@
             <span class = "hamb-middle"></span>
             <span class = "hamb-bottom"></span>
         </button>
-
+        <!--Tips - For login and sign up-->
+        <div ng-include = "'views/login.include.client.html'"></div>
         <!--Tips- Difference between pages - Start-->
         <div>
             <!--TODO - add border shade-->
@@ -121,10 +129,10 @@
                                 </h6>
                                 <p style = "color: black;"> {{ story.abstract }}</p>
                                 <div>
-                                    <div class="pull-left">
+                                    <div class = "pull-left">
                                         {{ story.published_date }} {{story.byline}} {{story.id}}
                                     </div>
-                                    <div class="pull-right">
+                                    <div class = "pull-right">
                                         <ng-rating ng-model = "model.rate"
                                                    editable = "false"
                                                    show-grade = "true">
@@ -138,11 +146,8 @@
             </ul>
         </div>
         <!--Tips- Difference between pages - End-->
-
-
     </div>
 </div>
-
 <!--Footer-->
 <nav class = "navbar navbar-default navbar-fixed-bottom" style = "max-height: 50px; min-height: 50px; ">
     <div class = "container-fluid">

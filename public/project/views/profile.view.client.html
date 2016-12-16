@@ -1,0 +1,141 @@
+<div id = "wrapper" style = "z-index: 1000;">
+    <!--Sidebar-->
+    <div ng-include = "'views/profile.sidebar.include.client.html'"></div>
+    <!-- Page Content -->
+    <div id = "page-content-wrapper">
+        <!--Top Bar-->
+        <div ng-include = "'views/profile.header.include.client.html'"></div>
+        <!--Tips: $scope's replacement is model - see model.hambuergerClick()-->
+        <button type = "button" class = "hamburger is-closed animated fadeInLeft" data-toggle = "offcanvas"
+                ng-click = "model.hamburgerClick()">
+            <span class = "hamb-top"></span>
+            <span class = "hamb-middle"></span>
+            <span class = "hamb-bottom"></span>
+        </button>
+        <!--Tips - For login and sign up-->
+        <div ng-include = "'views/login.include.client.html'"></div>
+        <!--Tips- Difference between pages - Start-->
+        {{ $root.user }}
+        <div>
+            <div class = "row text-center">
+                <div class = "col-xs-4 col-sm-6"></div>
+                <div class = "col-xs-4 col-sm-3">
+                    <a>
+                        <div class = "row">
+                            <h8>
+                                <i class = "fa fa-users"></i>
+                                Followers
+                            </h8>
+                        </div>
+                        <div class = "row">
+                            7
+                        </div>
+                    </a>
+                </div>
+                <div class = "col-xs-4 col-sm-3">
+                    <a>
+                        <div class = "row">
+                            <h8>
+                                <i class = "fa fa-users"></i>
+                                Following
+                            </h8>
+                        </div>
+                        <div class = "row">
+                            5
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <!--Tips - no need to use {{ }} in ng tags-->
+                <form ng-submit = "model.update()" style = "margin-left: 20px; margin-right: 20px">
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-user"></i>
+                            </span>
+                            <input type = "text" class = "form-control" placeholder = "Username"
+                                   name = "username" title = "Username"
+                                   value = "{{$root.user.username}}"
+                                   ng-model = "$root.user.username" readonly autofocus>
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-option-horizontal"></i>
+                            </span>
+                            <input type = "text" class = "form-control" placeholder = "First Name"
+                                   name = "firstName" title = "First Name"
+                                   value = "{{$root.user.username}}"
+                                   ng-model = "$root.user.firstName">
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-option-horizontal"></i>
+                            </span>
+                            <input type = "text" class = "form-control" placeholder = "Last Name"
+                                   name = "lastName" title = "Last Name"
+                                   value = "{{$root.user.lastName}}"
+                                   ng-model = "$root.user.lastName">
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-lock"></i>
+                            </span>
+                            <input type = "password" class = "form-control" placeholder = "Password"
+                                   name = "password" title = "Password"
+                                   value = "{{$root.user.password}}"
+                                   ng-model = "$root.user.password">
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-earphone"></i>
+                            </span>
+                            <input type = "text" class = "form-control" placeholder = "Phone Number"
+                                   name = "phone" title = "Phone Number"
+                                   value = "{{$root.user.phone}}"
+                                   ng-model = "$root.user.phone">
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-envelope"></i>
+                            </span>
+                            <input type = "email" class = "form-control" placeholder = "Email"
+                                   name = "email" title = "Email"
+                                   value = "{{$root.user.email}}"
+                                   ng-model = "$root.user.email">
+                        </div>
+                    </div>
+                    <div class = "form-group">
+                        <div class = "input-group">
+                            <span class = "input-group-addon">
+                                <i class = "glyphicon glyphicon-upload"></i>
+                            </span>
+                            <input type = "url" class = "form-control" placeholder = "Image Url"
+                                   name = "url" title = "Image Url"
+                                   value = "{{$root.user.imgUrl}}"
+                                   ng-model = "$root.user.imgUrl">
+                        </div>
+                    </div>
+                    <div class = "form-group" style = "margin-bottom: 80px">
+                        <button type = "submit"
+                                class = "btn btn-success btn-block">Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--Tips- Difference between pages - End-->
+    </div>
+</div>
+<!--Footer-->
+<div ng-include = "'views/footer.include.client.html'"></div>

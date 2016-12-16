@@ -1,0 +1,67 @@
+<div class = "overlay"></div>
+<!--TODOs:- -->
+<!--Romil - Beautification remaining-->
+<!--a. Colors on homepage-->
+<!--b. Icons for site-->
+<!--c. Shadow for Footer-->
+<!-- Sidebar -->
+<nav class = "navbar navbar-inverse navbar-fixed-top" id = "sidebar-wrapper" role = "navigation">
+    <!--TODO- Create directive to stop the drop down from closing on click-->
+    <ul class = "nav sidebar-nav">
+        <li class = "sidebar-brand">
+            <a href = "" id = "category-header">
+                CATEGORIES
+            </a>
+        </li>
+        <!--Tips - Using username since for some weird reason $root.user is always defined-->
+        <li ng-show = "$root.user.username" id = "sidebar-image">
+            <!--Tips:- ng-src requires {{}}-->
+            <img style = "height: 100px;" class = "thumbnail profile-photo" src = "/project/images/profile-image.png"
+                 alt = "" ng-show = "!$root.user.imgUrl">
+            <img style = "height: 100px;" class = "thumbnail profile-photo" ng-src = "{{ $root.user.imgUrl }}" alt = ""
+                 ng-show = "$root.user.imgUrl">
+            <a href = ""><i class = "glyphicon glyphicon-user"></i>&nbsp; {{ $root.user.username }}</as></a>
+        </li>
+        <!--Tips:- Use &nbsp for non beaking space-->
+        <!--TODO - Change Opacity Option-->
+        <li class = "dropdown">
+            <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
+            <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
+                <i class = "fa fa-newspaper-o"></i>
+                &nbsp;Popular Stories
+                <span class = "caret"></span></a>
+            <ul class = "dropdown-menu" role = "menu" ng-repeat = "popularStory in model.popularStoryTypes">
+                <li><a href = "#/popular/{{ popularStory.type }}/{{ model.userId }}"
+                       ng-click = "model.hamburgerClick()">{{ popularStory.displayName }}</a></li>
+            </ul>
+        </li>
+        <li class = "dropdown">
+            <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
+            <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
+                <i class = "fa fa-newspaper-o"></i>
+                &nbsp; Top Stories
+                <span class = "caret"></span></a>
+            <ul class = "dropdown-menu" role = "menu" ng-repeat = "topStory in model.topStoryTypes">
+                <li><a href = "#/top/{{ topStory.type }}/{{ model.userId }}" ng-click = "model.hamburgerClick()">{{
+                    topStory.displayName }}</a></li>
+            </ul>
+        </li>
+        <li class = "dropdown">
+            <!--Tips:- Could have used data-target and data-parent to put list options in other locations-->
+            <a href = "" class = "dropdown-toggle" data-toggle = "dropdown">
+                <i class = "glyphicon glyphicon-film"></i>
+                &nbsp; Movie Reviews
+                <span class = "caret"></span></a>
+            <ul class = "dropdown-menu" role = "menu" ng-repeat = "movieType in model.movieTypes">
+                <li><a href = "#/movie/{{ movieType.type }}/{{ model.userId }}" ng-click = "model.hamburgerClick()">{{
+                    movieType.displayName }}</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href = "#"><i class = "fa fa-line-chart"></i>&nbsp; Stocks</a>
+        </li>
+        <li>
+            <a href = "#"><i class = "fa fa-youtube-square"></i>&nbsp; Live Stream</a>
+        </li>
+    </ul>
+</nav>
