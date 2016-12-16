@@ -844,7 +844,7 @@
                             ,"ccol" : "chr"
                             ,"pcls_fix" : "36.79"
                         }
-                    ]
+                    ];
                     return populateSensexDetails();
                 }, function errorCallback(response) {
                     console.log("ERROR: returning previous Details");
