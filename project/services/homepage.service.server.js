@@ -6,8 +6,8 @@ module.exports = function (app, model) {
 
     var API_WUNDERGROUND_CURRENT_KEY = "";
     // TIPS: Done this since we can only call the API 10 times in a min
-    var API_WUNDERGROUND_KEY1 = "55cb0dec1d762018";
-    var API_WUNDERGROUND_KEY2 = "893c9e629f221f3c";
+    var API_WUNDERGROUND_KEY1 = "ef52dd787cce9028";
+    var API_WUNDERGROUND_KEY2 = "87974b78858b6921";
 
     var API_NY_TIMES_KEY = "f079aa2561f6444f8914ab709171fd1a";
 
@@ -167,7 +167,8 @@ module.exports = function (app, model) {
             body = JSON.parse(body);
             if (err || body.response.hasOwnProperty("error")) {
                 console.log("ERROR OCCURED");
-                return getWeatherDetails(req, res);
+                res.sendStatus(400);
+                return;
             }
             // console.log(body);
             getWeatherDetailsUsingRequestUrl(body.location.requesturl.replace("\.html", "\.json"), API_WUNDERGROUND_KEY2, res);
@@ -186,7 +187,8 @@ module.exports = function (app, model) {
             body = JSON.parse(body);
             if (err || body.response.hasOwnProperty("error")) {
                 console.log("ERROR OCCURED");
-                return getWeatherDetailsUsingRequestUrl(requesturl, API_KEY, res);
+                res.sendStatus(400);
+                return;
             }
             // console.log(body);
             var weather = {
