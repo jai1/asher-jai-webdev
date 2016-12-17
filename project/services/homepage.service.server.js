@@ -6,8 +6,8 @@ module.exports = function (app, model) {
 
     var API_WUNDERGROUND_CURRENT_KEY = "";
     // TIPS: Done this since we can only call the API 10 times in a min
-    var API_WUNDERGROUND_KEY1 = "68ece3a10941a6fa";
-    var API_WUNDERGROUND_KEY2 = "d83fd4dfe8c87e40";
+    var API_WUNDERGROUND_KEY1 = "55cb0dec1d762018";
+    var API_WUNDERGROUND_KEY2 = "893c9e629f221f3c";
 
     var API_NY_TIMES_KEY = "f079aa2561f6444f8914ab709171fd1a";
 

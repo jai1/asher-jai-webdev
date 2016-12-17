@@ -47,11 +47,6 @@
         /** Common For All Controllers - End **/
 
 
-        vm.userId = $routeParams.uid;
-        if (!vm.userId) {
-            vm.userId = "";
-        }
-
         type = $routeParams.type;
         if (!type) {
             type = vm.popularStoryTypes[0].type;

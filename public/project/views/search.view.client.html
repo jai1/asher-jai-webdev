@@ -38,13 +38,13 @@
                                         <p style = "color: black;">
                                             {{ article.snippet }}.
                                         </p>
-                                            <a class="btn btn-circle-sm btn-primary pull-right"
+                                            <a class="btn btn-circle-sm-liked btn-primary pull-right"
                                                ng-show = "article.like"
                                                ng-click="article.like = false; model.update(article)" >
                                                 <span class="glyphicon glyphicon-thumbs-up" style="color: black"></span>
                                             </a>
 
-                                            <a class="btn"
+                                            <a class="btn btn-circle-sm-unliked btn-primary"
                                                ng-show = "!article.like"
                                                ng-click="article.like = true; model.update(article)" >
                                                 <span class="glyphicon glyphicon-thumbs-up" style="color: black"></span>

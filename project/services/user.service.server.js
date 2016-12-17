@@ -36,6 +36,7 @@ module.exports = function (app, model) {
     app.put("/api/user/", updateUser);
     app.get("/api/loggedin", loggedin);
     app.get("/api/logout", logout);
+    app.get("/api/user/:username", getUserByUsername);
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : null);
@@ -46,6 +47,28 @@ module.exports = function (app, model) {
         res.send(200);
     }
 
+    function getUserByUsername(req, res) {
+        var username = req.params.username;
+        console.log("getUserByUsername called");
+        console.log(username);
+        model
+            .userModel
+            .findUserByUsername(username)
+            .then(
+                function (user) {
+                    console.log("findUserByUsername returned");
+                    console.log(user);
+                    if (user) {
+                        res.send(user);
+                    } else {
+                        res.send(400);
+                    }
+                },
+                function (error) {
+                    res.status(400).send(err);
+                }
+            );
+    }
     function localStrategy(username, password, done) {
         console.log("localStrategy called");
         console.log(username);

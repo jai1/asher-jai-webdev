@@ -5,12 +5,20 @@
 
     function Controller($interval, $location, $routeParams, $rootScope, UserService, CommonService) {
 
-        console.log("WTF");
+        console.log($location.path() );
         console.log($rootScope.user);
 
-        if (!$rootScope.user || !$rootScope.user.username) {
-            $location.path("#/homepage");
+        profileUsername = "";
+        if ($location.path() == "/user/view/"+ $routeParams.profileUsername) {
+            profileUsername = $routeParams.profileUsername
+        } else {
+            if (!$rootScope.user || !$rootScope.user.username) {
+                $location.path("#/homepage");
+            }
+            profileUsername = $rootScope.user.username;
         }
+
+
 
         /** Common For All Controllers - Start **/
         var vm = this;
@@ -25,6 +33,12 @@
 
         // Time controller
         vm.clock = {time: "", intervalInMs: 1000};
+
+        vm.profileUser = {};
+        vm.userEmpty = "http://www.praxisemr.com/images/testimonials_images/dr_profile.jpg";
+
+
+
 
         $interval(function () {
                 vm.clock.time = CommonService.getCurrentTime();
@@ -51,9 +65,12 @@
 
         /** Common For All Controllers - End **/
 
+
+        vm.followStatus = "Follow";
+
         vm.logout = function () {
-            delete $rootScope.user;
             UserService.logout();
+            delete $rootScope.user;
         };
 
 
@@ -74,22 +91,55 @@
 
         vm.likedArticles = [];
 
+        UserService
+            .getUserByUsername(profileUsername)
+            .success(function(user) {
+                console.log("User is");
+                console.log(user);
+                if (user) {
+                    vm.profileUser = user;
+                } else {
+                    $location.path("#/homepage");
+                }
+            })
+            .error(function (error) {
+                $location.path("#/homepage");
+            });
+
         // Tips when the controller loads the $rootScope.user is empty hence need to call this function later
         $rootScope.populateLikedArticles = function () {
-            if ($rootScope.user) {
-                console.log("Calling Get liked articles");
+            console.log("Calling Get liked articles");
                 CommonService
-                    .getlikedArticles($rootScope.user.username)
+                    .getlikedArticles(profileUsername)
                     .success(function (likedArticles) {
                         vm.likedArticles = likedArticles;
                     })
                     .error(function (error) {
                         vm.likedArticles = [];
                     });
+            if ($rootScope.user && $rootScope.user.username != profileUsername) {
+                if ($rootScope.user.following.indexOf(profileUsername) != -1) {
+                    vm.followStatus = "Following";
+                }
             }
         };
         $rootScope.populateLikedArticles();
 
+        if ($rootScope.user && $rootScope.user.username != profileUsername) {
+            if ($rootScope.user.following.indexOf(profileUsername) != -1) {
+                vm.followStatus = "Following";
+            }
+        }
+
+        vm.followUser = function() {
+            if (vm.followStatus != "Following") {
+                vm.profileUser.followers.push($rootScope.user.username);
+                $rootScope.user.following.push(profileUsername);
+                UserService.updateUser(vm.profileUser);
+                UserService.updateUser($rootScope.user);
+            }
+            vm.followStatus = "Following"
+        };
     }
 })();
 /* Tips: (function() {})(); without the last () the function is not called hence iffy is useless */

@@ -57,6 +57,22 @@
                     getLoggedIn: getLoggedIn
                 }
             })
+            .when("/profile/view/:profileUsername", {
+                templateUrl: "views/profile.user.view.client.html",
+                controller: "ProfilePageController",
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
+            })
+            .when("/user/view/:profileUsername", {
+                templateUrl: "views/user.view.client.html",
+                controller: "ProfilePageController",
+                controllerAs: "model",
+                resolve: {
+                    setUser: setUser
+                }
+        })
             .otherwise({
                 redirectTo: "/homepage"
             });
@@ -75,5 +91,17 @@
                 deferred.resolve();
             });
         return deferred.promise;
+    }
+
+    function setUser(UserService) {
+        console.log("getLoggedIn called");
+        UserService
+            .getCurrentUser()
+            .then(function (response) {
+                console.log("setUser response is");
+                console.log(response);
+                var user = response.data;
+                UserService.setCurrentUser(user);
+            });
     }
 })();

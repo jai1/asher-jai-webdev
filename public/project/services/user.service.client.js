@@ -13,7 +13,8 @@
             setCurrentUser: setCurrentUser,
             updateUser: updateUser,
             getCurrentUser: getCurrentUser,
-            logout: logout
+            logout: logout,
+            getUserByUsername: getUserByUsername
         };
         return apis;
 
@@ -37,6 +38,9 @@
             return $http.get("/api/loggedin");
         }
 
+        function getUserByUsername(username) {
+            return $http.get("/api/user/"+ username);
+        }
 
         function logout() {
             return $http.get("/api/logout");

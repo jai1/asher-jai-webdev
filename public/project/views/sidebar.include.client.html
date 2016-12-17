@@ -20,7 +20,7 @@
                  alt = "" ng-show = "!$root.user.imgUrl">
             <img style = "height: 100px;" class = "thumbnail profile-photo" ng-src = "{{ $root.user.imgUrl }}" alt = ""
                  ng-show = "$root.user.imgUrl">
-            <a href = ""><i class = "glyphicon glyphicon-user"></i>&nbsp; {{ $root.user.username }}</as></a>
+            <a href = "#/user/view/{{ $root.user.username }}"><i class = "glyphicon glyphicon-user"></i>&nbsp; {{ $root.user.username }}</as></a>
         </li>
         <!--Tips:- Use &nbsp for non beaking space-->
         <!--TODO - Change Opacity Option-->
@@ -67,7 +67,7 @@
         <!--</li>-->
 
         <li>
-            <a href = "#/homepage"><i class = "fa fa-newspaper-o"></i>&nbsp; All Articles </a>
+            <a href = "#/homepage"><i class = "fa fa-newspaper-o"></i>&nbsp; Articles </a>
         </li>
     </ul>
 </nav>

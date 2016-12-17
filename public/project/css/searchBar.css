@@ -6,3 +6,11 @@
 #searchList li:hover a {
     color: #63d297;
 }
+
+#followDiv a {
+    color: #63d297;
+}
+
+#followDiv a:hover {
+    color: darkblue;
+}
