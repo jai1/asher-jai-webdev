@@ -61,7 +61,7 @@
             delete $rootScope.user;
         };
 
-        
+
         UserService
             .getAllUsers()
             .success(function(users) {
