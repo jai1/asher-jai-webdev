@@ -47,15 +47,12 @@
                 <!--</div>-->
             <!--</div>-->
             <ul style = "list-style: none;">
-                <li>
+                <li class="row centered-form center-block">
                     <div class = "card" style = "background-color: white; float: left; margin: 15px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                        <div class = "row">
-                            <div class = " col-md-3" >
                                 <img style = "width: 100%; width: 250px; height: 180px ;display: block; float: left"
                                      ng-src = "{{model.profileUser.imgUrl ? model.profileUser.imgUrl : model.userEmpty}}"
                                      alt = "Card image cap">
-                            </div>
-                            <div class = " col-md-9" style="margin-left: 10px">
+<br/>
                                 <b>First Name</b> - {{ model.profileUser.firstName }}
                                 <br/>
                                 <b>Last Name</b> - {{ model.profileUser.lastName }}
@@ -65,8 +62,7 @@
                                 <div id="followDiv" ng-show="$root.user.username && model.profileUser.username != $root.user.username">
                                     <a ng-click="model.followUser()">{{ model.followStatus }}</a>
                                 </div>
-                            </div>
-                        </div>
+
                     </div>
                 </li>
             </ul>

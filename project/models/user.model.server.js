@@ -13,8 +13,14 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         findUserById: findUserById,
         createUser: createUser,
-        updateUser: updateUser
+        updateUser: updateUser,
+        findAllUsers: findAllUsers
     };
+
+    function findAllUsers() {
+        return UserModel
+            .find({});
+    }
 
     function findUserById(i_userId) {
         return UserModel

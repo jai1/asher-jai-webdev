@@ -13,7 +13,7 @@
                 controller: "HomePageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
 
             })
@@ -22,7 +22,7 @@
                 controller: "PopularPageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/top/:type?", {
@@ -30,7 +30,7 @@
                 controller: "TopPageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/profile", {
@@ -38,7 +38,7 @@
                 controller: "ProfilePageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/search/:type?", {
@@ -46,7 +46,7 @@
                 controller: "SearchPageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/profile/likes", {
@@ -54,7 +54,7 @@
                 controller: "ProfilePageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/profile/view/:profileUsername", {
@@ -62,7 +62,7 @@
                 controller: "ProfilePageController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    checkLoggedIn: checkLoggedIn
                 }
             })
             .when("/user/view/:profileUsername", {
@@ -70,7 +70,14 @@
                 controller: "ProfilePageController",
                 controllerAs: "model",
                 resolve: {
-                    setUser: setUser
+                    setUserIfLoggedIn: setUserIfLoggedIn
+                }
+            }).when("/profile/community/:type", {
+                templateUrl: "views/profile.community.view.client.html",
+                controller: "CommunityPageController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
                 }
         })
             .otherwise({
@@ -78,13 +85,13 @@
             });
     }
 
-    function getLoggedIn(UserService, $q) {
+    function checkLoggedIn(UserService, $q) {
         var deferred = $q.defer();
-        console.log("getLoggedIn called");
+        console.log("checkLoggedIn called");
         UserService
             .getCurrentUser()
             .then(function (response) {
-                console.log("getLoggedIn response is");
+                console.log("checkLoggedIn response is");
                 console.log(response);
                 var user = response.data;
                 UserService.setCurrentUser(user);
@@ -93,12 +100,12 @@
         return deferred.promise;
     }
 
-    function setUser(UserService) {
-        console.log("getLoggedIn called");
+    function setUserIfLoggedIn(UserService) {
+        console.log("checkLoggedIn called");
         UserService
             .getCurrentUser()
             .then(function (response) {
-                console.log("setUser response is");
+                console.log("setUserIfLoggedIn response is");
                 console.log(response);
                 var user = response.data;
                 UserService.setCurrentUser(user);

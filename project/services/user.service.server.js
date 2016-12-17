@@ -37,6 +37,29 @@ module.exports = function (app, model) {
     app.get("/api/loggedin", loggedin);
     app.get("/api/logout", logout);
     app.get("/api/user/:username", getUserByUsername);
+    app.get("/api/user", getAllUsers);
+
+
+    function getAllUsers(req, res) {
+        console.log("getAllUsers called");
+        model
+            .userModel
+            .findAllUsers()
+            .then(
+                function (users) {
+                    console.log("Users Fetched");
+                    console.log(users);
+                    if (users) {
+                        res.send(users);
+                    } else {
+                        res.send(400);
+                    }
+                },
+                function (error) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : null);

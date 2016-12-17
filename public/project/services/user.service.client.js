@@ -14,7 +14,8 @@
             updateUser: updateUser,
             getCurrentUser: getCurrentUser,
             logout: logout,
-            getUserByUsername: getUserByUsername
+            getUserByUsername: getUserByUsername,
+            getAllUsers: getAllUsers
         };
         return apis;
 
@@ -44,6 +45,11 @@
 
         function logout() {
             return $http.get("/api/logout");
+        }
+
+        function getAllUsers() {
+            console.log("getAllUsers called");
+            return $http.get("/api/user");
         }
     }
 })();
