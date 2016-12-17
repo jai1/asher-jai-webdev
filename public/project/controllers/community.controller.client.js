@@ -55,6 +55,13 @@
         var type = $routeParams.type;
 
         vm.displayUsers = [];
+
+        vm.logout = function () {
+            UserService.logout();
+            delete $rootScope.user;
+        };
+
+        
         UserService
             .getAllUsers()
             .success(function(users) {
