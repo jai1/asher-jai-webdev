@@ -1,0 +1,76 @@
+<div style="background-color: lightpink">
+    <center>
+        <font size="6"><strong><em>Dow<img src="http://1.bp.blogspot.com/_Ht1_rh8kGYQ/TKIOeWT_v2I/AAAAAAAADB0/u0lYZy7By8I/s1600/RupeeFont.png" height="20" width="20" />y Calculator</em></strong></br></font>
+        <form name="myForm">
+
+            <strong>Bride's Age</strong></br>
+                <select name="Brideage" ng-model="model.selectBrideAge">
+                        <option ng-repeat="item in model.brideAge" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>Bride's Caste</strong></br>
+                <select name="Bridecaste" ng-model="model.selectBrideCaste">
+                    <option ng-repeat="item in model.brideCaste" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>Bride's Current Profession</strong></br>
+                <select name="Brideprofession" ng-model="model.selectBrideProfession">
+                    <option ng-repeat="item in model.brideProfession" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>Bride's Monthly Salary (in <img src="http://1.bp.blogspot.com/_Ht1_rh8kGYQ/TKIOeWT_v2I/AAAAAAAADB0/u0lYZy7By8I/s1600/RupeeFont.png" height="12" width="12" />)</strong></br>
+                <select name="Bride Salary"ng-model="model.selectBrideMonthlyPackage">
+                    <option ng-repeat="item in model.brideMonthlyPackage" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>Bride's Alma Mater</strong></br>
+                <select name="Bridedoc" ng-model="model.selectBrideAlmaMatar">
+                    <option ng-repeat="item in model.brideAlmaMatar" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>The Bride is living in</strong></br>
+                <select name="Bridecountry" ng-model="model.selectBrideCountry">
+                    <option ng-repeat="item in model.brideCountry" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>Bride's Skin Color</strong></br>
+                <select name="Bridecolor" ng-model="model.selectBrideColor">
+                    <option ng-repeat="item in model.brideColor" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+
+            <strong>Bride's Height</strong></br>
+                <select name="Brideheight" ng-model="model.selectBrideHeight">
+                    <option ng-repeat="item in model.brideHeight" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br/>
+
+            <strong>Number of times the Bride has married before</strong></br>
+                <select name="Bridemarriage" ng-model="model.selectBrideMarriage">
+                    <option ng-repeat="item in model.brideMarriage" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            </form>
+
+            <strong>Bride's Father's Profession</strong></br>
+                <select name="Bridefather" ng-model="model.selectBrideFather">
+                    <option ng-repeat="item in model.brideFather" value="{{item.value}}">{{item.display}}</option>
+                </select>
+            <br />
+        <br />
+
+
+        <button ng-click="model.forceUnknownOption()">Calculate Dowry</button><br>
+
+        <iframe ng-show="model.clicked" ng-src="{{model.trustSrc(model.link)}}" style="width: 100%; height: 400px"></iframe>
+
+        <h3 ng-show="model.clicked">Not interested in Dowry? <a href="https://www.facebook.com/jai.asher.3">click here</a></h3>
+
+        </form>
+    </center>
+</div>
